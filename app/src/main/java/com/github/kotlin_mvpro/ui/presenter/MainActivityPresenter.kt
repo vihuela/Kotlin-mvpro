@@ -1,7 +1,7 @@
 package com.github.kotlin_mvpro.ui.presenter
 
 import android.os.Bundle
-import com.github.kotlin_mvpro.base.BasePresenter
+import com.github.library.base.BasePresenter
 import com.github.kotlin_mvpro.ui.view.IMainActivity
 
 class MainActivityPresenter : BasePresenter<IMainActivity>() {

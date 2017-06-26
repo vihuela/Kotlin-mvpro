@@ -1,4 +1,4 @@
-package com.github.kotlin_mvpro.base.interfaces
+package com.github.library.base.interfaces
 
 import android.content.Context
 

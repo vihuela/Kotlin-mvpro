@@ -1,11 +1,11 @@
-package com.github.kotlin_mvpro.base
+package com.github.library.base
 
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.github.kotlin_mvpro.base.interfaces.IView
+import com.github.library.base.interfaces.IView
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import java.lang.reflect.ParameterizedType
 
@@ -25,12 +25,13 @@ abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : RxAppCo
 
     private fun createViewDataBinding(): B = DataBindingUtil.setContentView(this, getLayoutId())
 
-
+    @Suppress("UNCHECKED_CAST")
     private fun createPresenter(): T? {
         val trans = supportFragmentManager.beginTransaction()
         val presenterClass = try {
             (this::class.java.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
         } catch (e: Exception) {
+            print("${this.javaClass.simpleName} presenter is null")
             null
         }
         if (presenterClass != null) {
@@ -47,8 +48,6 @@ abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : RxAppCo
         } else {
             return null
         }
-
-
     }
 
     abstract fun getLayoutId(): Int

@@ -1,4 +1,4 @@
-package com.github.kotlin_mvpro.base
+package com.github.library.base
 
 import android.content.Context
 import android.os.Build
@@ -7,7 +7,7 @@ import android.support.annotation.NonNull
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.kotlin_mvpro.base.interfaces.IView
+import com.github.library.base.interfaces.IView
 import com.trello.rxlifecycle2.components.support.RxFragment
 
 /**
