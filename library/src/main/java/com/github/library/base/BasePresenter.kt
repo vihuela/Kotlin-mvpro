@@ -21,7 +21,7 @@ abstract class BasePresenter<V : IView> : RxFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = mView ?: throw IllegalArgumentException("no attach IView implementation class")
+        val view = mView ?: return null
         onViewCreated(view, arguments, savedInstanceState)
         return null
     }
@@ -40,11 +40,7 @@ abstract class BasePresenter<V : IView> : RxFragment() {
 
     fun view(): V? = mView
     fun setView(view: Any) {
-        this.mView = try {
-            view as V
-        } catch (e: Exception) {
-            throw ClassCastException("${view.javaClass.simpleName} no implementation IView")
-        }
+        this.mView = view as V
     }
 
 }
