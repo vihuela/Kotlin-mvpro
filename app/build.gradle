@@ -33,6 +33,6 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile project(':library')
-    //kotlin
     kapt "com.android.databinding:compiler:$android_plugin_version"
+    kapt 'nz.bradcampbell:paperparcel-compiler:2.0.1'//Instance
 }

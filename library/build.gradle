@@ -66,4 +66,6 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.2'//https://github.com/wasabeef/glide-transformations
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     compile 'me.drakeet.multitype:multitype:3.1.0-beta1'
+    compile 'nz.bradcampbell:paperparcel:2.0.1'//Instance
+    compile 'nz.bradcampbell:paperparcel-kotlin:2.0.1'
 }

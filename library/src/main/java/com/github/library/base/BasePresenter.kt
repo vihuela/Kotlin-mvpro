@@ -8,11 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.library.base.interfaces.IView
-import com.trello.rxlifecycle2.components.support.RxFragment
+import com.trello.rxlifecycle2.components.RxFragment
 
 /**
- * Build Presenter with Fragment
- * Fragment has a life cycle
+ *
+ * <h3>Build Presenter with Fragment：</h3>
+ *
+ * Fragment has a life cycle Fragment
+ *
+ * FragmentManager can cache fragment
+ *
+ * Coordinate with RxLifeCycle
+ *
  */
 abstract class BasePresenter<V : IView> : RxFragment() {
     protected var mView: V? = null

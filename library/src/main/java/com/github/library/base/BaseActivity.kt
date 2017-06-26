@@ -4,7 +4,7 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.app.Fragment
 import com.github.library.base.interfaces.IView
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import java.lang.reflect.ParameterizedType
@@ -27,7 +27,8 @@ abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : RxAppCo
 
     @Suppress("UNCHECKED_CAST")
     private fun createPresenter(): T? {
-        val trans = supportFragmentManager.beginTransaction()
+        //not use fragmentManager under support.v4，cause the bug of findFragmentByTag()
+        val trans = fragmentManager.beginTransaction()
         val presenterClass = try {
             (this::class.java.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
         } catch (e: Exception) {
