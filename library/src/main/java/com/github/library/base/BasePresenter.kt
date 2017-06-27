@@ -14,7 +14,7 @@ import com.trello.rxlifecycle2.components.RxFragment
  *
  * <h3>Build Presenter with Fragment：</h3>
  *
- * Fragment has a life cycle Fragment
+ * Fragment has a life cycle
  *
  * FragmentManager can cache fragment
  *

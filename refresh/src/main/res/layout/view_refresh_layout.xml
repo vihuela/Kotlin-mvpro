@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.github.refresh.RefreshLayout
+        android:id="@+id/mRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="true"
+            android:overScrollMode="never"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:requiresFadingEdge="none"
+            android:scrollbars="vertical" />
+    </com.github.refresh.RefreshLayout>
+</FrameLayout>

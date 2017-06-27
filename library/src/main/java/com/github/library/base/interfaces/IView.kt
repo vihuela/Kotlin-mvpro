@@ -1,4 +1,3 @@
 package com.github.library.base.interfaces
 
-interface IView : IContextProvider {
-}
+interface IView : IContextProvider,IStateView
