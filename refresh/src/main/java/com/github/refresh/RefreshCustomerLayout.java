@@ -3,6 +3,7 @@ package com.github.refresh;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.CheckResult;
 import android.support.annotation.IntDef;
@@ -298,7 +299,7 @@ public class RefreshCustomerLayout<T> extends FrameLayout implements IRefreshDat
 
         if(mAdapter.getItemCount() == 0){
             if(mIRefreshStateView !=null) {
-                mIRefreshStateView.showError(error, content);
+                mIRefreshStateView.showMessageFromNet(error, content);
                 mRefreshLayout.endRefreshing();
             }
         }
@@ -319,7 +320,7 @@ public class RefreshCustomerLayout<T> extends FrameLayout implements IRefreshDat
     public void startRequest(){
         mRefreshLayout.beginRefreshing();
     }
-    public void stopRequest(){
+    public void endRequest(){
         mRefreshLayout.endRefreshing();
     }
 
@@ -409,7 +410,7 @@ public class RefreshCustomerLayout<T> extends FrameLayout implements IRefreshDat
 
     /**----------------------------------------onSaveInstance------------------------------------------*/
 
-    public static class SaveInstance<T> implements IRefreshDataView{
+    public static class SaveInstance implements IRefreshDataView{
 
          boolean isInit;
 
@@ -420,7 +421,6 @@ public class RefreshCustomerLayout<T> extends FrameLayout implements IRefreshDat
          Object error ;  String content ;
 
          int currentPageIndex;
-
 
         //已经请求过数据
         public boolean isLoaded(){  return isInit ;   }
@@ -453,5 +453,6 @@ public class RefreshCustomerLayout<T> extends FrameLayout implements IRefreshDat
             this.error = error;
             this.content = content;
         }
+
     }
 }

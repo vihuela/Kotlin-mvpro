@@ -5,9 +5,7 @@ import github.library.utils.Error
 
 interface IList : IView {
 
-    fun setTotalPage(totalPage: Int) = -1
-
     fun setData(beanList: List<*>, loadMore: Boolean)
 
-    fun setMessage(error: Error, content: String)
+    fun setMessage(error: Any, content: String)
 }

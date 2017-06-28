@@ -1,16 +1,18 @@
 package com.github.kotlin_mvpro.ui.base
 
 import android.databinding.ViewDataBinding
+import android.os.Bundle
 import com.github.library.base.BaseBindingActivity
 import com.github.library.base.BasePresenter
 
 abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>() {
+
     override fun showLoading() {
         super.showLoading()
     }
 
-    override fun showNetError(error: Any, content: String) {
-        super.showNetError(error, content)
+    override fun showMessageFromNet(error: Any, content: String) {
+        super.showMessageFromNet(error, content)
     }
 
     override fun showEmpty() {

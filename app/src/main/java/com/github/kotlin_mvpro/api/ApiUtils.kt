@@ -1,6 +1,13 @@
 package com.github.kotlin_mvpro.api
 
 import android.content.Context
+import android.net.NetworkInfo
+import com.github.library.utils.defThread
+import com.github.pwittchen.reactivenetwork.library.rx2.ConnectivityPredicate
+import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
+import io.paperdb.Paper
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import io.rx_cache2.internal.RxCache
 import io.victoralbertos.jolyglot.GsonSpeaker
 import okhttp3.OkHttpClient
@@ -12,11 +19,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiUtils {
 
     lateinit var retrofitClient: Retrofit
-    lateinit var api:Api
-    lateinit var apiProvider:ApiCacheProvider
-    lateinit var context:Context
+    lateinit var api: Api
+    lateinit var apiProvider: ApiCacheProvider
+    lateinit var context: Context
 
-    fun init(context:Context){
+    fun init(context: Context) {
         this.context = context.applicationContext
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -32,6 +39,8 @@ object ApiUtils {
         apiProvider = RxCache.Builder()
                 .persistence(this.context.filesDir, GsonSpeaker())
                 .using(ApiCacheProvider::class.java)
+        //db
+        Paper.init(context)
     }
 
 }

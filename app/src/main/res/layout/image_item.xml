@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.github.kotlin_mvpro.ui.widget.CustomerImageView
-        android:id="@+id/iv"
-        android:scaleType="centerCrop"
+    <data>
+
+        <variable
+            name="item"
+            type="com.github.kotlin_mvpro.model.ImageItem" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+<!--        app:load_image="@{item.url}"-->
+        <com.github.kotlin_mvpro.ui.widget.CustomerImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+
+            android:scaleType="centerCrop" />
+    </LinearLayout>
+</layout>

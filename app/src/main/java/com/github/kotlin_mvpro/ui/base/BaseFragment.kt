@@ -28,8 +28,8 @@ abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBin
         mMultiStateView?.viewState = MultiStateView.VIEW_STATE_LOADING
     }
 
-    override fun showNetError(error: Any, content: String) {
-        super.showNetError(error, content)
+    override fun showMessageFromNet(error: Any, content: String) {
+        super.showMessageFromNet(error, content)
         mMultiStateView?.viewState = MultiStateView.VIEW_STATE_ERROR
         val errorView = mMultiStateView?.getView(MultiStateView.VIEW_STATE_ERROR)?.findOptional<TextView>(R.id.tv)
         val retryButton = mMultiStateView?.getView(MultiStateView.VIEW_STATE_ERROR)?.findOptional<Button>(R.id.retry)
