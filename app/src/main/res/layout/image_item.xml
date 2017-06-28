@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
 
     <data>
 
@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-<!--        app:load_image="@{item.url}"-->
+
         <com.github.kotlin_mvpro.ui.widget.CustomerImageView
             android:id="@+id/iv"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-
+            android:load_image="@{item.url}"
             android:scaleType="centerCrop" />
     </LinearLayout>
 </layout>
