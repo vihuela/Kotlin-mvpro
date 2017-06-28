@@ -1,14 +1,8 @@
 package com.github.kotlin_mvpro.ui.fragment
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.ImageView
 import com.blankj.utilcode.util.SizeUtils
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
 import com.github.kotlin_mvpro.R
 import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.databinding.FragmentImageBinding
@@ -23,10 +17,15 @@ import com.github.refresh.RefreshLayout
 import com.github.refresh.interfaces.IRefreshStateView
 
 class ImageFragment : BaseFragment<ImageFragmentPresenter, FragmentImageBinding>(), IImageFragment {
+
     override fun onFirstUserVisible() {
 
         mBinding.mRefreshLayout.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         mBinding.mRefreshLayout.recyclerView.addItemDecoration(GridItemDecoration(2, SizeUtils.dp2px(5f), false))
+        val imageListAdapter = ImageListAdapter()
+        imageListAdapter.setOnItemClickListener { adapter, view, position ->
+            mPresenter?.openImageDetail(view as ImageView, (adapter.getItem(position) as ImageItem), position)
+        }
         mBinding.mRefreshLayout.setPageSize(Api.pageSize)
                 .setPageStartOffset(1)
                 .setViewType(RefreshCustomerLayout.Refresh_LoadMore)
@@ -55,7 +54,7 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, FragmentImageBinding>
                     override fun showContent() {
                         this@ImageFragment.showContent()
                     }
-                }).setAdapter(ImageListAdapter())
+                }).setAdapter(imageListAdapter)
 
         /*mBinding.mRefreshLayout.setTotalPage(20)*/
         mBinding.mRefreshLayout.startRequest()

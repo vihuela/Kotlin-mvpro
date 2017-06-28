@@ -4,6 +4,7 @@ import android.app.Fragment
 import android.net.NetworkInfo
 import android.os.Bundle
 import android.support.v13.app.FragmentPagerAdapter
+import android.view.WindowManager
 import com.blankj.utilcode.util.SnackbarUtils
 import com.github.kotlin_mvpro.R
 import com.github.kotlin_mvpro.databinding.ActivityMainBinding
@@ -24,6 +25,8 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
+//        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         //rxNetState
         ReactiveNetwork.observeNetworkConnectivity(applicationContext)
                 .subscribeOn(Schedulers.io())

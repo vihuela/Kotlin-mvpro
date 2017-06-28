@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
@@ -62,8 +61,12 @@ dependencies {
     compile "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxLifecycle_version"
     compile 'com.github.VictorAlbertos.RxCache:runtime:1.8.0-2.x'
     compile 'com.github.VictorAlbertos.Jolyglot:gson:0.0.3'
-    compile 'com.github.pwittchen:reactivenetwork-rx2:0.9.1'
+    compile 'com.github.pwittchen:reactivenetwork-rx2:0.9.1'//monitor net state
     //utils
+    compile 'com.github.Hitomis.transferee:Transferee:v1.0.0'//smooth open image,https://github.com/Hitomis/transferee
+    compile ('com.github.Hitomis.transferee:GlideLoader:v1.0.0', {
+        exclude group: 'com.bumptech.glide'
+    })
     compile 'io.paperdb:paperdb:2.1'
     compile 'com.blankj:utilcode:1.7.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'

@@ -9,16 +9,10 @@
             type="com.github.kotlin_mvpro.model.ImageItem" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.github.kotlin_mvpro.ui.widget.CustomerImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <com.github.kotlin_mvpro.ui.widget.CustomerImageView
-            android:id="@+id/iv"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:load_image="@{item.url}"
-            android:scaleType="centerCrop" />
-    </LinearLayout>
+        android:layout_height="200dp"
+        android:load_image="@{item.url}"
+        android:scaleType="centerCrop" />
 </layout>
