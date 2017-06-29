@@ -3,11 +3,14 @@ package com.github.kotlin_mvpro.ui.fragment
 import android.support.v7.widget.LinearLayoutManager
 import com.github.kotlin_mvpro.R
 import com.github.kotlin_mvpro.api.Api
+import com.github.kotlin_mvpro.api.request.NewsRequest
 import com.github.kotlin_mvpro.databinding.CommonListBinding
 import com.github.kotlin_mvpro.ui.adapter.NewsListAdapter
 import com.github.kotlin_mvpro.ui.base.BaseFragment
 import com.github.kotlin_mvpro.ui.presenter.NewsFragmentPresenter
 import com.github.kotlin_mvpro.ui.view.INewsFragment
+import com.github.kotlin_mvpro.utils.RouterImpl
+import com.github.kotlin_mvpro.utils.router
 import com.github.refresh.RefreshCustomerLayout
 import com.github.refresh.RefreshLayout
 import com.github.refresh.interfaces.IRefreshStateView
@@ -19,6 +22,8 @@ class NewsFragment : BaseFragment<NewsFragmentPresenter, CommonListBinding>(), I
         mBinding.mRefreshLayout.recyclerView.layoutManager = LinearLayoutManager(context)
         val adapter = NewsListAdapter()
         adapter.setOnItemClickListener { adapter, view, position ->
+            val storiesBean = adapter.getItem(position) as NewsRequest.ListRes.StoriesBean
+            router(RouterImpl.NewsDetailFrom + storiesBean.id)
         }
         mBinding.mRefreshLayout.setPageSize(Api.pageSize)
                 .setPageStartOffset(0)

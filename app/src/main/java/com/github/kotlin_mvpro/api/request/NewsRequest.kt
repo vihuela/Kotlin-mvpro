@@ -10,7 +10,9 @@ class NewsRequest {
                                val title: String,
                                val type: Int,
                                val multipic: Boolean,
-                               val images: List<String>)
+                               val images: List<String>) {
+            fun getImageUrl() = if (images.isNotEmpty()) images[0] else ""
+        }
 
         data class TopStoriesBean(val ga_prefix: String,
                                   val id: Int,
@@ -19,7 +21,7 @@ class NewsRequest {
                                   val type: Int)
     }
 
-    data class DetailRes(val body: String,
+    data class DetailRes(val body : String?,
                          val image_source: String,
                          val title: String,
                          val image: String,

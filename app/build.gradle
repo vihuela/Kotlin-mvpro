@@ -36,4 +36,5 @@ dependencies {
     compile project(':refresh')
     kapt "com.android.databinding:compiler:$android_plugin_version"
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.1'//Instance
+    kapt 'com.github.mzule.activityrouter:compiler:1.1.7'
 }

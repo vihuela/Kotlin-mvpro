@@ -3,10 +3,7 @@ package com.github.kotlin_mvpro.ui.presenter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
-import android.view.ViewGroup
 import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.ApiCacheProvider
 import com.github.kotlin_mvpro.model.ImageItem
@@ -29,8 +26,8 @@ import io.rx_cache2.EvictDynamicKey
 
 class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
 
-    lateinit var  transferConfig:TransferConfig
-    lateinit var  transferee:Transferee
+    lateinit var transferConfig: TransferConfig
+    var transferee: Transferee? = null
 
     override fun onViewCreated(view: IImageFragment, arguments: Bundle?, savedInstanceState: Bundle?) {
 
@@ -38,10 +35,10 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        transferee.destroy()
+        transferee?.destroy()
     }
 
-    fun openImageDetail(iv:ImageView, item:ImageItem, position: Int){
+    fun openImageDetail(iv: ImageView, item: ImageItem, position: Int) {
         val imageViewList = arrayListOf<ImageView>().apply { add(iv) }
         val imagesList = arrayListOf<ImageItem>().apply { add(item) }
 
@@ -55,7 +52,7 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
                 .setImageLoader(GlideImageLoader.with(context.applicationContext))
                 .create()
         transferee = Transferee.getDefault(context)
-        transferee.apply(transferConfig).show()
+        transferee!!.apply(transferConfig).show()
     }
 
     fun getImageList(page: Int = 1, loadMore: Boolean, resetCache: Boolean = true) {
@@ -72,7 +69,8 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
                 .map { it.data.results.map { ImageItem(it.url) } }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    view()!!.setData(it, loadMore) },
+                    view()!!.setData(it, loadMore)
+                },
                         {
                             ExceptionParseMgr.Instance.parseException(it, { error, message -> view()!!.setMessage(error, message) })
                         }, { view()!!.hideLoading() })
