@@ -1,7 +1,5 @@
 package com.github.kotlin_mvpro.api.request
 
-import java.util.*
-
 class NewsRequest {
 
     data class ListRes(val date: String, val stories: List<StoriesBean>, val top_stories: List<TopStoriesBean>) {
@@ -22,7 +20,7 @@ class NewsRequest {
     }
 
     data class DetailRes(val body: String,
-                         val image_source:String,
+                         val image_source: String,
                          val title: String,
                          val image: String,
                          val share_url: String,

@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.github.kotlin_mvpro.api.request.NewsRequest.ListRes" />
+            type="com.github.kotlin_mvpro.api.request.NewsRequest.ListRes.StoriesBean" />
     </data>
 
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +16,6 @@
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         card_view:cardCornerRadius="3dp"
-        card_view:cardElevation="3dp"
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout

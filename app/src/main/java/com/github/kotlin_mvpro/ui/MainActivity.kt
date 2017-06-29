@@ -41,8 +41,8 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
                     Paper.book().write(Cons.NET_STATE, it)
                 })
 
-        val title = arrayOf("美图","知乎日报")
-        val items = arrayOf(ImageFragment(), ImageFragment())
+        val title = arrayOf("美图", "知乎日报")
+        val items = arrayOf(ImageFragment(), NewsFragment())
         mBinding.pager.adapter = object : FragmentPagerAdapter(fragmentManager) {
 
             override fun getItem(position: Int): Fragment = items[position] as Fragment

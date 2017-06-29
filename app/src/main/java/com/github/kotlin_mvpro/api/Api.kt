@@ -18,6 +18,7 @@ interface Api {
     @GET("http://news-at.zhihu.com/api/4/news/latest")
     fun getNewsList(): Observable<NewsRequest.ListRes>
 
+    //the last day of the current date
     @GET("http://news-at.zhihu.com/api/4/news/before/{date}")
     fun getNewsListForDate(@Path("date") date: String): Observable<NewsRequest.ListRes>
 

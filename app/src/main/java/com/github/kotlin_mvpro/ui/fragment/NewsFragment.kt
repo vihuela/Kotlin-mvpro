@@ -25,11 +25,11 @@ class NewsFragment : BaseFragment<NewsFragmentPresenter, CommonListBinding>(), I
                 .setViewType(RefreshCustomerLayout.Refresh_LoadMore)
                 .setRefreshListener(object : RefreshCustomerLayout.IRefreshListener {
                     override fun onLoadMore(targetPage: Int) {
-                        mPresenter?.getNewsList()
+                        mPresenter?.getNewsListForDate(targetPage)
                     }
 
                     override fun onRefresh(refreshLayout: RefreshLayout) {
-                        mPresenter?.getNewsListForDate(mBinding.mRefreshLayout.pageStartOffset)
+                        mPresenter?.getNewsList()
                     }
                 })
                 .setStateListener(object : IRefreshStateView {
