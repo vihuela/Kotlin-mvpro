@@ -7,6 +7,14 @@ import com.github.library.base.BasePresenter
 
 abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     override fun showLoading() {
         super.showLoading()
     }
