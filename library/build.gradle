@@ -35,6 +35,7 @@ dependencies {
     compile "com.android.support:design:$support_version"
     compile "com.android.support:support-v4:$support_version"
     compile "com.android.support:support-v13:$support_version"
+    compile "com.android.support:cardview-v7:$support_version"
     compile "com.android.support:appcompat-v7:$support_version"
     compile "com.android.support:recyclerview-v7:$support_version"
     compile "com.android.support:support-annotations:$support_version"
@@ -63,14 +64,16 @@ dependencies {
     compile 'com.github.VictorAlbertos.Jolyglot:gson:0.0.3'
     compile 'com.github.pwittchen:reactivenetwork-rx2:0.9.1'//monitor net state
     //utils
-    compile 'com.github.Hitomis.transferee:Transferee:v1.0.0'//smooth open image,https://github.com/Hitomis/transferee
-    compile ('com.github.Hitomis.transferee:GlideLoader:v1.0.0', {
+    compile 'com.github.Hitomis.transferee:Transferee:v1.0.0'
+//smooth open image,https://github.com/Hitomis/transferee
+    compile('com.github.Hitomis.transferee:GlideLoader:v1.0.0', {
         exclude group: 'com.bumptech.glide'
     })
     compile 'io.paperdb:paperdb:2.1'
     compile 'com.blankj:utilcode:1.7.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'jp.wasabeef:glide-transformations:2.0.2'//https://github.com/wasabeef/glide-transformations
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
+//https://github.com/wasabeef/glide-transformations
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     compile 'nz.bradcampbell:paperparcel:2.0.1'//Instance
     compile 'nz.bradcampbell:paperparcel-kotlin:2.0.1'

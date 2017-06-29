@@ -42,13 +42,11 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
     }
 
     fun openImageDetail(iv:ImageView, item:ImageItem, position: Int){
-        val imageViewList = arrayListOf<ImageView>()
-        imageViewList.add(iv)
-        val imagesList = arrayListOf<ImageItem>()
-        imagesList.add(item)
+        val imageViewList = arrayListOf<ImageView>().apply { add(iv) }
+        val imagesList = arrayListOf<ImageItem>().apply { add(item) }
 
         transferConfig = TransferConfig.build()
-                .setSourceImageList(imagesList.map { it.url })//这俩要对应
+                .setSourceImageList(imagesList.map { it.url })//SourceImageList\OriginImageList size一致
                 .setOriginImageList(imageViewList)
                 .setMissDrawable(ColorDrawable(Color.parseColor("#DCDDE1")))
                 .setErrorDrawable(ColorDrawable(Color.parseColor("#DCDDE1")))

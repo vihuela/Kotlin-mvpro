@@ -1,31 +1,20 @@
 package com.github.kotlin_mvpro.ui.adapter
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
-import android.view.View
-import android.view.ViewGroup
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
+import android.support.v7.widget.StaggeredGridLayoutManager
+import com.blankj.utilcode.util.ScreenUtils
 import com.github.kotlin_mvpro.BR
 import com.github.kotlin_mvpro.R
 import com.github.kotlin_mvpro.model.ImageItem
 
-class ImageListAdapter : BaseQuickAdapter<ImageItem, ImageListAdapter.ImageListHolder>(R.layout.image_item) {
-    override fun convert(helper: ImageListHolder, item: ImageItem) {
+class ImageListAdapter : CommonListAdapter<ImageItem>(R.layout.image_item) {
+    val heights = arrayOf(ScreenUtils.getScreenHeight() / 2, ScreenUtils.getScreenHeight() / 3, ScreenUtils.getScreenHeight() / 4)
+    override fun convert(helper: BindHolder, item: ImageItem?) {
         val binding = helper.getBinding()
-        binding.setVariable(BR.item,item)
-        binding.executePendingBindings()
-    }
+        val lp = binding.root.layoutParams as? StaggeredGridLayoutManager.LayoutParams
+        lp?.height = heights[0]
+        lp?.let { binding.root.layoutParams = it }
 
-    override fun getItemView(layoutResId: Int, parent: ViewGroup?): View {
-        val binding = DataBindingUtil.inflate<ViewDataBinding>(mLayoutInflater, layoutResId, parent, false) ?: return super.getItemView(layoutResId, parent)
-        val view = binding.root
-        view.setTag(R.id.BaseQuickAdapter_databinding_support, binding)
-        return view
-    }
-    inner class ImageListHolder(val view: View) : BaseViewHolder(view) {
-        fun getBinding(): ViewDataBinding {
-            return itemView.getTag(R.id.BaseQuickAdapter_databinding_support) as ViewDataBinding
-        }
+        binding.setVariable(BR.item, item)
+        binding.executePendingBindings()
     }
 }

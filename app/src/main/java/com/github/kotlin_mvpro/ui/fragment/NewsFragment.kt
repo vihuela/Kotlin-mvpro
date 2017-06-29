@@ -1,60 +1,54 @@
 package com.github.kotlin_mvpro.ui.fragment
 
-import android.support.v7.widget.StaggeredGridLayoutManager
-import android.widget.ImageView
-import com.blankj.utilcode.util.SizeUtils
+import android.support.v7.widget.LinearLayoutManager
 import com.github.kotlin_mvpro.R
 import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.databinding.CommonListBinding
-import com.github.kotlin_mvpro.model.ImageItem
-import com.github.kotlin_mvpro.ui.adapter.ImageListAdapter
+import com.github.kotlin_mvpro.ui.adapter.NewsListAdapter
 import com.github.kotlin_mvpro.ui.base.BaseFragment
-import com.github.kotlin_mvpro.ui.presenter.ImageFragmentPresenter
-import com.github.kotlin_mvpro.ui.view.IImageFragment
-import com.github.kotlin_mvpro.ui.widget.GridItemDecoration
+import com.github.kotlin_mvpro.ui.presenter.NewsFragmentPresenter
+import com.github.kotlin_mvpro.ui.view.INewsFragment
 import com.github.refresh.RefreshCustomerLayout
 import com.github.refresh.RefreshLayout
 import com.github.refresh.interfaces.IRefreshStateView
 
-class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(), IImageFragment {
+class NewsFragment : BaseFragment<NewsFragmentPresenter, CommonListBinding>(), INewsFragment {
 
     override fun onFirstUserVisible() {
 
-        mBinding.mRefreshLayout.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        mBinding.mRefreshLayout.recyclerView.addItemDecoration(GridItemDecoration(2, SizeUtils.dp2px(5f), false))
-        val imageListAdapter = ImageListAdapter()
-        imageListAdapter.setOnItemClickListener { adapter, view, position ->
-            mPresenter?.openImageDetail(view as ImageView, (adapter.getItem(position) as ImageItem), position)
+        mBinding.mRefreshLayout.recyclerView.layoutManager = LinearLayoutManager(context)
+        val adapter = NewsListAdapter()
+        adapter.setOnItemClickListener { adapter, view, position ->
         }
         mBinding.mRefreshLayout.setPageSize(Api.pageSize)
-                .setPageStartOffset(1)
+                .setPageStartOffset(0)
                 .setViewType(RefreshCustomerLayout.Refresh_LoadMore)
                 .setRefreshListener(object : RefreshCustomerLayout.IRefreshListener {
                     override fun onLoadMore(targetPage: Int) {
-                        mPresenter?.getImageList(targetPage, true)
+                        mPresenter?.getNewsList()
                     }
 
                     override fun onRefresh(refreshLayout: RefreshLayout) {
-                        mPresenter?.getImageList(mBinding.mRefreshLayout.pageStartOffset, false)
+                        mPresenter?.getNewsListForDate(mBinding.mRefreshLayout.pageStartOffset)
                     }
                 })
                 .setStateListener(object : IRefreshStateView {
                     override fun showMessage(content: String) {
-                        this@ImageFragment.showMessage(content)
+                        this@NewsFragment.showMessage(content)
                     }
 
                     override fun showMessageFromNet(error: Any, content: String) {
-                        this@ImageFragment.showMessageFromNet(error, content)
+                        this@NewsFragment.showMessageFromNet(error, content)
                     }
 
                     override fun showEmpty() {
-                        this@ImageFragment.showEmpty()
+                        this@NewsFragment.showEmpty()
                     }
 
                     override fun showContent() {
-                        this@ImageFragment.showContent()
+                        this@NewsFragment.showContent()
                     }
-                }).setAdapter(imageListAdapter)
+                }).setAdapter(adapter)
 
         /*mBinding.mRefreshLayout.setTotalPage(20)*/
         mBinding.mRefreshLayout.startRequest()
