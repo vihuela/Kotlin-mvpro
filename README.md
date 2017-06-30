@@ -23,5 +23,5 @@
 
 - 项目中的Presenter使用的Fragment不是v4包底下的，因supportFragmentManager的findFragmentByTag()有bug
 - java下此项目的版本可以参考：[RAD](https://github.com/vihuela/RAD)，Presenter带数据缓存，欢迎一起讨论
-- 任何与项目有关或者与kotlin有关的疑问可以通过issue交流
+- **任何与项目有关或者有关kotlin学习可以通过issue交流，定知无不言**
 - 感谢[Kotlin-Android-Template](https://github.com/nekocode/Kotlin-Android-Template "Kotlin-Android-Template")
