@@ -1,5 +1,6 @@
 package com.github.kotlin_mvpro.ui.fragment
 
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.TransitionDrawable
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.ImageView
@@ -27,7 +28,7 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(),
         imageListAdapter.setOnItemClickListener { adapter, view, position ->
             val iv = view as ImageView
             //load thumb complete
-            if (iv.drawable is TransitionDrawable){
+            if (iv.drawable !is ColorDrawable){
                 mPresenter?.openImageDetail(iv, (adapter.getItem(position) as ImageItem), position)
             }
         }

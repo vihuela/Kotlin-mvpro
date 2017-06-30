@@ -4,6 +4,7 @@ import android.app.Fragment
 import android.net.NetworkInfo
 import android.os.Bundle
 import android.support.v13.app.FragmentPagerAdapter
+import android.support.v7.widget.RecyclerView
 import com.blankj.utilcode.util.SnackbarUtils
 import com.github.kotlin_mvpro.R
 import com.github.kotlin_mvpro.databinding.ActivityMainBinding
@@ -18,6 +19,7 @@ import io.paperdb.Paper
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.toast
 
 class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
 
@@ -50,6 +52,5 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
             override fun getPageTitle(position: Int): CharSequence = title[position]
         }
         mBinding.tab.setViewPager(mBinding.pager, title)
-
     }
 }

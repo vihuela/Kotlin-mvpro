@@ -47,7 +47,7 @@ import java.util.List;
                  .setAdapter(mAdapter);
  * </pre>
  */
-public class RefreshCustomerLayout<T> extends FrameLayout implements IRefreshDataView {
+public class RefreshCustomerLayout extends FrameLayout implements IRefreshDataView {
     public final static int DEFAULT_SIZE = 10;
     public final static int Refresh = 0;
     public final static int LoadMore = 1;
@@ -338,7 +338,7 @@ public class RefreshCustomerLayout<T> extends FrameLayout implements IRefreshDat
                     setTotalPage(saveInstance.totalPage);
                     setData(saveInstance.beanList, saveInstance.loadMore);
                 }
-                else{  setMessage((T) saveInstance.error, saveInstance.content); }
+                else{  setMessage( saveInstance.error, saveInstance.content); }
                 setCurrentPage(saveInstance.currentPageIndex);
             }
         }

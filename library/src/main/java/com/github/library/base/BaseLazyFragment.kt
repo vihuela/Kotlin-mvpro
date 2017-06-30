@@ -56,13 +56,13 @@ abstract class BaseLazyFragment : RxFragment() {
     protected abstract fun onFirstUserVisible()
 
     //每次可见
-    protected fun onUserVisible() {}
+    open fun onUserVisible() {}
 
     //首次不可见
-    private fun onFirstUserInvisible() {}
+    open fun onFirstUserInvisible() {}
 
     //每次不可见
-    protected fun onUserInvisible() {}
+    open fun onUserInvisible() {}
 
     @Synchronized private fun initPrepare() {
         if (isPrepared) {

@@ -23,6 +23,11 @@ abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBin
         return view
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mMultiStateView = null
+    }
+
     override fun showLoading() {
         super.showLoading()
         mMultiStateView?.viewState = MultiStateView.VIEW_STATE_LOADING
@@ -36,8 +41,6 @@ abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBin
         errorView?.text = content
         retryButton?.setOnClickListener { onRetryListener() }
     }
-
-    open fun onRetryListener() = Unit
 
     override fun showEmpty() {
         super.showEmpty()
@@ -58,4 +61,7 @@ abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBin
         super.hideLoading()
         showContent()
     }
+
+    open fun onRetryListener() = Unit
+
 }
