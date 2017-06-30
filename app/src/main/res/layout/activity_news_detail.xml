@@ -27,10 +27,9 @@
                 android:layout_height="?attr/actionBarSize"
                 android:setup_toolbar="@{context}"
                 app:background="@color/colorPrimary"
-                app:titleTextAppearance="@style/ExpandedAppBar"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                />
+                app:titleTextAppearance="@style/ExpandedAppBar" />
 
         </android.support.design.widget.AppBarLayout>
 
@@ -38,8 +37,7 @@
             android:id="@+id/contain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:orientation="vertical" />
 
     </android.support.design.widget.CoordinatorLayout>
 

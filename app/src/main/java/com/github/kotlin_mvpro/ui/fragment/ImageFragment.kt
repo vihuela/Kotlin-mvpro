@@ -1,5 +1,6 @@
 package com.github.kotlin_mvpro.ui.fragment
 
+import android.graphics.drawable.TransitionDrawable
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.ImageView
 import com.blankj.utilcode.util.SizeUtils
@@ -24,7 +25,11 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(),
         mBinding.mRefreshLayout.recyclerView.addItemDecoration(GridItemDecoration(2, SizeUtils.dp2px(5f), false))
         val imageListAdapter = ImageListAdapter()
         imageListAdapter.setOnItemClickListener { adapter, view, position ->
-            mPresenter?.openImageDetail(view as ImageView, (adapter.getItem(position) as ImageItem), position)
+            val iv = view as ImageView
+            //load thumb complete
+            if (iv.drawable is TransitionDrawable){
+                mPresenter?.openImageDetail(iv, (adapter.getItem(position) as ImageItem), position)
+            }
         }
         mBinding.mRefreshLayout.setPageSize(Api.pageSize)
                 .setPageStartOffset(1)
