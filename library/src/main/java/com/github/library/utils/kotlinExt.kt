@@ -11,7 +11,9 @@
 
 package com.github.library.utils
 
+import android.app.Activity
 import android.content.Context
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,4 +27,15 @@ fun Context.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
 fun <T> Observable<T>.defThread(): Observable<T> {
     return this.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+}
+
+fun Activity.hideKeyboard(): Boolean {
+    val view = currentFocus
+    view?.let {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE)
+                as InputMethodManager
+        return inputMethodManager.hideSoftInputFromWindow(view.windowToken,
+                InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+    return false
 }

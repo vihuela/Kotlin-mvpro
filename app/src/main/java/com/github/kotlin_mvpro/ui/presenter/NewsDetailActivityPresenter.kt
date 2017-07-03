@@ -14,31 +14,29 @@ package com.github.kotlin_mvpro.ui.presenter
 import android.os.Bundle
 import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.ApiCacheProvider
+import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.ui.view.INewsDetailActivity
-import com.github.kotlin_mvpro.utils.Cons
 import com.github.library.base.BasePresenter
 import com.github.library.utils.defThread
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import github.library.parser.ExceptionParseMgr
-import io.paperdb.Paper
 import io.rx_cache2.DynamicKey
 import io.rx_cache2.EvictDynamicKey
 
 class NewsDetailActivityPresenter : BasePresenter<INewsDetailActivity>() {
-    //isLocalCss:是否使用本地Css显示
     var onLoadCallback: ((title: String, data: String) -> Unit)? = null
 
     override fun onViewCreated(view: INewsDetailActivity, arguments: Bundle?, savedInstanceState: Bundle?) {
     }
 
-    fun getNewsDetail(id: Int, resetCache: Boolean = true) {
+    fun getNewsDetail(id: Int) {
         val api = Api.IMPL.getNewDetail(id)
-        ApiCacheProvider.IMPL.getNewDetail(api, DynamicKey(id), EvictDynamicKey(Paper.book().read(Cons.NET_STATE, resetCache)))
+        ApiCacheProvider.IMPL.getNewDetail(api, DynamicKey(id), EvictDynamicKey(ApiUtils.isRxCacheEvict))
                 .defThread()
                 .bindToLifecycle(this)
                 .doOnSubscribe { view()!!.showLoading() }
                 .subscribe({
-                    onLoadCallback?.invoke(it.data.title,  it.data.share_url)
+                    onLoadCallback?.invoke(it.data.title, it.data.share_url)
                 },
                         {
                             ExceptionParseMgr.Instance.parseException(it, { error, message -> view()!!.showMessageFromNet(error, message) })

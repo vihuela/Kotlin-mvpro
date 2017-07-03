@@ -14,13 +14,12 @@ package com.github.kotlin_mvpro.ui.presenter
 import android.os.Bundle
 import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.ApiCacheProvider
+import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.ui.view.INewsFragment
-import com.github.kotlin_mvpro.utils.Cons
 import com.github.library.base.BasePresenter
 import com.github.library.utils.defThread
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import github.library.parser.ExceptionParseMgr
-import io.paperdb.Paper
 import io.rx_cache2.DynamicKey
 import io.rx_cache2.EvictDynamicKey
 import io.rx_cache2.EvictProvider
@@ -31,9 +30,9 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
     override fun onViewCreated(view: INewsFragment, arguments: Bundle?, savedInstanceState: Bundle?) {
     }
 
-    fun getNewsList(resetCache: Boolean = true) {
+    fun getNewsList() {
         val api = Api.IMPL.getNewsList()
-        ApiCacheProvider.IMPL.getNewsList(api, EvictProvider(Paper.book().read(Cons.NET_STATE, resetCache)))
+        ApiCacheProvider.IMPL.getNewsList(api, EvictProvider(ApiUtils.isRxCacheEvict))
                 .defThread()
                 .bindToLifecycle(this)
                 .doOnSubscribe { view()!!.showLoading() }
@@ -45,10 +44,10 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
                         { view()!!.hideLoading() })
     }
 
-    fun getNewsListForDate(page: Int = 1, resetCache: Boolean = true) {
+    fun getNewsListForDate(page: Int = 1) {
         val dateString = getNextDay(-1 * page)
         val api = Api.IMPL.getNewsListForDate(dateString)
-        ApiCacheProvider.IMPL.getNewsListForDate(api, DynamicKey(page), EvictDynamicKey(Paper.book().read(Cons.NET_STATE, resetCache)))
+        ApiCacheProvider.IMPL.getNewsListForDate(api, DynamicKey(page), EvictDynamicKey(ApiUtils.isRxCacheEvict))
                 .defThread()
                 .bindToLifecycle(this)
                 .doOnSubscribe { view()!!.showLoading() }

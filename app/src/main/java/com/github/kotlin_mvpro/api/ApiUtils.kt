@@ -12,13 +12,8 @@
 package com.github.kotlin_mvpro.api
 
 import android.content.Context
-import android.net.NetworkInfo
-import com.github.library.utils.defThread
-import com.github.pwittchen.reactivenetwork.library.rx2.ConnectivityPredicate
-import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
+import com.github.kotlin_mvpro.utils.NET_STATE
 import io.paperdb.Paper
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import io.rx_cache2.internal.RxCache
 import io.victoralbertos.jolyglot.GsonSpeaker
 import okhttp3.OkHttpClient
@@ -26,32 +21,48 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.reflect.KProperty
 
 object ApiUtils {
-
-    lateinit var retrofitClient: Retrofit
-    lateinit var api: Api
-    lateinit var apiProvider: ApiCacheProvider
     lateinit var context: Context
 
     fun init(context: Context) {
         this.context = context.applicationContext
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        val okHttpClient = OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build()
-        this.retrofitClient = Retrofit.Builder()
+    }
+
+    //retrofit
+    val api: Api by lazy {
+        val okClientBuilder = OkHttpClient.Builder().apply {
+            //log
+            this.addInterceptor(HttpLoggingInterceptor().apply { this.level = HttpLoggingInterceptor.Level.BODY })
+            //...
+        }
+        Retrofit.Builder()
                 .baseUrl("http://gank.io/api/data/")
-                .client(okHttpClient)
+                .client(okClientBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
-        api = this.retrofitClient.create(Api::class.java)
-        //rxCache
-        apiProvider = RxCache.Builder()
+                .create(Api::class.java)
+    }
+    //rxCache
+    val apiProvider: ApiCacheProvider by lazy {
+        RxCache.Builder()
                 .persistence(this.context.filesDir, GsonSpeaker())
                 .using(ApiCacheProvider::class.java)
-        //db
-        Paper.init(context)
     }
+
+    var isRxCacheEvict: Boolean by RxCacheEvict()
+
+    class RxCacheEvict {
+        operator fun getValue(any: Any, property: KProperty<*>): Boolean {
+            return Paper.book().read(NET_STATE, true)
+        }
+
+        operator fun setValue(any: Any, property: KProperty<*>, b: Boolean) {
+            Paper.book().write(NET_STATE, b)
+        }
+    }
+
 
 }

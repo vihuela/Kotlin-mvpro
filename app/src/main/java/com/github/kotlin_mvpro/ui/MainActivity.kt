@@ -15,22 +15,19 @@ import android.app.Fragment
 import android.net.NetworkInfo
 import android.os.Bundle
 import android.support.v13.app.FragmentPagerAdapter
-import android.support.v7.widget.RecyclerView
 import com.blankj.utilcode.util.SnackbarUtils
 import com.github.kotlin_mvpro.R
+import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.databinding.ActivityMainBinding
 import com.github.kotlin_mvpro.ui.base.BaseActivity
 import com.github.kotlin_mvpro.ui.fragment.ImageFragment
 import com.github.kotlin_mvpro.ui.fragment.NewsFragment
-import com.github.kotlin_mvpro.utils.Cons
 import com.github.library.base.defaults.EmptyPresenter
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
-import io.paperdb.Paper
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.toast
 
 class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
 
@@ -51,7 +48,7 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
                                 .setDuration(0)
                                 .showWarning()
                     }
-                    Paper.book().write(Cons.NET_STATE, it)
+                    ApiUtils.isRxCacheEvict = it
                 })
 
         val title = arrayOf("美图", "知乎日报")

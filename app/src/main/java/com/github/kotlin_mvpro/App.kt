@@ -14,11 +14,16 @@ package com.github.kotlin_mvpro
 import android.app.Application
 import com.blankj.utilcode.util.Utils
 import com.github.kotlin_mvpro.api.ApiUtils
+import io.paperdb.Paper
 
-class App :Application() {
+class App : Application() {
     override fun onCreate() {
         super.onCreate()
+        //api
         ApiUtils.init(this)
+        //db
+        Paper.init(this)
+        //utils
         Utils.init(this)
     }
 }

@@ -17,9 +17,9 @@ import android.os.Bundle
 import android.widget.ImageView
 import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.ApiCacheProvider
+import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.model.ImageItem
 import com.github.kotlin_mvpro.ui.view.IImageFragment
-import com.github.kotlin_mvpro.utils.Cons
 import com.github.library.base.BasePresenter
 import com.github.library.utils.defThread
 import com.hitomi.glideloader.GlideImageLoader
@@ -28,7 +28,6 @@ import com.hitomi.tilibrary.transfer.TransferConfig
 import com.hitomi.tilibrary.transfer.Transferee
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import github.library.parser.ExceptionParseMgr
-import io.paperdb.Paper
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -38,15 +37,15 @@ import io.rx_cache2.EvictDynamicKey
 class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
 
     lateinit var transferConfig: TransferConfig
-    var transferee: Transferee? = null
+    lateinit var transferee: Transferee
 
     override fun onViewCreated(view: IImageFragment, arguments: Bundle?, savedInstanceState: Bundle?) {
-
+        transferee = Transferee.getDefault(context)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        transferee?.destroy()
+        transferee.destroy()
     }
 
     fun openImageDetail(iv: ImageView, item: ImageItem, position: Int) {
@@ -62,13 +61,12 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
                 .setNowThumbnailIndex(0)//仅一张
                 .setImageLoader(GlideImageLoader.with(context.applicationContext))
                 .create()
-        transferee = Transferee.getDefault(context)
-        transferee!!.apply(transferConfig).show()
+        transferee.apply(transferConfig).show()
     }
 
-    fun getImageList(page: Int = 1, loadMore: Boolean, resetCache: Boolean = true) {
+    fun getImageList(page: Int = 1, loadMore: Boolean) {
         val api = Api.IMPL.getImageList(Api.pageSize, page)
-        ApiCacheProvider.IMPL.getImageList(api, DynamicKey(page), EvictDynamicKey(Paper.book().read(Cons.NET_STATE, resetCache)))
+        ApiCacheProvider.IMPL.getImageList(api, DynamicKey(page), EvictDynamicKey(ApiUtils.isRxCacheEvict))
                 .defThread()
                 .bindToLifecycle(this)
                 .doOnSubscribe { view()!!.showLoading() }
