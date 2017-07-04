@@ -18,8 +18,8 @@ import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.ui.view.INewsFragment
 import com.github.library.base.BasePresenter
 import com.github.library.utils.defThread
+import com.github.library.utils.parse
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
-import github.library.parser.ExceptionParseMgr
 import io.rx_cache2.DynamicKey
 import io.rx_cache2.EvictDynamicKey
 import io.rx_cache2.EvictProvider
@@ -37,10 +37,8 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
                 .bindToLifecycle(this)
                 .doOnSubscribe { view()!!.showLoading() }
                 .map { it.data.stories }
-                .subscribe({
-                    view()!!.setData(it, false)
-                },
-                        { ExceptionParseMgr.Instance.parseException(it, { error, message -> view()!!.setMessage(error, message) }) },
+                .subscribe({ view()!!.setData(it, false) },
+                        { it.parse({ error, message -> view()!!.setMessage(error, message) }) },
                         { view()!!.hideLoading() })
     }
 
@@ -52,12 +50,9 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
                 .bindToLifecycle(this)
                 .doOnSubscribe { view()!!.showLoading() }
                 .map { it.data.stories }
-                .subscribe({
-                    view()!!.setData(it, true)
-                },
-                        {
-                            ExceptionParseMgr.Instance.parseException(it, { error, message -> view()!!.setMessage(error, message) })
-                        }, { view()!!.hideLoading() })
+                .subscribe({ view()!!.setData(it, true) },
+                        { it.parse({ error, message -> view()!!.setMessage(error, message) }) },
+                        { view()!!.hideLoading() })
     }
 
     private fun getNextDay(delay: Int): String {

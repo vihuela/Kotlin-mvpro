@@ -22,12 +22,12 @@ import com.github.kotlin_mvpro.model.ImageItem
 import com.github.kotlin_mvpro.ui.view.IImageFragment
 import com.github.library.base.BasePresenter
 import com.github.library.utils.defThread
+import com.github.library.utils.parse
 import com.hitomi.glideloader.GlideImageLoader
 import com.hitomi.tilibrary.style.progress.ProgressPieIndicator
 import com.hitomi.tilibrary.transfer.TransferConfig
 import com.hitomi.tilibrary.transfer.Transferee
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
-import github.library.parser.ExceptionParseMgr
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -77,11 +77,8 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
                 }
                 .map { it.data.results.map { ImageItem(it.url) } }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    view()!!.setData(it, loadMore)
-                },
-                        {
-                            ExceptionParseMgr.Instance.parseException(it, { error, message -> view()!!.setMessage(error, message) })
-                        }, { view()!!.hideLoading() })
+                .subscribe({ view()!!.setData(it, loadMore) },
+                        { it.parse({ error, message -> view()!!.setMessage(error, message) }) },
+                        { view()!!.hideLoading() })
     }
 }

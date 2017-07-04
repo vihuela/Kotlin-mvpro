@@ -18,8 +18,8 @@ import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.ui.view.INewsDetailActivity
 import com.github.library.base.BasePresenter
 import com.github.library.utils.defThread
+import com.github.library.utils.parse
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
-import github.library.parser.ExceptionParseMgr
 import io.rx_cache2.DynamicKey
 import io.rx_cache2.EvictDynamicKey
 
@@ -35,12 +35,9 @@ class NewsDetailActivityPresenter : BasePresenter<INewsDetailActivity>() {
                 .defThread()
                 .bindToLifecycle(this)
                 .doOnSubscribe { view()!!.showLoading() }
-                .subscribe({
-                    onLoadCallback?.invoke(it.data.title, it.data.share_url)
-                },
-                        {
-                            ExceptionParseMgr.Instance.parseException(it, { error, message -> view()!!.showMessageFromNet(error, message) })
-                        }, { view()!!.hideLoading() })
+                .subscribe({ onLoadCallback?.invoke(it.data.title, it.data.share_url) },
+                        { it.parse({ error, message -> view()!!.showMessageFromNet(error, message) }) },
+                        { view()!!.hideLoading() })
     }
 
     fun convertBody(preResult: String): String {

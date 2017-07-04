@@ -15,6 +15,8 @@ import android.app.Activity
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import github.library.parser.ExceptionParseMgr
+import github.library.utils.Error
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -38,4 +40,8 @@ fun Activity.hideKeyboard(): Boolean {
                 InputMethodManager.HIDE_NOT_ALWAYS)
     }
     return false
+}
+
+fun Throwable.parse(iHandler: (error: Error, message: String) -> Unit) {
+    ExceptionParseMgr.Instance.parseException(this, iHandler)
 }
