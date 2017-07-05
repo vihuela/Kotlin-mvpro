@@ -9,7 +9,7 @@
  *
  */
 
-package com.github.library.base
+package com.ricky.kotlin_mvpro.base
 
 import android.content.Context
 import android.os.Build
@@ -18,7 +18,7 @@ import android.support.annotation.NonNull
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.library.base.interfaces.IView
+import com.ricky.kotlin_mvpro.base.interfaces.IView
 import com.trello.rxlifecycle2.components.RxFragment
 
 /**
@@ -33,14 +33,13 @@ import com.trello.rxlifecycle2.components.RxFragment
  *
  */
 abstract class BasePresenter<V : IView> : RxFragment() {
-    protected var mView: V? = null
+    lateinit var mView: V
     override fun getContext(): Context {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) super.getContext() else activity
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = mView ?: return null
-        onViewCreated(view, arguments, savedInstanceState)
+        onViewCreated(mView, arguments, savedInstanceState)
         return null
     }
 
@@ -51,12 +50,7 @@ abstract class BasePresenter<V : IView> : RxFragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onDestroyView() {
-        mView = null
-        super.onDestroyView()
-    }
-
-    fun view(): V? = mView
+    fun view(): V = mView
     fun setView(view: Any) {
         this.mView = view as V
     }

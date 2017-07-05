@@ -16,7 +16,7 @@ import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.ApiCacheProvider
 import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.ui.view.INewsFragment
-import com.github.library.base.BasePresenter
+import com.ricky.kotlin_mvpro.base.BasePresenter
 import com.github.library.utils.defThread
 import com.github.library.utils.parse
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
@@ -35,11 +35,11 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
         ApiCacheProvider.IMPL.getNewsList(api, EvictProvider(ApiUtils.isRxCacheEvict))
                 .defThread()
                 .bindToLifecycle(this)
-                .doOnSubscribe { view()!!.showLoading() }
+                .doOnSubscribe { view().showLoading() }
                 .map { it.data.stories }
-                .subscribe({ view()!!.setData(it, false) },
-                        { it.parse({ error, message -> view()!!.setMessage(error, message) }) },
-                        { view()!!.hideLoading() })
+                .subscribe({ view().setData(it, false) },
+                        { it.parse({ error, message -> view().setMessage(error, message) }) },
+                        { view().hideLoading() })
     }
 
     fun getNewsListForDate(page: Int = 1) {
@@ -48,11 +48,11 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
         ApiCacheProvider.IMPL.getNewsListForDate(api, DynamicKey(page), EvictDynamicKey(ApiUtils.isRxCacheEvict))
                 .defThread()
                 .bindToLifecycle(this)
-                .doOnSubscribe { view()!!.showLoading() }
+                .doOnSubscribe { view().showLoading() }
                 .map { it.data.stories }
-                .subscribe({ view()!!.setData(it, true) },
-                        { it.parse({ error, message -> view()!!.setMessage(error, message) }) },
-                        { view()!!.hideLoading() })
+                .subscribe({ view().setData(it, true) },
+                        { it.parse({ error, message -> view().setMessage(error, message) }) },
+                        { view().hideLoading() })
     }
 
     private fun getNextDay(delay: Int): String {

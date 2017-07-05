@@ -9,7 +9,7 @@
  *
  */
 
-package com.github.library.base.interfaces
+package com.ricky.kotlin_mvpro.base.interfaces
 
 interface IStateView {
     fun showLoading() = Unit

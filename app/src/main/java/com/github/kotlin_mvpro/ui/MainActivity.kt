@@ -22,7 +22,7 @@ import com.github.kotlin_mvpro.databinding.ActivityMainBinding
 import com.github.kotlin_mvpro.ui.base.BaseActivity
 import com.github.kotlin_mvpro.ui.fragment.ImageFragment
 import com.github.kotlin_mvpro.ui.fragment.NewsFragment
-import com.github.library.base.defaults.EmptyPresenter
+import com.ricky.kotlin_mvpro.base.defaults.EmptyPresenter
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.Observable

@@ -16,7 +16,7 @@ import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.ApiCacheProvider
 import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.ui.view.INewsDetailActivity
-import com.github.library.base.BasePresenter
+import com.ricky.kotlin_mvpro.base.BasePresenter
 import com.github.library.utils.defThread
 import com.github.library.utils.parse
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
@@ -34,10 +34,10 @@ class NewsDetailActivityPresenter : BasePresenter<INewsDetailActivity>() {
         ApiCacheProvider.IMPL.getNewDetail(api, DynamicKey(id), EvictDynamicKey(ApiUtils.isRxCacheEvict))
                 .defThread()
                 .bindToLifecycle(this)
-                .doOnSubscribe { view()!!.showLoading() }
+                .doOnSubscribe { view().showLoading() }
                 .subscribe({ onLoadCallback?.invoke(it.data.title, it.data.share_url) },
-                        { it.parse({ error, message -> view()!!.showMessageFromNet(error, message) }) },
-                        { view()!!.hideLoading() })
+                        { it.parse({ error, message -> view().showMessageFromNet(error, message) }) },
+                        { view().hideLoading() })
     }
 
     fun convertBody(preResult: String): String {

@@ -9,7 +9,7 @@
  *
  */
 
-package com.github.library.base
+package com.ricky.kotlin_mvpro.base
 
 import android.os.Bundle
 import android.view.View

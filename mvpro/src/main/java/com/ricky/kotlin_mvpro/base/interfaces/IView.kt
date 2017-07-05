@@ -9,11 +9,6 @@
  *
  */
 
-package com.github.library.base.interfaces
+package com.ricky.kotlin_mvpro.base.interfaces
 
-import android.content.Context
-
-interface IContextProvider {
-
-    fun getContext(): Context?
-}
+interface IView : IContextProvider, IStateView

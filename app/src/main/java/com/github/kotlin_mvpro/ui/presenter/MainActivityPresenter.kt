@@ -13,8 +13,8 @@ package com.github.kotlin_mvpro.ui.presenter
 
 import android.os.Bundle
 import com.github.kotlin_mvpro.model.UserInfo
-import com.github.library.base.BasePresenter
-import com.github.library.base.interfaces.IView
+import com.ricky.kotlin_mvpro.base.BasePresenter
+import com.ricky.kotlin_mvpro.base.interfaces.IView
 
 class MainActivityPresenter : BasePresenter<IView>() {
     override fun onViewCreated(view: IView, arguments: Bundle?, savedInstanceState: Bundle?) {

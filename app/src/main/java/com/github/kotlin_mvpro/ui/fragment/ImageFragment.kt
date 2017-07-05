@@ -40,7 +40,7 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(),
             val iv = view as ImageView
             //load thumb complete
             if (iv.drawable !is ColorDrawable){
-                mPresenter?.openImageDetail(iv, (adapter.getItem(position) as ImageItem), position)
+                mPresenter.openImageDetail(iv, (adapter.getItem(position) as ImageItem), position)
             }
         }
         mBinding.mRefreshLayout.setPageSize(Api.pageSize)
@@ -48,11 +48,11 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(),
                 .setViewType(RefreshCustomerLayout.Refresh_LoadMore)
                 .setRefreshListener(object : RefreshCustomerLayout.IRefreshListener {
                     override fun onLoadMore(targetPage: Int) {
-                        mPresenter?.getImageList(targetPage, true)
+                        mPresenter.getImageList(targetPage, true)
                     }
 
                     override fun onRefresh(refreshLayout: RefreshLayout) {
-                        mPresenter?.getImageList(mBinding.mRefreshLayout.pageStartOffset, false)
+                        mPresenter.getImageList(mBinding.mRefreshLayout.pageStartOffset, false)
                     }
                 })
                 .setStateListener(object : IRefreshStateView {

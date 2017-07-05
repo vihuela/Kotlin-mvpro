@@ -20,7 +20,7 @@ import com.github.kotlin_mvpro.api.ApiCacheProvider
 import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.model.ImageItem
 import com.github.kotlin_mvpro.ui.view.IImageFragment
-import com.github.library.base.BasePresenter
+import com.ricky.kotlin_mvpro.base.BasePresenter
 import com.github.library.utils.defThread
 import com.github.library.utils.parse
 import com.hitomi.glideloader.GlideImageLoader
@@ -69,7 +69,7 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
         ApiCacheProvider.IMPL.getImageList(api, DynamicKey(page), EvictDynamicKey(ApiUtils.isRxCacheEvict))
                 .defThread()
                 .bindToLifecycle(this)
-                .doOnSubscribe { view()!!.showLoading() }
+                .doOnSubscribe { view().showLoading() }
                 .observeOn(Schedulers.io())
                 .flatMap {
                     val data_ok = !it.data.error && it.data.results.isNotEmpty()
@@ -77,8 +77,8 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
                 }
                 .map { it.data.results.map { ImageItem(it.url) } }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ view()!!.setData(it, loadMore) },
-                        { it.parse({ error, message -> view()!!.setMessage(error, message) }) },
-                        { view()!!.hideLoading() })
+                .subscribe({ view().setData(it, loadMore) },
+                        { it.parse({ error, message -> view().setMessage(error, message) }) },
+                        { view().hideLoading() })
     }
 }

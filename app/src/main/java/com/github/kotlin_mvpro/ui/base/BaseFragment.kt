@@ -20,8 +20,8 @@ import android.widget.Button
 import android.widget.TextView
 import com.blankj.utilcode.util.ToastUtils
 import com.github.kotlin_mvpro.R
-import com.github.library.base.BaseBindingFragment
-import com.github.library.base.BasePresenter
+import com.ricky.kotlin_mvpro.base.BaseBindingFragment
+import com.ricky.kotlin_mvpro.base.BasePresenter
 import com.kennyc.view.MultiStateView
 import org.jetbrains.anko.findOptional
 

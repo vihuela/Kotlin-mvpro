@@ -43,13 +43,13 @@ class NewsDetailActivity : BaseActivity<NewsDetailActivityPresenter, ActivityNew
                 .createAgentWeb()
                 .ready()
                 .go("")
-        mPresenter?.onLoadCallback = { title, data ->
+        mPresenter.onLoadCallback = { title, data ->
             run {
                 mBinding.toolbar.title = title
                 mAgentWeb.loader.loadUrl(data)
             }
         }
-        mPresenter?.getNewsDetail(intent.getStringExtra("id").toInt())
+        mPresenter.getNewsDetail(intent.getStringExtra("id").toInt())
 
     }
 

@@ -11,8 +11,7 @@
 
 package com.github.kotlin_mvpro.ui.view
 
-import com.github.library.base.interfaces.IView
-import github.library.utils.Error
+import com.ricky.kotlin_mvpro.base.interfaces.IView
 
 interface IList : IView {
 
