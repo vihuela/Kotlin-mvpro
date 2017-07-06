@@ -9,13 +9,11 @@
  *
  */
 
-package com.github.kotlin_mvpro.ui.view
+package com.ricky.mvp_core.base.interfaces
 
-import com.ricky.mvp_core.base.interfaces.IView
+import android.content.Context
 
-interface IList : IView {
+interface IContextProvider {
 
-    fun setData(beanList: List<*>, loadMore: Boolean)
-
-    fun setMessage(error: Any, content: String)
+    fun getContext(): Context?
 }

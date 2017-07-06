@@ -91,5 +91,5 @@ dependencies {
     compile 'com.github.mzule.activityrouter:activityrouter:1.2.2'//路由
     compile 'com.ricky:refreshLayout:0.1'//https://github.com/vihuela/RefreshLayout
     //mvpro
-    compile(project(':mvpro'), { exclude group: 'com.trello.rxlifecycle2' })
+    compile(project(':mvp-core'), { exclude group: 'com.trello.rxlifecycle2' })
 }

@@ -12,7 +12,7 @@
 package com.github.kotlin_mvpro.ui.view
 
 import com.github.kotlin_mvpro.api.request.NewsRequest
-import com.ricky.kotlin_mvpro.base.interfaces.IView
+import com.ricky.mvp_core.base.interfaces.IView
 
 
 interface INewsDetailActivity : IView {

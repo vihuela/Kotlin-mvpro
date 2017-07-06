@@ -13,8 +13,8 @@ package com.github.kotlin_mvpro.ui.base
 
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import com.ricky.kotlin_mvpro.base.BaseBindingActivity
-import com.ricky.kotlin_mvpro.base.BasePresenter
+import com.ricky.mvp_core.base.BaseBindingActivity
+import com.ricky.mvp_core.base.BasePresenter
 
 abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>() {
 

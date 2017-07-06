@@ -9,4 +9,4 @@
  *
  */
 
-include ':app', ':library', ':mvpro'
+include ':app', ':library', ':mvp-core'

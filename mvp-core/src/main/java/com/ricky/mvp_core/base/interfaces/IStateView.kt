@@ -9,13 +9,19 @@
  *
  */
 
-package com.github.kotlin_mvpro.ui.view
+package com.ricky.mvp_core.base.interfaces
 
-import com.ricky.mvp_core.base.interfaces.IView
+interface IStateView {
+    fun showLoading() = Unit
 
-interface IList : IView {
+    fun hideLoading() = Unit
 
-    fun setData(beanList: List<*>, loadMore: Boolean)
+    fun showEmpty() = Unit
 
-    fun setMessage(error: Any, content: String)
+    fun showContent() = Unit
+
+    fun showMessage(content: String) = Unit
+
+    fun showMessageFromNet(error: Any, content: String) = Unit
+
 }

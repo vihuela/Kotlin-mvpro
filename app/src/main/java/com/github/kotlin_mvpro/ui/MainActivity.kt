@@ -22,8 +22,8 @@ import com.github.kotlin_mvpro.databinding.ActivityMainBinding
 import com.github.kotlin_mvpro.ui.base.BaseActivity
 import com.github.kotlin_mvpro.ui.fragment.ImageFragment
 import com.github.kotlin_mvpro.ui.fragment.NewsFragment
-import com.ricky.kotlin_mvpro.base.defaults.EmptyPresenter
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
+import com.ricky.mvp_core.base.defaults.EmptyPresenter
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

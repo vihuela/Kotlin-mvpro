@@ -19,6 +19,10 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.3.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.novoda:bintray-release:0.4.0'
+        // 上传kotlin库：
+        // 创建java的module、引入bintray依赖确保publishing的task有7个！！之后
+        // 才继续引入kotlin依赖
+        // app module 如果使用 kapt {generateStubs = true}须注释
     }
 }
 
@@ -29,10 +33,6 @@ allprojects {
     }
     tasks.withType(Javadoc) {
         options{
-            options.addStringOption('Xdoclint:none', '-quiet')
-            options.addStringOption('encoding', 'UTF-8')
-            options.addBooleanOption('Xdoclint:none', true)
-            excludes = ['**/*.kt']
             encoding "UTF-8"
             charSet 'UTF-8'
             links "http://docs.oracle.com/javase/7/docs/api"
@@ -43,3 +43,5 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+tasks.getByPath(":mvp-core:releaseAndroidJavadocs").enabled = false

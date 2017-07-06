@@ -20,9 +20,9 @@ import android.widget.Button
 import android.widget.TextView
 import com.blankj.utilcode.util.ToastUtils
 import com.github.kotlin_mvpro.R
-import com.ricky.kotlin_mvpro.base.BaseBindingFragment
-import com.ricky.kotlin_mvpro.base.BasePresenter
 import com.kennyc.view.MultiStateView
+import com.ricky.mvp_core.base.BaseBindingFragment
+import com.ricky.mvp_core.base.BasePresenter
 import org.jetbrains.anko.findOptional
 
 abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingFragment<T, B>() {

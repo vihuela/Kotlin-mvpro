@@ -33,13 +33,10 @@ android {
     dataBinding {
         enabled true
     }
-    lintOptions {
-        abortOnError false
-    }
 }
-kapt {
-    generateStubs = true
-}
+//kapt {
+//    generateStubs = true
+//}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

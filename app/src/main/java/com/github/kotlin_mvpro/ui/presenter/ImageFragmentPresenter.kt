@@ -20,13 +20,13 @@ import com.github.kotlin_mvpro.api.ApiCacheProvider
 import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.model.ImageItem
 import com.github.kotlin_mvpro.ui.view.IImageFragment
-import com.ricky.kotlin_mvpro.base.BasePresenter
 import com.github.library.utils.defThread
 import com.github.library.utils.parse
 import com.hitomi.glideloader.GlideImageLoader
 import com.hitomi.tilibrary.style.progress.ProgressPieIndicator
 import com.hitomi.tilibrary.transfer.TransferConfig
 import com.hitomi.tilibrary.transfer.Transferee
+import com.ricky.mvp_core.base.BasePresenter
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

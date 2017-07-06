@@ -9,13 +9,6 @@
  *
  */
 
-package com.github.kotlin_mvpro.ui.view
+package com.ricky.mvp_core.base.interfaces
 
-import com.ricky.mvp_core.base.interfaces.IView
-
-interface IList : IView {
-
-    fun setData(beanList: List<*>, loadMore: Boolean)
-
-    fun setMessage(error: Any, content: String)
-}
+interface IView : IContextProvider, IStateView
