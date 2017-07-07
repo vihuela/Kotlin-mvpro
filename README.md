@@ -18,6 +18,12 @@
 
 ![image](https://github.com/vihuela/Kotlin-mvpro/blob/master/gifdemo.gif ) 
 
+### 使用
+
+		compile 'com.ricky:mvpro-kotlin:1.1' 
+
+		或者 外部引用了rxlifecycle2
+		compile('com.ricky:mvpro-kotlin:1.1', { exclude group: 'com.trello.rxlifecycle2' })
 
 ### 注意事项
 
