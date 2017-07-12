@@ -22,6 +22,9 @@ import com.github.kotlin_mvpro.databinding.ActivityMainBinding
 import com.github.kotlin_mvpro.ui.base.BaseActivity
 import com.github.kotlin_mvpro.ui.fragment.ImageFragment
 import com.github.kotlin_mvpro.ui.fragment.NewsFragment
+import com.github.kotlin_mvpro.utils.LIST_TOP
+import com.github.library.utils.eventbus.Event
+import com.github.library.utils.eventbus.sendEvent
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import com.ricky.mvp_core.base.defaults.EmptyPresenter
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
@@ -60,5 +63,8 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
             override fun getPageTitle(position: Int): CharSequence = title[position]
         }
         mBinding.tab.setViewPager(mBinding.pager, title)
+        mBinding.top.setOnClickListener { sendEvent(Event.obtain(LIST_TOP, it.tag)) }
     }
+
+    override fun isRegisterEventBus(): Boolean = true
 }

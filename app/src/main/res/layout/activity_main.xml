@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2017 Ricky.yao https://github.com/vihuela
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,7 +9,7 @@
   ~
   -->
 
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
 
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,18 +26,34 @@
 
 
             <!--app:layout_scrollFlags="scroll|enterAlways"-->
-            <com.flyco.tablayout.SlidingTabLayout xmlns:tl="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/tab"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="#222831"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                tl:tl_indicator_color="#393E46"
-                tl:tl_indicator_corner_radius="5dp"
-                tl:tl_indicator_margin_left="2dp"
-                tl:tl_indicator_margin_right="2dp"
-                tl:tl_indicator_style="BLOCK" />
+                android:layout_height="wrap_content">
+
+                <com.flyco.tablayout.SlidingTabLayout xmlns:tl="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="#222831"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    tl:tl_indicator_color="#393E46"
+                    tl:tl_indicator_corner_radius="5dp"
+                    tl:tl_indicator_margin_left="2dp"
+                    tl:tl_indicator_margin_right="2dp"
+                    tl:tl_indicator_style="BLOCK" />
+
+                <ImageView
+                    android:id="@+id/top"
+                    android:tag="image_arrow_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginRight="20dp"
+                    android:src="@mipmap/ic_top"
+                    tools:ignore="all" />
+            </FrameLayout>
+
 
         </android.support.design.widget.AppBarLayout>
 

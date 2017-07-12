@@ -20,8 +20,10 @@ import com.github.kotlin_mvpro.ui.adapter.NewsListAdapter
 import com.github.kotlin_mvpro.ui.base.BaseFragment
 import com.github.kotlin_mvpro.ui.presenter.NewsFragmentPresenter
 import com.github.kotlin_mvpro.ui.view.INewsFragment
+import com.github.kotlin_mvpro.utils.LIST_TOP
 import com.github.kotlin_mvpro.utils.RouterImpl
 import com.github.kotlin_mvpro.utils.router
+import com.github.library.utils.eventbus.Event
 import com.github.refresh.RefreshCustomerLayout
 import com.github.refresh.RefreshLayout
 import com.github.refresh.interfaces.IRefreshStateView
@@ -97,7 +99,16 @@ class NewsFragment : BaseFragment<NewsFragmentPresenter, CommonListBinding>(), I
 
     override fun getLayoutId(): Int = R.layout.common_list
 
-    override fun onRetryListener() {
+    override fun onStateViewRetryListener() {
         mBinding.mRefreshLayout.startRequest()
     }
+
+    override fun <T> onEvent(event: Event<T>?) {
+        super.onEvent(event)
+        when (event?.code) {
+            LIST_TOP -> mBinding.mRefreshLayout.recyclerView.smoothScrollToPosition(0)
+        }
+    }
+
+    override fun isRegisterEventBus(): Boolean = true
 }

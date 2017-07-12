@@ -12,23 +12,37 @@
 package com.github.library.utils
 
 import android.app.Activity
+import android.app.Fragment
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.blankj.utilcode.util.ToastUtils
+import com.github.library.utils.eventbus.Event
 import github.library.parser.ExceptionParseMgr
 import github.library.utils.Error
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.greenrobot.eventbus.EventBus
 
-
-fun Context.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this, msg, length).show()
-}
-
+//rx default mainThread
 fun <T> Observable<T>.defThread(): Observable<T> {
     return this.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+}
+
+fun Fragment.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
+    when (length) {
+        Toast.LENGTH_SHORT -> ToastUtils.showShortSafe(msg)
+        Toast.LENGTH_LONG -> ToastUtils.showLongSafe(msg)
+    }
+}
+
+fun Activity.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
+    when (length) {
+        Toast.LENGTH_SHORT -> ToastUtils.showShortSafe(msg)
+        Toast.LENGTH_LONG -> ToastUtils.showLongSafe(msg)
+    }
 }
 
 fun Activity.hideKeyboard(): Boolean {
@@ -42,6 +56,8 @@ fun Activity.hideKeyboard(): Boolean {
     return false
 }
 
+//net error parse
 fun Throwable.parse(iHandler: (error: Error, message: String) -> Unit) {
     ExceptionParseMgr.Instance.parseException(this, iHandler)
 }
+

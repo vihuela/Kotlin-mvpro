@@ -12,3 +12,5 @@
 package com.github.kotlin_mvpro.utils
 
 const val NET_STATE = "netAvailable"
+
+const val LIST_TOP = 0xff10086

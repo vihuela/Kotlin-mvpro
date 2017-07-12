@@ -12,7 +12,6 @@
 package com.github.kotlin_mvpro.ui.fragment
 
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.TransitionDrawable
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.ImageView
 import com.blankj.utilcode.util.SizeUtils
@@ -25,6 +24,8 @@ import com.github.kotlin_mvpro.ui.base.BaseFragment
 import com.github.kotlin_mvpro.ui.presenter.ImageFragmentPresenter
 import com.github.kotlin_mvpro.ui.view.IImageFragment
 import com.github.kotlin_mvpro.ui.widget.GridItemDecoration
+import com.github.kotlin_mvpro.utils.LIST_TOP
+import com.github.library.utils.eventbus.Event
 import com.github.refresh.RefreshCustomerLayout
 import com.github.refresh.RefreshLayout
 import com.github.refresh.interfaces.IRefreshStateView
@@ -39,7 +40,7 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(),
         imageListAdapter.setOnItemClickListener { adapter, view, position ->
             val iv = view as ImageView
             //load thumb complete
-            if (iv.drawable !is ColorDrawable){
+            if (iv.drawable !is ColorDrawable) {
                 mPresenter.openImageDetail(iv, (adapter.getItem(position) as ImageItem), position)
             }
         }
@@ -104,7 +105,16 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(),
 
     override fun getLayoutId(): Int = R.layout.common_list
 
-    override fun onRetryListener() {
+    override fun onStateViewRetryListener() {
         mBinding.mRefreshLayout.startRequest()
     }
+
+    override fun <T> onEvent(event: Event<T>?) {
+        super.onEvent(event)
+        when (event?.code) {
+            LIST_TOP -> mBinding.mRefreshLayout.recyclerView.smoothScrollToPosition(0)
+        }
+    }
+
+    override fun isRegisterEventBus(): Boolean = true
 }

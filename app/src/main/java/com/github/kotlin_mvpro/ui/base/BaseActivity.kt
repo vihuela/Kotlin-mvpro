@@ -13,17 +13,23 @@ package com.github.kotlin_mvpro.ui.base
 
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import com.github.library.utils.eventbus.IEventBusIMPL
+import com.github.library.utils.eventbus.registerEventbus
+import com.github.library.utils.eventbus.unregisterEventbus
 import com.ricky.mvp_core.base.BaseBindingActivity
 import com.ricky.mvp_core.base.BasePresenter
 
-abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>() {
+//stateView and eventBus
+abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>() , IEventBusIMPL {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        super.registerEventBus(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        super.unregisterEventBus(this)
     }
 
     override fun showLoading() {

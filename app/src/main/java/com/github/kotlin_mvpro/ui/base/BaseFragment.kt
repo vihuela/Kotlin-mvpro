@@ -13,66 +13,63 @@ package com.github.kotlin_mvpro.ui.base
 
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import com.blankj.utilcode.util.ToastUtils
 import com.github.kotlin_mvpro.R
+import com.github.library.utils.IStateViewIMPL
+import com.github.library.utils.eventbus.IEventBusIMPL
+import com.github.library.utils.toast
 import com.kennyc.view.MultiStateView
 import com.ricky.mvp_core.base.BaseBindingFragment
 import com.ricky.mvp_core.base.BasePresenter
 import org.jetbrains.anko.findOptional
 
-abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingFragment<T, B>() {
+//stateView and eventBus
+abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingFragment<T, B>(), IStateViewIMPL , IEventBusIMPL {
 
-    var mMultiStateView: MultiStateView? = null
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
-        mMultiStateView = view.findOptional<MultiStateView>(R.id.multiStateView)
-        return view
+    override fun getStateView(): MultiStateView? {
+        return view.findOptional<MultiStateView>(R.id.multiStateView)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        super.registerEventBus(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        super.unregisterEventBus(this)
+    }
     override fun onDestroyView() {
         super.onDestroyView()
-        mMultiStateView = null
     }
 
     override fun showLoading() {
         super.showLoading()
-        mMultiStateView?.viewState = MultiStateView.VIEW_STATE_LOADING
+        super.stateViewLoading()
     }
 
     override fun showMessageFromNet(error: Any, content: String) {
         super.showMessageFromNet(error, content)
-        mMultiStateView?.viewState = MultiStateView.VIEW_STATE_ERROR
-        val errorView = mMultiStateView?.getView(MultiStateView.VIEW_STATE_ERROR)?.findOptional<TextView>(R.id.tv)
-        val retryButton = mMultiStateView?.getView(MultiStateView.VIEW_STATE_ERROR)?.findOptional<Button>(R.id.retry)
-        errorView?.text = content
-        retryButton?.setOnClickListener { onRetryListener() }
+        super.stateViewError(error, content)
     }
 
     override fun showEmpty() {
         super.showEmpty()
-        mMultiStateView?.viewState = MultiStateView.VIEW_STATE_EMPTY
+        super.stateViewEmpty()
     }
 
     override fun showContent() {
         super.showContent()
-        mMultiStateView?.viewState = MultiStateView.VIEW_STATE_CONTENT
+        super.stateViewContent()
     }
 
     override fun showMessage(content: String) {
         super.showMessage(content)
-        ToastUtils.showShortSafe(content)
+        toast(content)
     }
 
     override fun hideLoading() {
         super.hideLoading()
         showContent()
     }
-
-    open fun onRetryListener() = Unit
 
 }
