@@ -20,12 +20,13 @@ import com.github.kotlin_mvpro.databinding.ActivityNewsDetailBinding
 import com.github.kotlin_mvpro.ui.base.BaseActivity
 import com.github.kotlin_mvpro.ui.presenter.NewsDetailActivityPresenter
 import com.github.kotlin_mvpro.ui.view.INewsDetailActivity
-import com.github.kotlin_mvpro.utils.RouterImpl
+import com.github.library.utils.RouterImpl
+import com.github.library.utils.eventbus.Event
 import com.github.mzule.activityrouter.annotation.Router
 import com.just.library.AgentWeb
 
 
-@Router(value = RouterImpl.NewsDetailTo)
+@Router(RouterImpl.NewsDetailActivity)
 class NewsDetailActivity : BaseActivity<NewsDetailActivityPresenter, ActivityNewsDetailBinding>(), INewsDetailActivity {
     override fun setData(res: NewsRequest.DetailRes) {
 
@@ -49,7 +50,8 @@ class NewsDetailActivity : BaseActivity<NewsDetailActivityPresenter, ActivityNew
                 mAgentWeb.loader.loadUrl(data)
             }
         }
-        mPresenter.getNewsDetail(intent.getStringExtra("id").toInt())
+        val idStr = intent.getStringExtra("id") ?: return
+        mPresenter.getNewsDetail(idStr.toInt())
 
     }
 

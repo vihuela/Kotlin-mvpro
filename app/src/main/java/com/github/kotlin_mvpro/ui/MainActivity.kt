@@ -65,6 +65,4 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
         mBinding.tab.setViewPager(mBinding.pager, title)
         mBinding.top.setOnClickListener { sendEvent(Event.obtain(LIST_TOP, it.tag)) }
     }
-
-    override fun isRegisterEventBus(): Boolean = true
 }

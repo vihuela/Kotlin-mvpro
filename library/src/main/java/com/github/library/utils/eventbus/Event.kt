@@ -24,35 +24,19 @@ data class Event<T>(var code: Int, var data: T) {
 }
 
 //fragment Ext
-fun Fragment.registerEventbus(subscriber: Any = this) {
-    EventBus.getDefault().register(subscriber)
-}
-
-fun Fragment.unregisterEventbus(subscriber: Any = this) {
-    EventBus.getDefault().unregister(subscriber)
-}
-
 fun Fragment.sendEvent(event: Event<*>) {
     EventBus.getDefault().post(event)
 }
 
-fun Fragment.sendStickyEvent(event: Event<*>) {
+fun Fragment.sendEventSticky(event: Event<*>) {
     EventBus.getDefault().postSticky(event)
 }
 
 //activity Ext
-fun Activity.registerEventbus(subscriber: Any = this) {
-    EventBus.getDefault().register(subscriber)
-}
-
-fun Activity.unregisterEventbus(subscriber: Any = this) {
-    EventBus.getDefault().unregister(subscriber)
-}
-
 fun Activity.sendEvent(event: Event<*>) {
     EventBus.getDefault().post(event)
 }
 
-fun Activity.sendStickyEvent(event: Event<*>) {
+fun Activity.sendEventSticky(event: Event<*>) {
     EventBus.getDefault().postSticky(event)
 }

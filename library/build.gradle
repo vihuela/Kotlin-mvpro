@@ -76,8 +76,8 @@ dependencies {
     compile 'com.github.pwittchen:reactivenetwork-rx2:0.9.1'//monitor net state
     //utils
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.github.Hitomis.transferee:Transferee:v1.0.0'
     //smooth open image,https://github.com/Hitomis/transferee
+    compile 'com.github.Hitomis.transferee:Transferee:v1.0.0'
     compile('com.github.Hitomis.transferee:GlideLoader:v1.0.0', {
         exclude group: 'com.bumptech.glide'
     })
@@ -88,7 +88,7 @@ dependencies {
     compile 'nz.bradcampbell:paperparcel:2.0.1'//持久化
     compile 'nz.bradcampbell:paperparcel-kotlin:2.0.1'
     compile 'com.github.Kennyc1012:MultiStateView:1.3.0'//视图状态切换
-    compile 'com.just.agentweb:agentweb:1.2.3'//webView
+    compile 'com.just.agentweb:agentweb:1.2.5'//webView
     compile 'com.github.mzule.activityrouter:activityrouter:1.2.2'//路由
     compile('com.ricky:refreshLayout:0.1', {exclude group: 'com.github.CymChad'})//https://github.com/vihuela/RefreshLayout
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'

@@ -23,7 +23,7 @@ import com.ricky.mvp_core.base.BasePresenter
 import org.jetbrains.anko.findOptional
 
 //stateView and eventBus
-abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingFragment<T, B>(), IStateViewIMPL , IEventBusIMPL {
+abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingFragment<T, B>(), IStateViewIMPL, IEventBusIMPL {
 
     override fun getStateView(): MultiStateView? {
         return view.findOptional<MultiStateView>(R.id.multiStateView)
@@ -38,6 +38,7 @@ abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBin
         super.onDestroy()
         super.unregisterEventBus(this)
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
     }

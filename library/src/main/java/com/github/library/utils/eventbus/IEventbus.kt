@@ -24,7 +24,7 @@ interface IEventBusIMPL {
     fun <T> onEvent(event: Event<T>?) = Unit
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    fun <T> onStickyEvent(event: Event<T>?) = Unit
+    fun <T> onEventSticky(event: Event<T>?) = Unit
 
     fun registerEventBus(subscriber: Any) {
         if (isRegisterEventBus()) {

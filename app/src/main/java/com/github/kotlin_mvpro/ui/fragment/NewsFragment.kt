@@ -21,9 +21,10 @@ import com.github.kotlin_mvpro.ui.base.BaseFragment
 import com.github.kotlin_mvpro.ui.presenter.NewsFragmentPresenter
 import com.github.kotlin_mvpro.ui.view.INewsFragment
 import com.github.kotlin_mvpro.utils.LIST_TOP
-import com.github.kotlin_mvpro.utils.RouterImpl
-import com.github.kotlin_mvpro.utils.router
+import com.github.library.utils.RouterImpl
 import com.github.library.utils.eventbus.Event
+import com.github.library.utils.eventbus.sendEventSticky
+import com.github.library.utils.router
 import com.github.refresh.RefreshCustomerLayout
 import com.github.refresh.RefreshLayout
 import com.github.refresh.interfaces.IRefreshStateView
@@ -36,7 +37,7 @@ class NewsFragment : BaseFragment<NewsFragmentPresenter, CommonListBinding>(), I
         val adapter = NewsListAdapter()
         adapter.setOnItemClickListener { adapter, view, position ->
             val storiesBean = adapter.getItem(position) as NewsRequest.ListRes.StoriesBean
-            router(RouterImpl.NewsDetailFrom + storiesBean.id)
+            router(RouterImpl.NewsDetailActivity, Pair("id", storiesBean.id), Pair("imageUrl", storiesBean.getImageUrl()))
         }
         mBinding.mRefreshLayout.setPageSize(Api.pageSize)
                 .setPageStartOffset(0)
