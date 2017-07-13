@@ -15,14 +15,6 @@ import android.app.Activity
 import android.app.Fragment
 import com.github.mzule.activityrouter.router.Routers
 
-class RouterImpl {
-    companion object {
-        //NewsDetailActivity
-        const val NewsDetailActivity = "NewsDetailActivity"
-    }
-
-}
-
 fun Activity.router(toPage: String, vararg pairs: Pair<*, *>) {
     Routers.open(this, "router://$toPage${getParamString(pairs)}")
 }

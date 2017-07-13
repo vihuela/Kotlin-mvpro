@@ -21,7 +21,7 @@ import com.github.kotlin_mvpro.databinding.ActivityNewsDetailBinding
 import com.github.kotlin_mvpro.ui.base.BaseActivity
 import com.github.kotlin_mvpro.ui.presenter.NewsDetailActivityPresenter
 import com.github.kotlin_mvpro.ui.view.INewsDetailActivity
-import com.github.library.utils.RouterImpl
+import com.github.kotlin_mvpro.utils.RouterImpl
 import com.github.mzule.activityrouter.annotation.Router
 import com.just.library.AgentWeb
 

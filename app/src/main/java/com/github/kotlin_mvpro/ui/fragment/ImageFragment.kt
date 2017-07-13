@@ -112,7 +112,7 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(),
     override fun <T> onEvent(event: Event<T>?) {
         super.onEvent(event)
         when (event?.code) {
-            LIST_TOP -> mBinding.mRefreshLayout.recyclerView.smoothScrollToPosition(0)
+            LIST_TOP -> if (userVisibleHint) mBinding.mRefreshLayout.recyclerView.smoothScrollToPosition(0)
         }
     }
 

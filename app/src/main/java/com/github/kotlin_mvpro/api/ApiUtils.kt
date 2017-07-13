@@ -56,7 +56,7 @@ object ApiUtils {
 
     class RxCacheEvict {
         operator fun getValue(any: Any, property: KProperty<*>): Boolean {
-            return Paper.book().read(NET_STATE, true)
+            return Paper.book().read(NET_STATE, false)
         }
 
         operator fun setValue(any: Any, property: KProperty<*>, b: Boolean) {
