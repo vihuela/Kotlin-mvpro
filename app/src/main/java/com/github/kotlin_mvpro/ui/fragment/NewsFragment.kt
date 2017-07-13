@@ -23,7 +23,6 @@ import com.github.kotlin_mvpro.ui.view.INewsFragment
 import com.github.kotlin_mvpro.utils.LIST_TOP
 import com.github.library.utils.RouterImpl
 import com.github.library.utils.eventbus.Event
-import com.github.library.utils.eventbus.sendEventSticky
 import com.github.library.utils.router
 import com.github.refresh.RefreshCustomerLayout
 import com.github.refresh.RefreshLayout

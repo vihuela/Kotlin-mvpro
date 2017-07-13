@@ -12,6 +12,7 @@
 package com.github.kotlin_mvpro.ui.activity
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.widget.LinearLayout
 import com.github.kotlin_mvpro.BR
 import com.github.kotlin_mvpro.R
@@ -21,7 +22,6 @@ import com.github.kotlin_mvpro.ui.base.BaseActivity
 import com.github.kotlin_mvpro.ui.presenter.NewsDetailActivityPresenter
 import com.github.kotlin_mvpro.ui.view.INewsDetailActivity
 import com.github.library.utils.RouterImpl
-import com.github.library.utils.eventbus.Event
 import com.github.mzule.activityrouter.annotation.Router
 import com.just.library.AgentWeb
 
@@ -70,5 +70,12 @@ class NewsDetailActivity : BaseActivity<NewsDetailActivityPresenter, ActivityNew
     override fun onDestroy() {
         super.onDestroy()
         mAgentWeb.webLifeCycle.onDestroy()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (mAgentWeb.handleKeyEvent(keyCode, event)) {
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }
