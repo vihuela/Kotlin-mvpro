@@ -12,7 +12,6 @@
 package com.github.kotlin_mvpro.ui.activity
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.widget.LinearLayout
 import com.github.kotlin_mvpro.BR
 import com.github.kotlin_mvpro.R
@@ -40,10 +39,9 @@ class NewsDetailActivity : BaseActivity<NewsDetailActivityPresenter, ActivityNew
                 .setAgentWebParent(mBinding.contain, LinearLayout.LayoutParams(-1, -1))
                 .useDefaultIndicator()
                 .defaultProgressBarColor()
-                .setReceivedTitleCallback({ view, title -> mBinding.toolbar.title = title })
+                .setReceivedTitleCallback({ _, title -> mBinding.toolbar.title = title })
                 .createAgentWeb()
-                .ready()
-                .go("")
+                .ready().go("")
         mPresenter.onLoadCallback = { title, data ->
             run {
                 mBinding.toolbar.title = title
@@ -52,30 +50,22 @@ class NewsDetailActivity : BaseActivity<NewsDetailActivityPresenter, ActivityNew
         }
         val idStr = intent.getStringExtra("id") ?: return
         mPresenter.getNewsDetail(idStr.toInt())
-
     }
 
     override fun getLayoutId(): Int = R.layout.activity_news_detail
 
     override fun onPause() {
         super.onPause()
-        mAgentWeb.webLifeCycle.onPause()
+        mAgentWeb.webLifeCycle?.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        mAgentWeb.webLifeCycle.onResume()
+        mAgentWeb.webLifeCycle?.onResume()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mAgentWeb.webLifeCycle.onDestroy()
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (mAgentWeb.handleKeyEvent(keyCode, event)) {
-            return true
-        }
-        return super.onKeyDown(keyCode, event)
+        mAgentWeb.webLifeCycle?.onDestroy()
     }
 }
