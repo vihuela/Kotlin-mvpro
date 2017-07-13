@@ -20,10 +20,13 @@ import com.github.library.utils.toast
 import com.kennyc.view.MultiStateView
 import com.ricky.mvp_core.base.BaseBindingFragment
 import com.ricky.mvp_core.base.BasePresenter
+import com.tbruyelle.rxpermissions2.RxPermissions
 import org.jetbrains.anko.findOptional
 
 //stateView and eventBus
 abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingFragment<T, B>(), IStateViewIMPL, IEventBusIMPL {
+
+    val mRxPermissions: RxPermissions by lazy { RxPermissions(activity) }
 
     override fun getStateView(): MultiStateView? {
         return view.findOptional<MultiStateView>(R.id.multiStateView)

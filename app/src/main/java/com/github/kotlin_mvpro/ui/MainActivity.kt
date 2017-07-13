@@ -11,6 +11,7 @@
 
 package com.github.kotlin_mvpro.ui
 
+import android.Manifest
 import android.app.Fragment
 import android.net.NetworkInfo
 import android.os.Bundle
@@ -25,6 +26,8 @@ import com.github.kotlin_mvpro.ui.fragment.NewsFragment
 import com.github.kotlin_mvpro.utils.LIST_TOP
 import com.github.library.utils.eventbus.Event
 import com.github.library.utils.eventbus.sendEvent
+import com.github.library.utils.requestPermission
+import com.github.library.utils.toast
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import com.ricky.mvp_core.base.defaults.EmptyPresenter
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
@@ -63,6 +66,11 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
             override fun getPageTitle(position: Int): CharSequence = title[position]
         }
         mBinding.tab.setViewPager(mBinding.pager, title)
-        mBinding.top.setOnClickListener { sendEvent(Event.obtain(LIST_TOP, it.tag)) }
+        mBinding.top.setOnClickListener {
+            sendEvent(Event.obtain(LIST_TOP, it.tag))
+//            requestPermission(mRxPermissions, {
+//                toast("权限获取成功")
+//            }, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
     }
 }

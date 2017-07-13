@@ -25,11 +25,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.greenrobot.eventbus.EventBus
 
-//rx default mainThread
-fun <T> Observable<T>.defThread(): Observable<T> {
-    return this.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-}
 
 fun Fragment.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
     when (length) {
@@ -56,8 +51,5 @@ fun Activity.hideKeyboard(): Boolean {
     return false
 }
 
-//net error parse
-fun Throwable.parse(iHandler: (error: Error, message: String) -> Unit) {
-    ExceptionParseMgr.Instance.parseException(this, iHandler)
-}
+
 

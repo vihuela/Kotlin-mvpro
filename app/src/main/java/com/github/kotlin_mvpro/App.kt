@@ -12,6 +12,7 @@
 package com.github.kotlin_mvpro
 
 import android.app.Application
+import android.os.Debug
 import com.blankj.utilcode.util.Utils
 import com.github.kotlin_mvpro.api.ApiUtils
 import io.paperdb.Paper
@@ -19,11 +20,14 @@ import io.paperdb.Paper
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
+
+//        Debug.startMethodTracing("kotlin_mvpro")
         //api
         ApiUtils.init(this)
         //db
         Paper.init(this)
         //utils
         Utils.init(this)
+//        Debug.stopMethodTracing()
     }
 }
