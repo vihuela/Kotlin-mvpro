@@ -15,21 +15,16 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import com.github.kotlin_mvpro.BR
 import com.github.kotlin_mvpro.R
-import com.github.kotlin_mvpro.api.request.NewsRequest
 import com.github.kotlin_mvpro.databinding.ActivityNewsDetailBinding
 import com.github.kotlin_mvpro.ui.base.BaseActivity
-import com.github.kotlin_mvpro.ui.presenter.NewsDetailActivityPresenter
-import com.github.kotlin_mvpro.ui.view.INewsDetailActivity
+import com.github.kotlin_mvpro.ui.presenter.WebViewActivityPresenter
+import com.github.kotlin_mvpro.ui.services.WebViewServices
 import com.github.kotlin_mvpro.utils.RouterImpl
 import com.github.mzule.activityrouter.annotation.Router
 import com.just.library.AgentWeb
 
-
-@Router(RouterImpl.NewsDetailActivity)
-class NewsDetailActivity : BaseActivity<NewsDetailActivityPresenter, ActivityNewsDetailBinding>(), INewsDetailActivity {
-    override fun setData(res: NewsRequest.DetailRes) {
-
-    }
+@Router(RouterImpl.WebViewActivity)
+class WebViewActivity : BaseActivity<WebViewActivityPresenter, ActivityNewsDetailBinding>() {
 
     lateinit var mAgentWeb: AgentWeb
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +45,7 @@ class NewsDetailActivity : BaseActivity<NewsDetailActivityPresenter, ActivityNew
         }
         val idStr = intent.getStringExtra("id") ?: return
         mPresenter.getNewsDetail(idStr.toInt())
+        WebViewServices.start(this)//方便后续杀死进程
     }
 
     override fun getLayoutId(): Int = R.layout.activity_news_detail

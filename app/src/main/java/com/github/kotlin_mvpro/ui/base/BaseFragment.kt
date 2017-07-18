@@ -14,8 +14,8 @@ package com.github.kotlin_mvpro.ui.base
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import com.github.kotlin_mvpro.R
-import com.github.library.utils.IStateViewIMPL
-import com.github.library.utils.eventbus.IEventBusIMPL
+import com.github.library.utils.impl.IStateView
+import com.github.library.utils.impl.IEventBus
 import com.github.library.utils.toast
 import com.kennyc.view.MultiStateView
 import com.ricky.mvp_core.base.BaseBindingFragment
@@ -24,7 +24,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import org.jetbrains.anko.findOptional
 
 //stateView and eventBus
-abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingFragment<T, B>(), IStateViewIMPL, IEventBusIMPL {
+abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingFragment<T, B>(), IStateView, IEventBus {
 
     val mRxPermissions: RxPermissions by lazy { RxPermissions(activity) }
 

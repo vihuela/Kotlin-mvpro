@@ -12,8 +12,10 @@
 package com.github.library.utils.eventbus
 
 import android.app.Activity
+import android.app.Application
 import android.app.Fragment
-import org.greenrobot.eventbus.EventBus
+import android.app.Service
+import xiaofei.library.hermeseventbus.HermesEventBus
 
 data class Event<T>(var code: Int, var data: T) {
 
@@ -25,18 +27,36 @@ data class Event<T>(var code: Int, var data: T) {
 
 //fragment Ext
 fun Fragment.sendEvent(event: Event<*>) {
-    EventBus.getDefault().post(event)
+    HermesEventBus.getDefault().post(event)
 }
 
 fun Fragment.sendEventSticky(event: Event<*>) {
-    EventBus.getDefault().postSticky(event)
+    HermesEventBus.getDefault().postSticky(event)
 }
 
 //activity Ext
 fun Activity.sendEvent(event: Event<*>) {
-    EventBus.getDefault().post(event)
+    HermesEventBus.getDefault().post(event)
 }
 
 fun Activity.sendEventSticky(event: Event<*>) {
-    EventBus.getDefault().postSticky(event)
+    HermesEventBus.getDefault().postSticky(event)
+}
+
+//service Ext
+fun Service.sendEvent(event: Event<*>) {
+    HermesEventBus.getDefault().post(event)
+}
+
+fun Service.sendEventSticky(event: Event<*>) {
+    HermesEventBus.getDefault().postSticky(event)
+}
+
+//application Ext
+fun Application.sendEvent(event: Event<*>) {
+    HermesEventBus.getDefault().post(event)
+}
+
+fun Application.sendEventSticky(event: Event<*>) {
+    HermesEventBus.getDefault().postSticky(event)
 }

@@ -15,18 +15,18 @@ import android.os.Bundle
 import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.ApiCacheProvider
 import com.github.kotlin_mvpro.api.ApiUtils
-import com.github.kotlin_mvpro.ui.view.INewsDetailActivity
 import com.github.library.utils.defThread
 import com.github.library.utils.parse
 import com.ricky.mvp_core.base.BasePresenter
+import com.ricky.mvp_core.base.interfaces.IView
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.rx_cache2.DynamicKey
 import io.rx_cache2.EvictDynamicKey
 
-class NewsDetailActivityPresenter : BasePresenter<INewsDetailActivity>() {
+class WebViewActivityPresenter : BasePresenter<IView>() {
     var onLoadCallback: ((title: String, data: String) -> Unit)? = null
 
-    override fun onViewCreated(view: INewsDetailActivity, arguments: Bundle?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: IView, arguments: Bundle?, savedInstanceState: Bundle?) {
     }
 
     fun getNewsDetail(id: Int) {

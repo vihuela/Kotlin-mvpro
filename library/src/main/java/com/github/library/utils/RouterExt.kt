@@ -13,7 +13,10 @@ package com.github.library.utils
 
 import android.app.Activity
 import android.app.Fragment
+import android.app.Service
 import com.github.mzule.activityrouter.router.Routers
+
+//apply for ActivityRouter
 
 fun Activity.router(toPage: String, vararg pairs: Pair<*, *>) {
     Routers.open(this, "router://$toPage${getParamString(pairs)}")
@@ -21,6 +24,10 @@ fun Activity.router(toPage: String, vararg pairs: Pair<*, *>) {
 
 fun Fragment.router(toPage: String, vararg pairs: Pair<*, *>) {
     Routers.open(activity, "router://$toPage${getParamString(pairs)}")
+}
+
+fun Service.router(toPage: String, vararg pairs: Pair<*, *>) {
+    Routers.open(this, "router://$toPage${getParamString(pairs)}")
 }
 
 private fun getParamString(pairs: Array<out Pair<*, *>>): String {

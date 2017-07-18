@@ -36,7 +36,7 @@ class NewsFragment : BaseFragment<NewsFragmentPresenter, CommonListBinding>(), I
         val adapter = NewsListAdapter()
         adapter.setOnItemClickListener { adapter, view, position ->
             val storiesBean = adapter.getItem(position) as NewsRequest.ListRes.StoriesBean
-            router(RouterImpl.NewsDetailActivity, Pair("id", storiesBean.id), Pair("imageUrl", storiesBean.getImageUrl()))
+            router(RouterImpl.WebViewActivity, Pair("id", storiesBean.id), Pair("imageUrl", storiesBean.getImageUrl()))
         }
         mBinding.mRefreshLayout.setPageSize(Api.pageSize)
                 .setPageStartOffset(0)
@@ -111,4 +111,5 @@ class NewsFragment : BaseFragment<NewsFragmentPresenter, CommonListBinding>(), I
     }
 
     override fun isRegisterEventBus(): Boolean = true
+
 }

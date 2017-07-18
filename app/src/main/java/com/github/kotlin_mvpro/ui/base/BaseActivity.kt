@@ -13,16 +13,16 @@ package com.github.kotlin_mvpro.ui.base
 
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import com.github.library.utils.eventbus.IEventBusIMPL
+import com.github.library.utils.impl.IEventBus
 import com.ricky.mvp_core.base.BaseBindingActivity
 import com.ricky.mvp_core.base.BasePresenter
 import com.tbruyelle.rxpermissions2.RxPermissions
 
 //stateView and eventBus
-abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>(), IEventBusIMPL {
+abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>(), IEventBus {
 
     val mRxPermissions: RxPermissions by lazy { RxPermissions(this) }
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         super.registerEventBus(this)

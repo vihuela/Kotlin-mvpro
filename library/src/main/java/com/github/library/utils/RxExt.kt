@@ -12,7 +12,7 @@
 package com.github.library.utils
 
 import android.app.Activity
-import android.app.Fragment
+import com.blankj.utilcode.util.ToastUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import github.library.parser.ExceptionParseMgr
 import github.library.utils.Error
@@ -32,24 +32,31 @@ fun Throwable.parse(iHandler: (error: Error, message: String) -> Unit) {
 }
 
 //rxPermissions【https://ww4.sinaimg.cn/large/6a195423jw1ezwpc11cs0j20hr0majwm.jpg】
-fun Activity.requestPermission(rxPermissions: RxPermissions, success: () -> Unit, vararg permissions: String) {
+fun Activity.requestAllPermission(rxPermissions: RxPermissions,
+                                  success: () -> Unit,
+                                  vararg permissions: String) {
     rxPermissions.request(*permissions)
             .subscribe {
                 if (it) {
                     success.invoke()
                 } else {
-                    toast("Permission request fail")
+                    ToastUtils.showShortSafe("permission request fail")
                 }
             }
 }
 
-fun Fragment.requestPermission(rxPermissions: RxPermissions, success: () -> Unit, vararg permissions: String) {
-    rxPermissions.request(*permissions)
+//error: (denyName: String) -> Unit = { ToastUtils.showShortSafe("$it permission request fail") }
+fun Activity.requestEachPermission(rxPermissions: RxPermissions,
+                                   success: () -> Unit,
+                                   vararg permissions: String) {
+    rxPermissions.requestEach(*permissions)
             .subscribe {
-                if (it) {
+                if (it.granted) {
                     success.invoke()
+                } else if (it.shouldShowRequestPermissionRationale) {
+                    ToastUtils.showShortSafe("${it.name} permission request fail")
                 } else {
-                    toast("Permission request fail")
+                    ToastUtils.showShortSafe("${it.name} permission request fail")
                 }
             }
 }

@@ -9,7 +9,7 @@
  *
  */
 
-package com.github.library.utils
+package com.github.library.utils.impl
 
 import android.widget.Button
 import android.widget.TextView
@@ -18,7 +18,7 @@ import com.kennyc.view.MultiStateView
 import org.jetbrains.anko.findOptional
 
 //apply for MultiStateView
-interface IStateViewIMPL {
+interface IStateView {
 
     //default layout is multiStateView
     fun getStateView(): MultiStateView? = null

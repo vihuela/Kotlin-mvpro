@@ -12,18 +12,13 @@
 package com.github.library.utils
 
 import android.app.Activity
+import android.app.ActivityManager
+import android.app.Application
 import android.app.Fragment
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.blankj.utilcode.util.ToastUtils
-import com.github.library.utils.eventbus.Event
-import github.library.parser.ExceptionParseMgr
-import github.library.utils.Error
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import org.greenrobot.eventbus.EventBus
 
 
 fun Fragment.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
@@ -35,8 +30,12 @@ fun Fragment.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
 
 fun Activity.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
     when (length) {
-        Toast.LENGTH_SHORT -> ToastUtils.showShortSafe(msg)
-        Toast.LENGTH_LONG -> ToastUtils.showLongSafe(msg)
+        Toast.LENGTH_SHORT -> {
+            ToastUtils.showShortSafe(msg)
+        }
+        Toast.LENGTH_LONG -> {
+            ToastUtils.showLongSafe(msg)
+        }
     }
 }
 
@@ -49,6 +48,22 @@ fun Activity.hideKeyboard(): Boolean {
                 InputMethodManager.HIDE_NOT_ALWAYS)
     }
     return false
+}
+
+fun Application.getRunningProcessList(): MutableList<ActivityManager.RunningAppProcessInfo>? {
+    val am = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+    return am.runningAppProcesses
+}
+
+fun Application.getProcessName(): String? {
+    val am = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+    return am.runningAppProcesses
+            ?.find { it.pid == android.os.Process.myPid() }
+            ?.processName
+}
+
+fun Application.killCurrentProcess() {
+    android.os.Process.killProcess(android.os.Process.myPid())
 }
 
 

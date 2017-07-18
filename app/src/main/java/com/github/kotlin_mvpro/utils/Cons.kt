@@ -13,12 +13,13 @@ package com.github.kotlin_mvpro.utils
 
 const val NET_STATE = "netAvailable"
 
-const val LIST_TOP = 0xff10086
+const val LIST_TOP = 0xff1
 
 class RouterImpl {
     companion object {
-        //NewsDetailActivity
-        const val NewsDetailActivity = "NewsDetailActivity"
+        //WebViewActivity
+        const val WebViewActivity = "WebViewActivity"
+        const val WebViewActivityDestroy = 0xff2
     }
 
 }

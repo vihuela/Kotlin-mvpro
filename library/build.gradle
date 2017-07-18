@@ -76,7 +76,7 @@ dependencies {
     compile 'com.github.pwittchen:reactivenetwork-rx2:0.9.1'//monitor net state
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
     //utils
-    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'xiaofei.library:hermes-eventbus:0.3.0'
     //smooth open image,https://github.com/Hitomis/transferee
     compile 'com.github.Hitomis.transferee:Transferee:v1.0.0'
     compile('com.github.Hitomis.transferee:GlideLoader:v1.0.0', {
