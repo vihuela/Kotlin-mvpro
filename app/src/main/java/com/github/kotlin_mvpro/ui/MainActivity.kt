@@ -17,6 +17,7 @@ import android.os.Bundle
 import android.support.v13.app.FragmentPagerAdapter
 import com.blankj.utilcode.util.SnackbarUtils
 import com.github.kotlin_mvpro.R
+import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.databinding.ActivityMainBinding
 import com.github.kotlin_mvpro.ui.base.BaseActivity

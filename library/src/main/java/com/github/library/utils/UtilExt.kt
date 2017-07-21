@@ -19,8 +19,9 @@ import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.blankj.utilcode.util.ToastUtils
+import com.google.gson.Gson
 
-
+//Fragment
 fun Fragment.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
     when (length) {
         Toast.LENGTH_SHORT -> ToastUtils.showShortSafe(msg)
@@ -28,6 +29,7 @@ fun Fragment.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
     }
 }
 
+//Activity
 fun Activity.toast(msg: String, length: Int = Toast.LENGTH_SHORT) {
     when (length) {
         Toast.LENGTH_SHORT -> {
@@ -50,6 +52,7 @@ fun Activity.hideKeyboard(): Boolean {
     return false
 }
 
+//Application
 fun Application.getRunningProcessList(): MutableList<ActivityManager.RunningAppProcessInfo>? {
     val am = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
     return am.runningAppProcesses
@@ -64,6 +67,11 @@ fun Application.getProcessName(): String? {
 
 fun Application.killCurrentProcess() {
     android.os.Process.killProcess(android.os.Process.myPid())
+}
+
+//gson
+inline fun <reified T> Gson.fromJson(json: String): T {
+    return fromJson(json, T::class.java)
 }
 
 

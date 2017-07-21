@@ -13,7 +13,7 @@ package com.github.kotlin_mvpro.api
 
 import android.content.Context
 import com.github.kotlin_mvpro.utils.NET_STATE
-import io.paperdb.Paper
+import com.github.library.utils.pref
 import io.rx_cache2.internal.RxCache
 import io.victoralbertos.jolyglot.GsonSpeaker
 import okhttp3.OkHttpClient
@@ -21,7 +21,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.reflect.KProperty
 
 object ApiUtils {
     lateinit var context: Context
@@ -51,18 +50,6 @@ object ApiUtils {
                 .persistence(this.context.filesDir, GsonSpeaker())
                 .using(ApiCacheProvider::class.java)
     }
-
-    var isRxCacheEvict: Boolean by RxCacheEvict()
-
-    class RxCacheEvict {
-        operator fun getValue(any: Any, property: KProperty<*>): Boolean {
-            return Paper.book().read(NET_STATE, false)
-        }
-
-        operator fun setValue(any: Any, property: KProperty<*>, b: Boolean) {
-            Paper.book().write(NET_STATE, b)
-        }
-    }
-
+    var isRxCacheEvict by pref(false, NET_STATE)
 
 }
