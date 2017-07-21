@@ -45,7 +45,7 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(),
             }
         }
         mBinding.mRefreshLayout.setPageSize(Api.pageSize)
-                .setPageStartOffset(1)
+                .setPageStartOffset(Api.startOffset)
                 .setViewType(RefreshCustomerLayout.Refresh_LoadMore)
                 .setRefreshListener(object : RefreshCustomerLayout.IRefreshListener {
                     override fun onLoadMore(targetPage: Int) {

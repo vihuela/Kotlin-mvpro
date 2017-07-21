@@ -19,10 +19,14 @@ import retrofit2.http.Path
 
 interface Api {
     companion object {
-        val apiConfig = mapOf(Pair("pageSize", 10)).withDefault { null }
+        val listConfig = mapOf(
+                Pair("pageSize", 10),
+                Pair("startOffset", 1))
+                .withDefault { 0 }
 
         val IMPL: Api = ApiUtils.api
-        val pageSize by apiConfig
+        val pageSize by listConfig
+        val startOffset by listConfig
     }
 
     @GET("福利/{size}/{page}")
