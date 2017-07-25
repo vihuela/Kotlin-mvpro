@@ -19,7 +19,6 @@ class RouterImpl {
     companion object {
         //WebViewActivity
         const val WebViewActivity = "WebViewActivity"
-        const val WebViewActivityDestroy = 0xff2
     }
 
 }

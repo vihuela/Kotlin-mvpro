@@ -14,25 +14,18 @@ package com.github.kotlin_mvpro
 import android.app.Application
 import com.blankj.utilcode.util.Utils
 import com.github.kotlin_mvpro.api.ApiUtils
-import com.github.kotlin_mvpro.utils.RouterImpl
-import com.github.library.utils.eventbus.Event
-import com.github.library.utils.impl.IEventBus
-import com.github.library.utils.eventbus.sendEvent
 import com.github.library.utils.getProcessName
+import com.github.library.utils.impl.INetState
 import io.paperdb.Paper
 
-class App : Application() {
+class App : Application(), INetState {
     override fun onCreate() {
         super.onCreate()
 
         when (getProcessName()) {
             packageName -> {
-                IEventBus.init(this, true)
                 commonInit()
-            }
-            "$packageName:webView" -> {
-                IEventBus.init(this, false)
-                commonInit()
+                observeNetwork(this, { ApiUtils.isRxCacheEvict = it })
             }
         }
     }
@@ -46,13 +39,12 @@ class App : Application() {
         Utils.init(this)
     }
 
+    //wait future use
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
         when {
             level > Application.TRIM_MEMORY_UI_HIDDEN -> {
-                sendEvent(Event.obtain(RouterImpl.WebViewActivityDestroy))
             }
         }
-
     }
 }

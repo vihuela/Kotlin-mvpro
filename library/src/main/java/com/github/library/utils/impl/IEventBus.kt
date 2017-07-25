@@ -11,11 +11,10 @@
 
 package com.github.library.utils.impl
 
-import android.app.Application
 import com.github.library.utils.eventbus.Event
+import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import xiaofei.library.hermeseventbus.HermesEventBus
 
 //apply for eventBus
 interface IEventBus {
@@ -30,34 +29,14 @@ interface IEventBus {
 
     fun registerEventBus(subscriber: Any) {
         if (isRegisterEventBus()) {
-            HermesEventBus.getDefault().register(subscriber)
+            EventBus.getDefault().register(subscriber)
         }
 
     }
 
     fun unregisterEventBus(subscriber: Any) {
         if (isRegisterEventBus()) {
-            HermesEventBus.getDefault().unregister(subscriber)
+            EventBus.getDefault().unregister(subscriber)
         }
     }
-
-    //apply for HermesEventBus，进程间通讯的eventBus
-    //传递对象会被序列号成linkedTreeMap
-    companion object {
-        //进程结束时调用
-        fun destroy() {
-            HermesEventBus.getDefault().destroy()
-        }
-
-        //在Application中进程初始化调用
-        fun init(context: Application, isMainProcess: Boolean) {
-            when (isMainProcess) {
-                true -> HermesEventBus.getDefault().init(context)
-                false -> HermesEventBus.getDefault().connectApp(context, context.packageName)
-            }
-
-        }
-    }
-
-
 }

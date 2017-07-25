@@ -39,21 +39,6 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //rxNetState
-        ReactiveNetwork.observeNetworkConnectivity(applicationContext)
-                .subscribeOn(Schedulers.io())
-                .bindToLifecycle(this)
-                .flatMap { Observable.just((it.isAvailable && it.state == NetworkInfo.State.CONNECTED)) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (!it) {
-                        SnackbarUtils.with(findViewById(android.R.id.content))
-                                .setMessage("网络未连接")
-                                .setDuration(0)
-                                .showWarning()
-                    }
-                    ApiUtils.isRxCacheEvict = it
-                })
 
         val title = arrayOf("美图", "知乎日报")
         val items = arrayOf(ImageFragment(), NewsFragment())
