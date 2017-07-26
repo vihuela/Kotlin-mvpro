@@ -1,4 +1,4 @@
-   
+﻿   
 ## [English README](https://github.com/vihuela/Kotlin-mvpro/blob/master/README_EN.md "English README") ##
 
 # 介绍 
@@ -26,10 +26,10 @@
 
 ### 使用
 
-		compile 'com.ricky:mvpro-kotlin:1.1' 
+		compile 'com.ricky:mvpro-kotlin:1.2' 
 
 		或者 外部引用了rxlifecycle2
-		compile('com.ricky:mvpro-kotlin:1.1', { exclude group: 'com.trello.rxlifecycle2' })
+		compile('com.ricky:mvpro-kotlin:1.2', { exclude group: 'com.trello.rxlifecycle2' })
 
 ### apk
 

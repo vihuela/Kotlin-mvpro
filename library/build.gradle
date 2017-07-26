@@ -95,5 +95,5 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     //mvpro
 //    compile(project(':mvp-core'), { exclude group: 'com.trello.rxlifecycle2' })
-    compile('com.ricky:mvpro-kotlin:1.1', { exclude group: 'com.trello.rxlifecycle2' })
+    compile('com.ricky:mvpro-kotlin:1.2', { exclude group: 'com.trello.rxlifecycle2' })
 }

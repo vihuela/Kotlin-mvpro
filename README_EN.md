@@ -1,4 +1,4 @@
-# README
+﻿# README
 
 [![Apache 2.0 License](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
@@ -22,10 +22,10 @@ base [**Kotlin**](https://kotlinlang.org)，include DataBinding、RxJava、Rxkol
 
 ### Usage
 
-		compile 'com.ricky:mvpro-kotlin:1.1' 
+		compile 'com.ricky:mvpro-kotlin:1.2' 
 
 		OR
-		compile('com.ricky:mvpro-kotlin:1.1', { exclude group: 'com.trello.rxlifecycle2' })
+		compile('com.ricky:mvpro-kotlin:1.2', { exclude group: 'com.trello.rxlifecycle2' })
 
 ### apk
 

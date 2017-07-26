@@ -11,10 +11,8 @@
 
 package com.ricky.mvp_core.base
 
-import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,9 +27,6 @@ abstract class BaseBindingFragment<T : BasePresenter<*>, B : ViewDataBinding> : 
 
     protected lateinit var mBinding: B
     protected lateinit var mPresenter: T
-
-
-    override fun getContext(): Context = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) super.getContext() else activity
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)

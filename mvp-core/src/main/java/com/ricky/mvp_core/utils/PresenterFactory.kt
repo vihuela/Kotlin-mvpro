@@ -12,6 +12,7 @@
 package com.ricky.mvp_core.utils
 
 import android.app.Fragment
+import android.os.Build
 import android.os.Bundle
 import com.ricky.mvp_core.base.BaseBindingActivity
 import com.ricky.mvp_core.base.BaseBindingFragment
@@ -56,7 +57,7 @@ internal object PresenterFactory {
         val args = if (frg.arguments != null) Bundle(frg.arguments) else Bundle()
         var presenter = frg.fragmentManager.findFragmentByTag(presenterClass.canonicalName) as T?
         if (presenter == null || presenter.isDetached) {
-            presenter = Fragment.instantiate(frg.context, presenterClass.canonicalName, args) as T
+            presenter = Fragment.instantiate(frg.activity, presenterClass.canonicalName, args) as T
             trans.add(0, presenter, presenterClass.canonicalName)
         }
         presenter.setView(frg)

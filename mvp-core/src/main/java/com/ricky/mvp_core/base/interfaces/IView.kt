@@ -11,4 +11,4 @@
 
 package com.ricky.mvp_core.base.interfaces
 
-interface IView : IContextProvider, IStateView
+interface IView : IStateView

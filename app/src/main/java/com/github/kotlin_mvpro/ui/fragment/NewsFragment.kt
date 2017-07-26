@@ -32,7 +32,7 @@ class NewsFragment : BaseFragment<NewsFragmentPresenter, CommonListBinding>(), I
 
     override fun onFirstUserVisible() {
 
-        mBinding.mRefreshLayout.recyclerView.layoutManager = LinearLayoutManager(context)
+        mBinding.mRefreshLayout.recyclerView.layoutManager = LinearLayoutManager(activity)
         val adapter = NewsListAdapter()
         adapter.setOnItemClickListener { adapter, view, position ->
             val storiesBean = adapter.getItem(position) as NewsRequest.ListRes.StoriesBean

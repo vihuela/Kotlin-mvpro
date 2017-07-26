@@ -11,8 +11,6 @@
 
 package com.ricky.mvp_core.base
 
-import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.support.annotation.NonNull
 import android.view.LayoutInflater
@@ -34,9 +32,6 @@ import com.trello.rxlifecycle2.components.RxFragment
  */
 abstract class BasePresenter<V : IView> : RxFragment() {
     lateinit var mView: V
-    override fun getContext(): Context {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) super.getContext() else activity
-    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         onViewCreated(mView, arguments, savedInstanceState)

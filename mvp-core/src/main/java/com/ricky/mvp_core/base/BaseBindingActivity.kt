@@ -11,7 +11,6 @@
 
 package com.ricky.mvp_core.base
 
-import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -27,8 +26,6 @@ abstract class BaseBindingActivity<T : BasePresenter<*>, B : ViewDataBinding> : 
     protected lateinit var mBinding: B
     protected lateinit var mPresenter: T
 
-
-    override fun getContext(): Context = this
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = createViewDataBinding()
