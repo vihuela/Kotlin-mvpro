@@ -18,7 +18,8 @@ import android.os.Bundle
 import com.blankj.utilcode.util.SnackbarUtils
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import com.trello.rxlifecycle2.LifecycleProvider
-import com.trello.rxlifecycle2.kotlin.bindToLifecycle
+import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -37,6 +38,8 @@ interface INetState {
                     .showWarning()
         }
 
+        val activityStateMap = mutableMapOf<String, Boolean>().withDefault { true }
+
         app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
 
 
@@ -47,22 +50,24 @@ interface INetState {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                 doAsync {
                     if (activity is LifecycleProvider<*>) {
-                        ReactiveNetwork.observeNetworkConnectivity(activity.applicationContext)
+                        ReactiveNetwork
+                                .observeNetworkConnectivity(activity.applicationContext)
                                 .subscribeOn(Schedulers.io())
-                                .bindToLifecycle(activity)
-                                .compose { it }
-                                .flatMap { Observable.just((it.isAvailable && it.state == NetworkInfo.State.CONNECTED)) }
+                                .bindUntilEvent(activity as LifecycleProvider<ActivityEvent>, ActivityEvent.DESTROY)//release util onDestroy
+                                .compose {//compose operate ObservableSource，not consumer callBack
+                                    activityStateMap.put(activity.javaClass.simpleName, true)
+                                    it.flatMap { Observable.just((it.isAvailable && it.state == NetworkInfo.State.CONNECTED)) }
+                                }
                                 .map {
                                     netCallback.invoke(it)
                                     it
                                 }
-                                .filter { !it }
+                                .filter { !it && activityStateMap[activity.javaClass.simpleName] ?: true }
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .delay(300,TimeUnit.MILLISECONDS)
+                                .delay(300, TimeUnit.MILLISECONDS)
                                 .subscribe({
                                     showSnackBar.invoke(activity)
                                 })
-
                     }
                 }
             }
@@ -71,9 +76,11 @@ interface INetState {
             }
 
             override fun onActivityResumed(activity: Activity) {
+                doAsync { activityStateMap.put(activity.javaClass.simpleName, true) }
             }
 
             override fun onActivityPaused(activity: Activity) {
+                doAsync { activityStateMap.put(activity.javaClass.simpleName, false) }
             }
 
             override fun onActivityStopped(activity: Activity) {

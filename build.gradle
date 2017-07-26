@@ -30,6 +30,7 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
+        maven { url 'https://dl.google.com/dl/android/maven2/' }
     }
     tasks.withType(Javadoc) {
         options{
