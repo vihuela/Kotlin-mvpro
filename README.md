@@ -31,6 +31,12 @@
 		或者 外部引用了rxlifecycle2
 		compile('com.ricky:mvpro-kotlin:1.1', { exclude group: 'com.trello.rxlifecycle2' })
 
+### apk
+
+[点击下载](https://www.pgyer.com/naXB "点击下载")
+
+![](https://www.pgyer.com/app/qrcode/naXB)
+
 ### 注意事项
 
 - 项目中的Presenter使用的Fragment不是v4包底下的，因supportFragmentManager的findFragmentByTag()有bug
