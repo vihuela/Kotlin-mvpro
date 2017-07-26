@@ -62,7 +62,7 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:$retrofit2_version"
     compile "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
     compile "com.squareup.okhttp3:okhttp:$okHttp_version"
-    compile 'com.ricky:retrofitExceptionDispatcher:0.3'//https://github.com/vihuela/Retrofitplus
+    compile 'com.ricky:retrofitExceptionDispatcher:0.5'//https://github.com/vihuela/Retrofitplus
     //rx
     compile "io.reactivex.rxjava2:rxjava:$rxJava_version"
     compile "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version"

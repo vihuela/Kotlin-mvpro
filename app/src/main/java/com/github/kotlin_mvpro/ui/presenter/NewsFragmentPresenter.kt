@@ -16,6 +16,7 @@ import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.ApiCacheProvider
 import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.ui.view.INewsFragment
+import com.github.library.utils.defRetry
 import com.github.library.utils.defThread
 import com.github.library.utils.parse
 import com.ricky.mvp_core.base.BasePresenter
@@ -34,12 +35,14 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
         val api = Api.IMPL.getNewsList()
         ApiCacheProvider.IMPL.getNewsList(api, EvictProvider(ApiUtils.isRxCacheEvict))
                 .defThread()
+                .defRetry()
                 .bindToLifecycle(this)
                 .doOnSubscribe { view().showLoading() }
                 .map { it.data.stories }
-                .subscribe({ view().setData(it, false) },
-                        { it.parse({ error, message -> view().setMessage(error, message) }) },
-                        { view().hideLoading() })
+                .subscribe({
+                    view().hideLoading()
+                    view().setData(it, false) },
+                        { it.parse({ error, message -> view().setMessage(error, message) }) })
     }
 
     fun getNewsListForDate(page: Int = 1) {
@@ -47,12 +50,14 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
         val api = Api.IMPL.getNewsListForDate(dateString)
         ApiCacheProvider.IMPL.getNewsListForDate(api, DynamicKey(page), EvictDynamicKey(ApiUtils.isRxCacheEvict))
                 .defThread()
+                .defRetry()
                 .bindToLifecycle(this)
                 .doOnSubscribe { view().showLoading() }
                 .map { it.data.stories }
-                .subscribe({ view().setData(it, true) },
-                        { it.parse({ error, message -> view().setMessage(error, message) }) },
-                        { view().hideLoading() })
+                .subscribe({
+                    view().hideLoading()
+                    view().setData(it, true) },
+                        { it.parse({ error, message -> view().setMessage(error, message) }) })
     }
 
     private fun getNextDay(delay: Int): String {
