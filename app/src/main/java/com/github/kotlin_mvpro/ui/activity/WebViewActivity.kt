@@ -38,6 +38,7 @@ class WebViewActivity : BaseActivity<WebViewActivityPresenter, ActivityNewsDetai
                 .ready().go("")
         mPresenter.onLoadCallback = { title, data ->
             run {
+                showContent()
                 mBinding.toolbar.title = title
                 mAgentWeb.loader.loadUrl(data)
             }

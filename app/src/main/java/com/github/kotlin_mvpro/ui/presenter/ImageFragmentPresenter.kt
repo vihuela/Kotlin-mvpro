@@ -79,10 +79,7 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
                 }
                 .map { it.data.results.map { ImageItem(it.url) } }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    view().hideLoading()
-                    view().setData(it, loadMore)
-                },
+                .subscribe({ view().setData(it, loadMore) },
                         { it.parse({ error, message -> view().setMessage(error, message) }) })
     }
 }

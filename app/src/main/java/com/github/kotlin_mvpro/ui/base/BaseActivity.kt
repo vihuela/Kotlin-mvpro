@@ -14,14 +14,24 @@ package com.github.kotlin_mvpro.ui.base
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import com.github.library.utils.impl.IEventBus
+import com.github.library.utils.impl.IStateView
+import com.github.library.utils.toast
+import com.kennyc.view.MultiStateView
 import com.ricky.mvp_core.base.BaseBindingActivity
 import com.ricky.mvp_core.base.BasePresenter
 import com.tbruyelle.rxpermissions2.RxPermissions
 
 //stateView and eventBus
-abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>(), IEventBus {
+abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>(), IStateView, IEventBus {
 
     val mRxPermissions: RxPermissions by lazy { RxPermissions(this) }
+    val mSateView: MultiStateView? by lazy {
+        super.stateViewInit(this)
+    }
+
+    override fun getStateView(): MultiStateView? {
+        return mSateView
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,25 +45,31 @@ abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBin
 
     override fun showLoading() {
         super.showLoading()
+        super.stateViewLoading()
     }
 
     override fun showMessageFromNet(error: Any, content: String) {
         super.showMessageFromNet(error, content)
+        super.stateViewError(error, content)
     }
 
     override fun showEmpty() {
         super.showEmpty()
+        super.stateViewEmpty()
     }
 
     override fun showContent() {
         super.showContent()
+        super.stateViewContent()
     }
 
     override fun showMessage(content: String) {
         super.showMessage(content)
+        toast(content)
     }
 
     override fun hideLoading() {
         super.hideLoading()
+        showContent()
     }
 }

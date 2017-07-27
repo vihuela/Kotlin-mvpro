@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2017 Ricky.yao https://github.com/vihuela
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,15 +12,9 @@
 <layout>
 
     <com.kennyc.view.MultiStateView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/multiStateView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:msv_animateViewChanges="true"
-        app:msv_emptyView="@layout/empty_view"
-        app:msv_errorView="@layout/error_view"
-        app:msv_loadingView="@layout/loading_view"
-        app:msv_viewState="loading">
+        android:layout_height="match_parent">
 
         <com.github.refresh.RefreshCustomerLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/mRefreshLayout"

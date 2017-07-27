@@ -39,9 +39,7 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
                 .bindToLifecycle(this)
                 .doOnSubscribe { view().showLoading() }
                 .map { it.data.stories }
-                .subscribe({
-                    view().hideLoading()
-                    view().setData(it, false) },
+                .subscribe({ view().setData(it, false) },
                         { it.parse({ error, message -> view().setMessage(error, message) }) })
     }
 
@@ -54,9 +52,7 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
                 .bindToLifecycle(this)
                 .doOnSubscribe { view().showLoading() }
                 .map { it.data.stories }
-                .subscribe({
-                    view().hideLoading()
-                    view().setData(it, true) },
+                .subscribe({ view().setData(it, true) },
                         { it.parse({ error, message -> view().setMessage(error, message) }) })
     }
 

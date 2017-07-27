@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2017 Ricky.yao https://github.com/vihuela
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,12 +18,13 @@
             type="android.support.v7.app.AppCompatActivity" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
@@ -44,13 +44,19 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <LinearLayout
-            android:id="@+id/contain"
+        <com.kennyc.view.MultiStateView
+            android:id="@+id/multiStateView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:layout_height="match_parent">
 
-    </android.support.design.widget.CoordinatorLayout>
+            <LinearLayout
+                android:id="@+id/contain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+        </com.kennyc.view.MultiStateView>
+
+    </LinearLayout>
 
 
 </layout>
