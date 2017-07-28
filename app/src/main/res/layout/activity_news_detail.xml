@@ -44,17 +44,13 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <com.kennyc.view.MultiStateView
-            android:id="@+id/multiStateView"
+        <LinearLayout
+            android:tag="setup_stateView"
+            android:id="@+id/contain"
+            android:contentDescription="setup_stateView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/contain"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" />
-        </com.kennyc.view.MultiStateView>
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
 
     </LinearLayout>
 

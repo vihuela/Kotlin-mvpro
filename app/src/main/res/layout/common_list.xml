@@ -9,18 +9,16 @@
   ~
   -->
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.kennyc.view.MultiStateView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/multiStateView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.github.refresh.RefreshCustomerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <com.github.refresh.RefreshCustomerLayout
             android:id="@+id/mRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </com.kennyc.view.MultiStateView>
-
+            android:layout_height="match_parent"
+            android:contentDescription="setup_stateView" />
+    </FrameLayout>
 </layout>

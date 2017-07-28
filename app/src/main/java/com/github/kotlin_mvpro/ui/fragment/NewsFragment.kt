@@ -112,4 +112,6 @@ class NewsFragment : BaseFragment<NewsFragmentPresenter, CommonListBinding>(), I
 
     override fun isRegisterEventBus(): Boolean = true
 
+    override fun isRegisterStateView(): Boolean = true
+
 }

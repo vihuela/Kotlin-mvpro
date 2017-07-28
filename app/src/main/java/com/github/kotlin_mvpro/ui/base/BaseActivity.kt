@@ -13,6 +13,8 @@ package com.github.kotlin_mvpro.ui.base
 
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import android.view.View
+import com.github.library.R
 import com.github.library.utils.impl.IEventBus
 import com.github.library.utils.impl.IStateView
 import com.github.library.utils.toast
@@ -20,22 +22,21 @@ import com.kennyc.view.MultiStateView
 import com.ricky.mvp_core.base.BaseBindingActivity
 import com.ricky.mvp_core.base.BasePresenter
 import com.tbruyelle.rxpermissions2.RxPermissions
+import org.jetbrains.anko.findOptional
 
 //stateView and eventBus
 abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>(), IStateView, IEventBus {
 
     val mRxPermissions: RxPermissions by lazy { RxPermissions(this) }
-    val mSateView: MultiStateView? by lazy {
-        super.stateViewInit(this)
-    }
 
     override fun getStateView(): MultiStateView? {
-        return mSateView
+        return super.getStateView(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         super.registerEventBus(this)
+        super.stateViewSetup(this)
     }
 
     override fun onDestroy() {

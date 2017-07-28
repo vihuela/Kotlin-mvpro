@@ -33,7 +33,6 @@ import com.github.refresh.interfaces.IRefreshStateView
 class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(), IImageFragment {
 
     override fun onFirstUserVisible() {
-
         mBinding.mRefreshLayout.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         mBinding.mRefreshLayout.recyclerView.addItemDecoration(GridItemDecoration(2, SizeUtils.dp2px(5f), false))
         val imageListAdapter = ImageListAdapter()
@@ -117,4 +116,7 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(),
     }
 
     override fun isRegisterEventBus(): Boolean = true
+
+    override fun isRegisterStateView(): Boolean = true
+
 }
