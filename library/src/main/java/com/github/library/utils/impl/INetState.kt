@@ -16,6 +16,8 @@ import android.app.Application
 import android.net.NetworkInfo
 import android.os.Bundle
 import com.blankj.utilcode.util.SnackbarUtils
+import com.blankj.utilcode.util.Utils
+import com.github.library.R
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.android.ActivityEvent
@@ -33,7 +35,7 @@ interface INetState {
     fun observeNetwork(app: Application, netCallback: (isNetAvailable: Boolean) -> Unit) {
         val showSnackBar: (activity: Activity) -> Unit = { activity ->
             SnackbarUtils.with(activity.findViewById(android.R.id.content))
-                    .setMessage("网络未连接")
+                    .setMessage(Utils.getContext().resources.getText(R.string.network_retry_tip))
                     .setDuration(0)
                     .showWarning()
         }

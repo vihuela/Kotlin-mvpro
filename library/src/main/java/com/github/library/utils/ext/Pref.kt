@@ -9,7 +9,7 @@
  *
  */
 
-package com.github.library.utils
+package com.github.library.utils.ext
 
 import io.paperdb.Paper
 import kotlin.reflect.KProperty

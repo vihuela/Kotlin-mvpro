@@ -9,13 +9,14 @@
  *
  */
 
-package com.github.library.utils
+package com.github.library.utils.ext
 
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.Application
 import android.app.Fragment
 import android.content.Context
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.blankj.utilcode.util.ToastUtils
@@ -74,5 +75,9 @@ inline fun <reified T> Gson.fromJson(json: String): T {
     return fromJson(json, T::class.java)
 }
 
+//log
+inline fun <reified T> T.L(message: Any, tag: String = T::class.java.simpleName) {
+    Log.d(tag, message.toString())
+}
 
 

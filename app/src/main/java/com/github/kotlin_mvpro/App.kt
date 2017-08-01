@@ -14,7 +14,7 @@ package com.github.kotlin_mvpro
 import android.app.Application
 import com.blankj.utilcode.util.Utils
 import com.github.kotlin_mvpro.api.ApiUtils
-import com.github.library.utils.getProcessName
+import com.github.library.utils.ext.getProcessName
 import com.github.library.utils.impl.INetState
 import io.paperdb.Paper
 

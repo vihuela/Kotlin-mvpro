@@ -13,7 +13,7 @@ package com.github.kotlin_mvpro.api
 
 import android.content.Context
 import com.github.kotlin_mvpro.utils.NET_STATE
-import com.github.library.utils.pref
+import com.github.library.utils.ext.pref
 import io.rx_cache2.internal.RxCache
 import io.victoralbertos.jolyglot.GsonSpeaker
 import okhttp3.OkHttpClient

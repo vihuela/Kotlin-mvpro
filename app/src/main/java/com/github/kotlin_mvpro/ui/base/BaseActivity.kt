@@ -13,16 +13,13 @@ package com.github.kotlin_mvpro.ui.base
 
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.view.View
-import com.github.library.R
 import com.github.library.utils.impl.IEventBus
 import com.github.library.utils.impl.IStateView
-import com.github.library.utils.toast
+import com.github.library.utils.ext.toast
 import com.kennyc.view.MultiStateView
 import com.ricky.mvp_core.base.BaseBindingActivity
 import com.ricky.mvp_core.base.BasePresenter
 import com.tbruyelle.rxpermissions2.RxPermissions
-import org.jetbrains.anko.findOptional
 
 //stateView and eventBus
 abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>(), IStateView, IEventBus {

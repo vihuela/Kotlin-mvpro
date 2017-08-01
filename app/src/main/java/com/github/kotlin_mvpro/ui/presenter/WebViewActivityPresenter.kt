@@ -15,12 +15,11 @@ import android.os.Bundle
 import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.ApiCacheProvider
 import com.github.kotlin_mvpro.api.ApiUtils
-import com.github.library.utils.defRetry
-import com.github.library.utils.defThread
-import com.github.library.utils.parse
+import com.github.library.utils.ext.defConfig
+import com.github.library.utils.ext.parse
 import com.ricky.mvp_core.base.BasePresenter
 import com.ricky.mvp_core.base.interfaces.IView
-import com.trello.rxlifecycle2.kotlin.bindToLifecycle
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.rx_cache2.DynamicKey
 import io.rx_cache2.EvictDynamicKey
 
@@ -34,10 +33,9 @@ class WebViewActivityPresenter : BasePresenter<IView>() {
     fun getNewsDetail(id: Int) {
         val api = Api.IMPL.getNewDetail(id)
         ApiCacheProvider.IMPL.getNewDetail(api, DynamicKey(id), EvictDynamicKey(ApiUtils.isRxCacheEvict))
-                .defThread()
-                .bindToLifecycle(this)
+                .defConfig(this)
                 .doOnSubscribe { view().showLoading() }
-                .defRetry()
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { onLoadCallback?.invoke(it.data.title, it.data.share_url) },
                         { it.parse({ error, message -> view().showMessageFromNet(error, message) }) })
