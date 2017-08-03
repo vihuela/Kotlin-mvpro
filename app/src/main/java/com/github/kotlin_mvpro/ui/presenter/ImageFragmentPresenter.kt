@@ -74,7 +74,6 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
         ApiCacheProvider.IMPL.getImageList(api, DynamicKey(page), EvictDynamicKey(ApiUtils.isRxCacheEvict))
                 .defConfig(this)
                 .bindToBehavior(bp!!)
-                .doOnSubscribe { view().showLoading() }
                 .flatMap {
                     val data_ok = !it.data.error && it.data.results.isNotEmpty()
                     if (data_ok) Observable.just(it) else Observable.error(IllegalArgumentException("server business error"))

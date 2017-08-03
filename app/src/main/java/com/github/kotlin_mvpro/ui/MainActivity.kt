@@ -12,13 +12,9 @@
 package com.github.kotlin_mvpro.ui
 
 import android.app.Fragment
-import android.net.NetworkInfo
 import android.os.Bundle
 import android.support.v13.app.FragmentPagerAdapter
-import com.blankj.utilcode.util.SnackbarUtils
 import com.github.kotlin_mvpro.R
-import com.github.kotlin_mvpro.api.Api
-import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.databinding.ActivityMainBinding
 import com.github.kotlin_mvpro.ui.base.BaseActivity
 import com.github.kotlin_mvpro.ui.fragment.ImageFragment
@@ -26,12 +22,8 @@ import com.github.kotlin_mvpro.ui.fragment.NewsFragment
 import com.github.kotlin_mvpro.utils.LIST_TOP
 import com.github.library.utils.eventbus.Event
 import com.github.library.utils.eventbus.sendEvent
-import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
+import com.github.library.utils.java.StatusBarUtil
 import com.ricky.mvp_core.base.defaults.EmptyPresenter
-import com.trello.rxlifecycle2.kotlin.bindToLifecycle
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
 
@@ -52,5 +44,8 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
         mBinding.top.setOnClickListener {
             sendEvent(Event.obtain(LIST_TOP, it.tag))
         }
+        StatusBarUtil.darkMode(this)
+        StatusBarUtil.setPaddingSmart(this,findViewById(R.id.content))
+
     }
 }

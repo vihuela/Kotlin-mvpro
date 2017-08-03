@@ -24,49 +24,33 @@ import com.github.kotlin_mvpro.utils.LIST_TOP
 import com.github.kotlin_mvpro.utils.RouterImpl
 import com.github.library.utils.eventbus.Event
 import com.github.library.utils.ext.router
+import com.github.library.utils.ext.setRefreshListener
+import com.github.library.utils.ext.setViewStateListener
 import com.github.refresh.RefreshCustomerLayout
-import com.github.refresh.RefreshLayout
-import com.github.refresh.interfaces.IRefreshStateView
 
 class NewsFragment : BaseFragment<NewsFragmentPresenter, CommonListBinding>(), INewsFragment {
 
     override fun onFirstUserVisible() {
-
-        mBinding.mRefreshLayout.recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = NewsListAdapter()
-        adapter.setOnItemClickListener { adapter, view, position ->
+        val mAdapter = NewsListAdapter()
+        mAdapter.setOnItemClickListener { adapter, _, position ->
             val storiesBean = adapter.getItem(position) as NewsRequest.ListRes.StoriesBean
             router(RouterImpl.WebViewActivity, Pair("id", storiesBean.id), Pair("imageUrl", storiesBean.getImageUrl()))
         }
-        mBinding.mRefreshLayout.setPageSize(Api.pageSize)
+        mBinding.mRefreshLayout
+                .setLayoutManager(LinearLayoutManager(activity))
+                .setLoadSize(Api.pageSize)
                 .setPageStartOffset(0)
                 .setViewType(RefreshCustomerLayout.Refresh_LoadMore)
-                .setRefreshListener(object : RefreshCustomerLayout.IRefreshListener {
-                    override fun onLoadMore(targetPage: Int) {
-                        mPresenter.getNewsListForDate(targetPage)
-                    }
-
-                    override fun onRefresh(refreshLayout: RefreshLayout) {
-                        mPresenter.getNewsList()
-                    }
-                })
-                .setStateListener(object : IRefreshStateView {
-                    override fun showMessage(content: String) {
-                        this@NewsFragment.showMessage(content)
-                    }
-
-                    override fun showMessageFromNet(error: Any, content: String) {
-                        this@NewsFragment.showMessageFromNet(error, content)
-                    }
-
-                    override fun showEmpty() {
-                        this@NewsFragment.showEmpty()
-                    }
-
-                    override fun showContent() {
-                        this@NewsFragment.showContent()
-                    }
-                }).setAdapter(adapter)
+                .setViewStateListener(
+                        { showEmpty() },
+                        { showContent() },
+                        { showLoading() },
+                        { showMessage(it) },
+                        { error, content -> showMessageFromNet(error, content) })
+                .setRefreshListener(
+                        { mPresenter.getNewsList() },
+                        { _, targetPage -> mPresenter.getNewsListForDate(targetPage) })
+                .setAdapter(mAdapter)
 
         /*mBinding.mRefreshLayout.setTotalPage(20)*/
         mBinding.mRefreshLayout.startRequest()
@@ -81,21 +65,6 @@ class NewsFragment : BaseFragment<NewsFragmentPresenter, CommonListBinding>(), I
     override fun setMessage(error: Any, content: String) {
         mBinding.mRefreshLayout.setMessage(error, content)
     }
-
-
-    override fun showLoading() {
-        if (mBinding.mRefreshLayout.isEmpty)
-            super<BaseFragment>.showLoading()
-    }
-
-    override fun showMessageFromNet(error: Any, content: String) {
-        if (mBinding.mRefreshLayout.isEmpty) {
-            super<BaseFragment>.showMessageFromNet(error, content)
-        } else {
-            super<BaseFragment>.showMessage(content)
-        }
-    }
-
 
     override fun getLayoutId(): Int = R.layout.common_list
 

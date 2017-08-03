@@ -18,41 +18,36 @@
             type="android.support.v7.app.AppCompatActivity" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:setup_toolbar="@{context}"
-                app:background="@color/colorPrimary"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:titleTextAppearance="@style/ExpandedAppBar" />
-
-        </android.support.design.widget.AppBarLayout>
-
         <LinearLayout
-            android:tag="setup_stateView"
             android:id="@+id/contain"
-            android:contentDescription="setup_stateView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" />
 
-    </LinearLayout>
+        <FrameLayout
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="setup_stateView" />
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/AppTheme.Toolbar"
+            android:setup_toolbar="@{context}"
+            app:layout_collapseMode="pin"
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+            app:titleTextAppearance="@style/ExpandedAppBar" />
+
+    </FrameLayout>
 
 
 </layout>

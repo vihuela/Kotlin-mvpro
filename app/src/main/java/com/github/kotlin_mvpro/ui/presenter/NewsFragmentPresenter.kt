@@ -43,7 +43,6 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
         ApiCacheProvider.IMPL.getNewsList(api, EvictProvider(ApiUtils.isRxCacheEvict))
                 .defConfig(this)
                 .bindToBehavior(bp!!)
-                .doOnSubscribe { view().showLoading() }
                 .map { it.data.stories }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view().setData(it, false) },
@@ -58,7 +57,6 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
         ApiCacheProvider.IMPL.getNewsListForDate(api, DynamicKey(page), EvictDynamicKey(ApiUtils.isRxCacheEvict))
                 .defConfig(this)
                 .bindToBehavior(bp!!)
-                .doOnSubscribe { view().showLoading() }
                 .map { it.data.stories }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view().setData(it, true) },

@@ -16,7 +16,10 @@ import com.blankj.utilcode.util.ToastUtils
 import com.ricky.mvp_core.base.BasePresenter
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.trello.rxlifecycle2.LifecycleProvider
-import com.trello.rxlifecycle2.kotlin.bindToLifecycle
+import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle2.android.FragmentEvent
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import github.library.parser.ExceptionParseMgr
 import github.library.utils.Error
 import io.reactivex.Observable
@@ -27,6 +30,13 @@ import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 object RxExt {
+    fun <T> getLifecycleProvider(o: Observable<T>, p: LifecycleProvider<*>): Observable<T> {
+        if (p is RxAppCompatActivity) {
+            return o.bindUntilEvent(p as LifecycleProvider<ActivityEvent>, ActivityEvent.DESTROY)
+        } else {
+            return o.bindUntilEvent(p as LifecycleProvider<FragmentEvent>, FragmentEvent.DESTROY_VIEW)
+        }
+    }
 }
 
 //net error parse
@@ -65,10 +75,15 @@ fun <T> Observable<T>.defRetry(count: Int = 10, period: Long = 2): Observable<T>
             }
 }
 
-fun <T> Observable<T>.defConfig(lifecycle: LifecycleProvider<*>): Observable<T> = this
-        .defThread()
-        .defRetry()
-        .bindToLifecycle(lifecycle)
+fun <T> Observable<T>.defConfig(lifecycle: LifecycleProvider<*>): Observable<T> {
+
+    val o = this.defThread().defRetry()
+    return if (lifecycle is RxAppCompatActivity) {
+        o.bindUntilEvent(lifecycle as LifecycleProvider<ActivityEvent>, ActivityEvent.DESTROY)
+    } else {
+        o.bindUntilEvent(lifecycle as LifecycleProvider<FragmentEvent>, FragmentEvent.DESTROY_VIEW)
+    }
+}
 
 
 fun BasePresenter<*>.getBehavior(behavior: BehaviorProcessor<Boolean>?): BehaviorProcessor<Boolean> {
@@ -107,4 +122,5 @@ fun Activity.requestEachPermission(rxPermissions: RxPermissions,
                 }
             }
 }
+
 

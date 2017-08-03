@@ -9,59 +9,59 @@
   ~
   -->
 
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
 
+    <!--android:fitsSystemWindows="true" Transferee in normal need-->
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tl="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-
-            <!--app:layout_scrollFlags="scroll|enterAlways"-->
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.flyco.tablayout.SlidingTabLayout xmlns:tl="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/tab"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="#222831"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    tl:tl_indicator_color="#393E46"
-                    tl:tl_indicator_corner_radius="5dp"
-                    tl:tl_indicator_margin_left="2dp"
-                    tl:tl_indicator_margin_right="2dp"
-                    tl:tl_indicator_style="BLOCK" />
-
-                <ImageView
-                    android:id="@+id/top"
-                    android:tag="image_arrow_top"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_marginRight="20dp"
-                    android:src="@mipmap/ic_top"
-                    tools:ignore="all" />
-            </FrameLayout>
-
-
-        </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:paddingTop="48dp" />
+
+        <com.github.mmin18.widget.RealtimeBlurView
+            android:id="@+id/blv"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="top" />
+
+        <FrameLayout
+            android:id="@+id/titleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/tab"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                tl:tl_indicator_color="#393E46"
+                tl:tl_indicator_corner_radius="5dp"
+                tl:tl_indicator_margin_left="2dp"
+                tl:tl_indicator_margin_right="2dp"
+                tl:tl_indicator_style="BLOCK"
+                tl:tl_textUnselectColor="#222831" />
+
+            <ImageView
+                android:id="@+id/top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/ic_top"
+                android:tag="image_arrow_top"
+                tools:ignore="all" />
+        </FrameLayout>
     </android.support.design.widget.CoordinatorLayout>
 
 </layout>

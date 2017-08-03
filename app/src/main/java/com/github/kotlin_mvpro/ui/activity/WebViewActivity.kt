@@ -26,6 +26,7 @@ import com.just.library.AgentWeb
 class WebViewActivity : BaseActivity<WebViewActivityPresenter, ActivityNewsDetailBinding>() {
 
     lateinit var mAgentWeb: AgentWeb
+    var idStr: Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding.setVariable(BR.context, this)
@@ -43,8 +44,8 @@ class WebViewActivity : BaseActivity<WebViewActivityPresenter, ActivityNewsDetai
                 mAgentWeb.loader.loadUrl(data)
             }
         }
-        val idStr = intent.getStringExtra("id") ?: return
-        mPresenter.getNewsDetail(idStr.toInt())
+        idStr = intent.getStringExtra("id")?.toInt()
+        mPresenter.getNewsDetail(idStr ?: return)
     }
 
     override fun getLayoutId(): Int = R.layout.activity_news_detail
@@ -62,5 +63,9 @@ class WebViewActivity : BaseActivity<WebViewActivityPresenter, ActivityNewsDetai
     override fun onDestroy() {
         super.onDestroy()
         mAgentWeb.webLifeCycle?.onDestroy()
+    }
+
+    override fun onStateViewRetryListener() {
+        mPresenter.getNewsDetail(idStr ?: return)
     }
 }
