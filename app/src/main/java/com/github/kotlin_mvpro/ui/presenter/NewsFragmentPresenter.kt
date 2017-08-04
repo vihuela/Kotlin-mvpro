@@ -17,7 +17,7 @@ import com.github.kotlin_mvpro.api.ApiCacheProvider
 import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.ui.view.INewsFragment
 import com.github.library.utils.ext.bindToBehavior
-import com.github.library.utils.ext.defConfig
+import com.github.library.utils.ext.defPolicy_Retry
 import com.github.library.utils.ext.getBehavior
 import com.github.library.utils.ext.parse
 import com.ricky.mvp_core.base.BasePresenter
@@ -41,7 +41,7 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
 
         val api = Api.IMPL.getNewsList()
         ApiCacheProvider.IMPL.getNewsList(api, EvictProvider(ApiUtils.isRxCacheEvict))
-                .defConfig(this)
+                .defPolicy_Retry(this)
                 .bindToBehavior(bp!!)
                 .map { it.data.stories }
                 .observeOn(AndroidSchedulers.mainThread())
@@ -55,7 +55,7 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
         val dateString = getNextDay(-1 * page)
         val api = Api.IMPL.getNewsListForDate(dateString)
         ApiCacheProvider.IMPL.getNewsListForDate(api, DynamicKey(page), EvictDynamicKey(ApiUtils.isRxCacheEvict))
-                .defConfig(this)
+                .defPolicy_Retry(this)
                 .bindToBehavior(bp!!)
                 .map { it.data.stories }
                 .observeOn(AndroidSchedulers.mainThread())

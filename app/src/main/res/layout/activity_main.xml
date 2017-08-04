@@ -13,31 +13,23 @@
 
 
     <!--android:fitsSystemWindows="true" Transferee in normal need-->
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tl="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="48dp" />
-
-        <com.github.mmin18.widget.RealtimeBlurView
-            android:id="@+id/blv"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_gravity="top" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/titleBar"
+            android:contentDescription="status_padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <com.github.mmin18.widget.RealtimeBlurView
+                android:id="@+id/blv"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="top" />
 
             <com.flyco.tablayout.SlidingTabLayout
                 android:id="@+id/tab"
@@ -62,6 +54,13 @@
                 android:tag="image_arrow_top"
                 tools:ignore="all" />
         </FrameLayout>
-    </android.support.design.widget.CoordinatorLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
 
 </layout>

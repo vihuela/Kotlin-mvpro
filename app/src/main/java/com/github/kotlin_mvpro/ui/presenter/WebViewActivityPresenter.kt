@@ -15,7 +15,7 @@ import android.os.Bundle
 import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.ApiCacheProvider
 import com.github.kotlin_mvpro.api.ApiUtils
-import com.github.library.utils.ext.defConfig
+import com.github.library.utils.ext.defPolicy_Retry
 import com.github.library.utils.ext.parse
 import com.ricky.mvp_core.base.BasePresenter
 import com.ricky.mvp_core.base.interfaces.IView
@@ -33,7 +33,7 @@ class WebViewActivityPresenter : BasePresenter<IView>() {
     fun getNewsDetail(id: Int) {
         val api = Api.IMPL.getNewDetail(id)
         ApiCacheProvider.IMPL.getNewDetail(api, DynamicKey(id), EvictDynamicKey(ApiUtils.isRxCacheEvict))
-                .defConfig(this)
+                .defPolicy_Retry(this)
                 .doOnSubscribe { view().showLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

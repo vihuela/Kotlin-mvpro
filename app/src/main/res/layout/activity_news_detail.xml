@@ -21,23 +21,16 @@
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
 
         <LinearLayout
             android:id="@+id/contain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" />
-
-        <FrameLayout
-            android:layout_marginTop="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="setup_stateView" />
-
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -47,6 +40,12 @@
             app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
             app:titleTextAppearance="@style/ExpandedAppBar" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:contentDescription="setup_stateView"
+            android:paddingTop="?attr/actionBarSize" />
     </FrameLayout>
 
 

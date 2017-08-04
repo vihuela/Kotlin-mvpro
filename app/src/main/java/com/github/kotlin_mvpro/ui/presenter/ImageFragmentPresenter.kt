@@ -21,7 +21,7 @@ import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.kotlin_mvpro.model.ImageItem
 import com.github.kotlin_mvpro.ui.view.IImageFragment
 import com.github.library.utils.ext.bindToBehavior
-import com.github.library.utils.ext.defConfig
+import com.github.library.utils.ext.defPolicy_Retry
 import com.github.library.utils.ext.getBehavior
 import com.github.library.utils.ext.parse
 import com.hitomi.glideloader.GlideImageLoader
@@ -72,7 +72,7 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
 
         val api = Api.IMPL.getImageList(Api.pageSize, page)
         ApiCacheProvider.IMPL.getImageList(api, DynamicKey(page), EvictDynamicKey(ApiUtils.isRxCacheEvict))
-                .defConfig(this)
+                .defPolicy_Retry(this)
                 .bindToBehavior(bp!!)
                 .flatMap {
                     val data_ok = !it.data.error && it.data.results.isNotEmpty()

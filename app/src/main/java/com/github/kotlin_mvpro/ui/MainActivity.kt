@@ -22,7 +22,7 @@ import com.github.kotlin_mvpro.ui.fragment.NewsFragment
 import com.github.kotlin_mvpro.utils.LIST_TOP
 import com.github.library.utils.eventbus.Event
 import com.github.library.utils.eventbus.sendEvent
-import com.github.library.utils.java.StatusBarUtil
+import com.github.library.utils.ext.applyStatusBarDark
 import com.ricky.mvp_core.base.defaults.EmptyPresenter
 
 class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
@@ -44,8 +44,6 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
         mBinding.top.setOnClickListener {
             sendEvent(Event.obtain(LIST_TOP, it.tag))
         }
-        StatusBarUtil.darkMode(this)
-        StatusBarUtil.setPaddingSmart(this,findViewById(R.id.content))
-
+        applyStatusBarDark()
     }
 }

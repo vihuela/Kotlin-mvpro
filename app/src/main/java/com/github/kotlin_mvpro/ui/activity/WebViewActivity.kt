@@ -19,6 +19,7 @@ import com.github.kotlin_mvpro.databinding.ActivityNewsDetailBinding
 import com.github.kotlin_mvpro.ui.base.BaseActivity
 import com.github.kotlin_mvpro.ui.presenter.WebViewActivityPresenter
 import com.github.kotlin_mvpro.utils.RouterImpl
+import com.github.library.utils.ext.applyStatusBar
 import com.github.mzule.activityrouter.annotation.Router
 import com.just.library.AgentWeb
 

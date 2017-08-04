@@ -19,6 +19,7 @@ import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import github.library.parser.ExceptionParseMgr
 import github.library.utils.Error
@@ -28,16 +29,6 @@ import io.reactivex.functions.BiFunction
 import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
-
-object RxExt {
-    fun <T> getLifecycleProvider(o: Observable<T>, p: LifecycleProvider<*>): Observable<T> {
-        if (p is RxAppCompatActivity) {
-            return o.bindUntilEvent(p as LifecycleProvider<ActivityEvent>, ActivityEvent.DESTROY)
-        } else {
-            return o.bindUntilEvent(p as LifecycleProvider<FragmentEvent>, FragmentEvent.DESTROY_VIEW)
-        }
-    }
-}
 
 //net error parse
 fun Throwable.parse(iHandler: (error: Error, message: String) -> Unit) {
@@ -75,7 +66,10 @@ fun <T> Observable<T>.defRetry(count: Int = 10, period: Long = 2): Observable<T>
             }
 }
 
-fun <T> Observable<T>.defConfig(lifecycle: LifecycleProvider<*>): Observable<T> {
+//网络不佳时重试，仅页面销毁才取消，保证重试策略的异常指向得到执行
+//避免在重试请求执行期间页面不可见销毁请求，而对应的View状态得不到切换
+//因为重试请求一直在发起，所以需要绑定外部的BehaviorProcessor，避免新请求执行时，重试仍然在执行
+fun <T> Observable<T>.defPolicy_Retry(lifecycle: LifecycleProvider<*>): Observable<T> {
 
     val o = this.defThread().defRetry()
     return if (lifecycle is RxAppCompatActivity) {
@@ -84,6 +78,10 @@ fun <T> Observable<T>.defConfig(lifecycle: LifecycleProvider<*>): Observable<T> 
         o.bindUntilEvent(lifecycle as LifecycleProvider<FragmentEvent>, FragmentEvent.DESTROY_VIEW)
     }
 }
+
+fun <T> Observable<T>.defPolicy(lifecycle: LifecycleProvider<*>): Observable<T> = this
+        .defThread()
+        .bindToLifecycle(lifecycle)
 
 
 fun BasePresenter<*>.getBehavior(behavior: BehaviorProcessor<Boolean>?): BehaviorProcessor<Boolean> {
