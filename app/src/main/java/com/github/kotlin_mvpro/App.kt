@@ -17,6 +17,7 @@ import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.library.utils.ext.getProcessName
 import com.github.library.utils.impl.INetState
 import io.paperdb.Paper
+import org.greenrobot.eventbus.EventBus
 
 class App : Application(), INetState {
     override fun onCreate() {
@@ -37,6 +38,8 @@ class App : Application(), INetState {
         Paper.init(this)
         //utils
         Utils.init(this)
+        //eventBus index
+        EventBus.builder().addIndex(MyEventBusIndex()).installDefaultEventBus()
     }
 
     //wait future use

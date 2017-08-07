@@ -38,9 +38,11 @@ android {
         enabled true
     }
 }
-//kapt {
-//    generateStubs = true
-//}
+kapt {
+    arguments {
+        arg('eventBusIndex', 'com.github.kotlin_mvpro.MyEventBusIndex')
+    }
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -51,4 +53,5 @@ dependencies {
     kapt "com.android.databinding:compiler:$android_plugin_version"
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.1'//Instance
     kapt 'com.github.mzule.activityrouter:compiler:1.1.7'
+    kapt 'org.greenrobot:eventbus-annotation-processor:3.0.1'
 }
