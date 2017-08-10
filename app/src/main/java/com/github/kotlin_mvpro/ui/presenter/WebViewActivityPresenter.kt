@@ -41,26 +41,4 @@ class WebViewActivityPresenter : BasePresenter<IView>() {
                         { it.parse({ error, message -> view().showMessageFromNet(error, message) }) })
 
     }
-
-    fun convertBody(preResult: String): String {
-        var preResult = preResult
-
-        preResult = preResult.replace("<div class=\"img-place-holder\">", "")
-        preResult = preResult.replace("<div class=\"headline\">", "")
-
-        val css = "<link rel=\"stylesheet\" href=\"file:///android_asset/zhihu_daily.css\" type=\"text/css\">"
-
-        val theme = "<body yclassName=\"\" onload=\"onLoaded()\">"
-
-        return StringBuilder()
-                .append("<!DOCTYPE html>\n")
-                .append("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">\n")
-                .append("<head>\n")
-                .append("\t<meta charset=\"utf-8\" />")
-                .append(css)
-                .append("\n</head>\n")
-                .append(theme)
-                .append(preResult)
-                .append("</body></html>").toString()
-    }
 }

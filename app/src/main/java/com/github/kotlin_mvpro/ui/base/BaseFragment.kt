@@ -16,9 +16,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.library.utils.ext.toast
 import com.github.library.utils.impl.IEventBus
 import com.github.library.utils.impl.IStateView
-import com.github.library.utils.ext.toast
 import com.kennyc.view.MultiStateView
 import com.ricky.mvp_core.base.BaseBindingFragment
 import com.ricky.mvp_core.base.BasePresenter
@@ -43,6 +43,7 @@ abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBin
         super.stateViewSetup(onCreateView)
         return onCreateView
     }
+
     override fun onDestroy() {
         super.onDestroy()
         super.unregisterEventBus(this)

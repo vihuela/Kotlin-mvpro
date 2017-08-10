@@ -11,9 +11,8 @@
 
 package com.ricky.mvp_core.utils
 
-import android.app.Fragment
-import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import com.ricky.mvp_core.base.BaseBindingActivity
 import com.ricky.mvp_core.base.BaseBindingFragment
 import com.ricky.mvp_core.base.BasePresenter
@@ -26,8 +25,7 @@ internal object PresenterFactory {
 
 
     fun <T : BasePresenter<*>> createPresenter(aty: BaseBindingActivity<*, *>): T {
-        //not use fragmentManager under support.v4，cause the bug of findFragmentByTag()
-        val trans = aty.fragmentManager.beginTransaction()
+        val trans = aty.supportFragmentManager.beginTransaction()
         val presenterClass = try {
             (aty::class.java.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
         } catch (e: Exception) {
@@ -35,7 +33,7 @@ internal object PresenterFactory {
                     "try EmptyPresenter If there is no presenter")
         }
         val args = if (aty.intent.extras != null) Bundle(aty.intent.extras) else Bundle()
-        var presenter = aty.fragmentManager.findFragmentByTag(presenterClass.canonicalName) as T?
+        var presenter = aty.supportFragmentManager.findFragmentByTag(presenterClass.canonicalName) as T?
         if (presenter == null || presenter.isDetached) {
             presenter = Fragment.instantiate(aty, presenterClass.canonicalName, args) as T
             trans.add(0, presenter, presenterClass.canonicalName)
@@ -46,7 +44,6 @@ internal object PresenterFactory {
     }
 
     fun <T : BasePresenter<*>> createPresenter(frg: BaseBindingFragment<*, *>): T {
-        //not use fragmentManager under support.v4，cause the bug of findFragmentByTag()
         val trans = frg.fragmentManager.beginTransaction()
         val presenterClass = try {
             (frg::class.java.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>

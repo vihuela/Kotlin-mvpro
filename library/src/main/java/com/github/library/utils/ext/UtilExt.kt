@@ -14,8 +14,8 @@ package com.github.library.utils.ext
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.Application
-import android.app.Fragment
 import android.content.Context
+import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast

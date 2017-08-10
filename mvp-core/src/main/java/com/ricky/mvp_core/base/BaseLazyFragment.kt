@@ -13,7 +13,7 @@ package com.ricky.mvp_core.base
 
 import android.os.Bundle
 import android.view.View
-import com.trello.rxlifecycle2.components.RxFragment
+import com.trello.rxlifecycle2.components.support.RxFragment
 
 abstract class BaseLazyFragment : RxFragment() {
 

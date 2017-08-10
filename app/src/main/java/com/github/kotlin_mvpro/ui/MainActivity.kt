@@ -11,9 +11,9 @@
 
 package com.github.kotlin_mvpro.ui
 
-import android.app.Fragment
 import android.os.Bundle
-import android.support.v13.app.FragmentPagerAdapter
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentPagerAdapter
 import com.github.kotlin_mvpro.R
 import com.github.kotlin_mvpro.databinding.ActivityMainBinding
 import com.github.kotlin_mvpro.ui.base.BaseActivity
@@ -34,7 +34,7 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
 
         val title = arrayOf("美图", "知乎日报")
         val items = arrayOf(ImageFragment(), NewsFragment())
-        mBinding.pager.adapter = object : FragmentPagerAdapter(fragmentManager) {
+        mBinding.pager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
 
             override fun getItem(position: Int): Fragment = items[position] as Fragment
             override fun getCount(): Int = title.size

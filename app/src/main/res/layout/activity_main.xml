@@ -25,11 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.github.mmin18.widget.RealtimeBlurView
-                android:id="@+id/blv"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_gravity="top" />
 
             <com.flyco.tablayout.SlidingTabLayout
                 android:id="@+id/tab"

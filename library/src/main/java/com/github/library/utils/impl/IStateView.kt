@@ -12,7 +12,7 @@
 package com.github.library.utils.impl
 
 import android.app.Activity
-import android.app.Fragment
+import android.support.v4.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -33,7 +33,7 @@ interface IStateView {
     fun <T> getStateView(context: T): MultiStateView? {
         when (context) {
             is Fragment -> {
-                return context.view.findOptional<MultiStateView>(R.id.multiStateView)
+                return context.view?.findOptional<MultiStateView>(R.id.multiStateView)
             }
             is Activity -> {
                 return context.findOptional<MultiStateView>(R.id.multiStateView)

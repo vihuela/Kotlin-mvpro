@@ -1,6 +1,7 @@
 *.iml
 *.apk
 *.tmp
+*.log
 .gradle
 .idea
 .DS_Store

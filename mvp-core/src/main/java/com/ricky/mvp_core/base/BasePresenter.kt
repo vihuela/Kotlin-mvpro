@@ -17,7 +17,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ricky.mvp_core.base.interfaces.IView
-import com.trello.rxlifecycle2.components.RxFragment
+import com.trello.rxlifecycle2.components.support.RxFragment
 
 /**
  *
