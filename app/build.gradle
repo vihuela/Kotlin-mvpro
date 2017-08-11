@@ -14,12 +14,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion "$maxSdk_version".toInteger()
+    buildToolsVersion "$buildTools_version".toString()
     defaultConfig {
+        minSdkVersion "$minSdk_version".toInteger()
+        targetSdkVersion "$maxSdk_version".toInteger()
+
         applicationId "com.github.kotlin_mvpro"
-        minSdkVersion 19
-        targetSdkVersion 25
         versionCode 10
         versionName "1.0.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
