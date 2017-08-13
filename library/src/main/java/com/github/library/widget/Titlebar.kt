@@ -193,33 +193,5 @@ class RightMenuItem(txt: String, txtClickListener: (v: View) -> Unit) {
 }
 
 interface ITitlebar {
-    fun arrowClick(app: Application) {
-        app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
-            override fun onActivityPaused(activity: Activity?) {
-            }
-
-            override fun onActivityResumed(activity: Activity?) {
-                doAsync {
-                    val titlebar = activity?.findViewById(R.id.titlebar) as? Titlebar
-                    titlebar?.setLeftClick { activity?.finish() }
-                }
-            }
-
-            override fun onActivityStarted(activity: Activity?) {
-            }
-
-            override fun onActivityDestroyed(activity: Activity?) {
-            }
-
-            override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
-            }
-
-            override fun onActivityStopped(activity: Activity?) {
-            }
-
-            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
-
-            }
-        })
-    }
+    fun isInitTitlebar() = false
 }

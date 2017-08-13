@@ -48,12 +48,9 @@ class WebViewActivity : BaseActivity<WebViewActivityPresenter, ActivityNewsDetai
         }
         idStr = intent.getStringExtra("id")?.toInt()
         mPresenter.getNewsDetail(idStr ?: return)
-        mBinding.titlebar
-                .setRightClickWithMenu(
-                        RightMenuItem("分享", { toast("one") }),
-                        RightMenuItem("复制", { toast("two") })
-                )
-
+        mTitlebar?.setRightClickWithMenu(
+                RightMenuItem("分享", { toast("one") }),
+                RightMenuItem("复制", { toast("two") }))
     }
 
     override fun getLayoutId(): Int = R.layout.activity_news_detail

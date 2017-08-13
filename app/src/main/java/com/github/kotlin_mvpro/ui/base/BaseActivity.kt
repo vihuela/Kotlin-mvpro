@@ -13,18 +13,23 @@ package com.github.kotlin_mvpro.ui.base
 
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import com.github.kotlin_mvpro.R
+import com.github.library.utils.ext.toast
 import com.github.library.utils.impl.IEventBus
 import com.github.library.utils.impl.IStateView
-import com.github.library.utils.ext.toast
+import com.github.library.widget.ITitlebar
+import com.github.library.widget.Titlebar
 import com.kennyc.view.MultiStateView
 import com.ricky.mvp_core.base.BaseBindingActivity
 import com.ricky.mvp_core.base.BasePresenter
 import com.tbruyelle.rxpermissions2.RxPermissions
+import org.jetbrains.anko.findOptional
 
 //stateView and eventBus
-abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>(), IStateView, IEventBus {
+abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingActivity<T, B>(), IStateView, IEventBus, ITitlebar {
 
     val mRxPermissions: RxPermissions by lazy { RxPermissions(this) }
+    val mTitlebar: Titlebar? by lazy { findOptional<Titlebar>(R.id.titlebar)?.setLeftClick { finish() } }
 
     override fun getStateView(): MultiStateView? {
         return super.getStateView(this)
@@ -34,6 +39,7 @@ abstract class BaseActivity<T : BasePresenter<*>, B : ViewDataBinding> : BaseBin
         super.onCreate(savedInstanceState)
         super.registerEventBus(this)
         super.stateViewSetup(this)
+        if (isInitTitlebar()) mTitlebar
     }
 
     override fun onDestroy() {

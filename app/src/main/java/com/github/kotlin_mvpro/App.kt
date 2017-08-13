@@ -16,11 +16,10 @@ import com.blankj.utilcode.util.Utils
 import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.library.utils.ext.getProcessName
 import com.github.library.utils.impl.INetState
-import com.github.library.widget.ITitlebar
 import io.paperdb.Paper
 import org.greenrobot.eventbus.EventBus
 
-class App : Application(), INetState,ITitlebar {
+class App : Application(), INetState {
     override fun onCreate() {
         super.onCreate()
 
@@ -28,7 +27,6 @@ class App : Application(), INetState,ITitlebar {
             packageName -> {
                 commonInit()
                 observeNetwork(this, { ApiUtils.isRxCacheEvict = it })
-                arrowClick(this)
             }
         }
     }
