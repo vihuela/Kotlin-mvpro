@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="titlebar" type="id"/>
+    <style name="QQPopAnim" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/tb_right_top_in</item>
+        <item name="android:windowExitAnimation">@anim/tb_right_top_out</item>
+    </style>
+
+    <declare-styleable name="Titlebar">
+        <attr name="title" format="string" />
+    </declare-styleable>
+</resources>

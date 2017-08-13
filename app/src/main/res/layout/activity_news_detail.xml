@@ -32,13 +32,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/AppTheme.Toolbar"
-            android:setup_toolbar="@{context}"
-            app:layout_collapseMode="pin"
-            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-            app:titleTextAppearance="@style/ExpandedAppBar" />
+
+        <com.github.library.widget.Titlebar
+            android:id="@+id/titlebar"
+            app:title=""
+            android:background="?attr/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <FrameLayout
             android:layout_width="match_parent"

@@ -70,6 +70,7 @@ dependencies {
     compile "com.github.pwittchen:reactivenetwork-rx2:$rxNetwork_version"
     compile "com.tbruyelle.rxpermissions2:rxpermissions:$rxPermissions_version"
     //utils
+    compile 'com.github.zyyoona7:EasyPopup:1.0.1'
     compile 'org.greenrobot:eventbus:3.0.0'
     //smooth open image,https://github.com/Hitomis/transferee
     compile 'com.github.Hitomis.transferee:Transferee:v1.0.0'

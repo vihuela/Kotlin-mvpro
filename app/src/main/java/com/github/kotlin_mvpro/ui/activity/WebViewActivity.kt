@@ -20,6 +20,8 @@ import com.github.kotlin_mvpro.ui.base.BaseActivity
 import com.github.kotlin_mvpro.ui.presenter.WebViewActivityPresenter
 import com.github.kotlin_mvpro.utils.RouterImpl
 import com.github.library.utils.ext.applyStatusBar
+import com.github.library.utils.ext.toast
+import com.github.library.widget.RightMenuItem
 import com.github.mzule.activityrouter.annotation.Router
 import com.just.library.AgentWeb
 
@@ -30,23 +32,28 @@ class WebViewActivity : BaseActivity<WebViewActivityPresenter, ActivityNewsDetai
     var idStr: Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding.setVariable(BR.context, this)
         mAgentWeb = AgentWeb.with(this)
                 .setAgentWebParent(mBinding.contain, LinearLayout.LayoutParams(-1, -1))
                 .useDefaultIndicator()
                 .defaultProgressBarColor()
-                .setReceivedTitleCallback({ _, title -> mBinding.toolbar.title = title })
+                .setReceivedTitleCallback({ _, title -> mBinding.titlebar.setTitle(title) })
                 .createAgentWeb()
                 .ready().go("")
         mPresenter.onLoadCallback = { title, data ->
             run {
                 showContent()
-                mBinding.toolbar.title = title
+                mBinding.titlebar.setTitle(title)
                 mAgentWeb.loader.loadUrl(data)
             }
         }
         idStr = intent.getStringExtra("id")?.toInt()
         mPresenter.getNewsDetail(idStr ?: return)
+        mBinding.titlebar
+                .setRightClickWithMenu(
+                        RightMenuItem("分享", { toast("one") }),
+                        RightMenuItem("复制", { toast("two") })
+                )
+
     }
 
     override fun getLayoutId(): Int = R.layout.activity_news_detail
