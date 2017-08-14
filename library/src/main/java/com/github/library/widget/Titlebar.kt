@@ -1,26 +1,3 @@
-package com.github.library.widget
-
-import android.app.Activity
-import android.app.Application
-import android.content.Context
-import android.os.Build
-import android.os.Bundle
-import android.util.AttributeSet
-import android.util.TypedValue
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.TextView
-import com.github.library.R
-import com.zyyoona7.lib.EasyPopup
-import com.zyyoona7.lib.HorizontalGravity
-import com.zyyoona7.lib.VerticalGravity
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.findOptional
-
 /*
  * Copyright (C) 2017 Ricky.yao https://github.com/vihuela
  *
@@ -31,6 +8,26 @@ import org.jetbrains.anko.findOptional
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  */
+package com.github.library.widget
+
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.os.Build
+import android.util.AttributeSet
+import android.util.TypedValue
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.TextView
+import com.github.library.R
+import com.github.library.widget.java.popwindows.EasyPopup
+import com.github.library.widget.java.popwindows.HorizontalGravity
+import com.github.library.widget.java.popwindows.VerticalGravity
+
+
 class Titlebar(context: Context, attr: AttributeSet?, defStyleAttr: Int) : FrameLayout(context, attr, defStyleAttr), View.OnClickListener {
 
     constructor(context: Context) : this(context, null, 0)
@@ -45,10 +42,12 @@ class Titlebar(context: Context, attr: AttributeSet?, defStyleAttr: Int) : Frame
     private var mRightClick: (v: View) -> Unit = {}
     private var mRightMenuPop: EasyPopup? = null
     private var mTitle: String? = null
+    private var mRightIconDrawable: Drawable? = null
 
     init {
         val ta = context.obtainStyledAttributes(attr, R.styleable.Titlebar)
         mTitle = ta.getString(R.styleable.Titlebar_title)
+        mRightIconDrawable = ta.getDrawable(R.styleable.Titlebar_rightIcon)
         ta.recycle()
 
     }
@@ -59,8 +58,11 @@ class Titlebar(context: Context, attr: AttributeSet?, defStyleAttr: Int) : Frame
             elevation = getDp(2f)
         }
         mLeftText = (findViewById(R.id.tv_title_left) as TextView).apply { setOnClickListener(this@Titlebar) }
-        mRightText = (findViewById(R.id.tv_title_right) as TextView).apply { setOnClickListener(this@Titlebar) }
-        mTitleText = (findViewById(R.id.tv_title_center) as TextView).apply { text = mTitle }
+        mRightText = (findViewById(R.id.tv_title_right) as TextView).apply {
+            setOnClickListener(this@Titlebar)
+            setCompoundDrawablesWithIntrinsicBounds(null, null, mRightIconDrawable ?: return@apply, null)
+        }
+        mTitleText = (findViewById(R.id.tv_title_center) as TextView).apply { text = mTitle ?: return@apply }
     }
 
     override fun onClick(v: View) {
@@ -140,7 +142,7 @@ class Titlebar(context: Context, attr: AttributeSet?, defStyleAttr: Int) : Frame
                     val menuItem = it
                     gravity = Gravity.CENTER
                     text = menuItem.txt
-                    textSize = getSp(10f)
+//                    textSize = getSp(12f)
                     setOnClickListener { menuItem.txtClick.invoke(it) }
                 }
                 val menuItemViewLp = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getDp(35f).toInt()).apply {

@@ -8,5 +8,6 @@
 
     <declare-styleable name="Titlebar">
         <attr name="title" format="string" />
+        <attr name="rightIcon" format="reference" />
     </declare-styleable>
 </resources>
