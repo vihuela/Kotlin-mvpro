@@ -31,21 +31,23 @@ import com.trello.rxlifecycle2.components.support.RxFragment
  *
  */
 abstract class BasePresenter<V : IView> : RxFragment() {
-    lateinit var mView: V
+    var mView: V? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        onViewCreated(mView, arguments, savedInstanceState)
+        if (mView != null)
+            onViewCreated(mView!!, arguments, savedInstanceState)
         return null
     }
 
-    abstract fun onViewCreated(@NonNull view: V, arguments: Bundle?, savedInstanceState: Bundle?)
+    abstract fun onViewCreated(view: V, arguments: Bundle?, savedInstanceState: Bundle?)
 
     //abandon
     final override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    fun view(): V = mView
+    fun view(): V = mView!!
+
     fun setView(view: Any) {
         this.mView = view as V
     }

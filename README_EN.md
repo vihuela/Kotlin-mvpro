@@ -22,10 +22,10 @@ base [**Kotlin**](https://kotlinlang.org)，include DataBinding、RxJava、Rxkol
 
 ### Usage
 
-		compile 'com.ricky:mvpro-kotlin:1.3' 
+		compile 'com.ricky:mvpro-kotlin:1.3.2'
 
 		OR
-		compile('com.ricky:mvpro-kotlin:1.3', { exclude group: 'com.trello.rxlifecycle2' })
+		compile('com.ricky:mvpro-kotlin:1.3.2', { exclude group: 'com.trello.rxlifecycle2' })
 
 ### apk
 
