@@ -16,6 +16,7 @@ base [**Kotlin**](https://kotlinlang.org)，include DataBinding、RxJava、Rxkol
 - The project covers most of the kotlin operations，Use new features to encapsulate, such as **extended functions**、 **interface default implementation** compile：
  EventBus、GlobalNetMonitor、StateView、[multiProcessWebView（Branch）](https://github.com/vihuela/Kotlin-mvpro/tree/webViewMulProcess "独立进程WebView分支")、Simplified class inheritance chain
 - All scenes are bundled with Rxlifecycle, follow View's lifecycle, reject memory leaks
+- Filtering network traffic anomaly, responsibility chain filtering network logic exception
 
 
 ![image](https://github.com/vihuela/Kotlin-mvpro/blob/master/gifdemo.gif ) 

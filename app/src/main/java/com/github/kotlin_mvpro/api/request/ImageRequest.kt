@@ -13,7 +13,7 @@ package com.github.kotlin_mvpro.api.request
 
 class ImageRequest {
 
-    data class Res(val error: Boolean, val results: List<Item>) {
+    class Res : BaseRequest<Res.Item>() {
 
 
         data class Item(val _id: String,

@@ -20,6 +20,7 @@
 - 网络使用Retrofit2、RxJava2，缓存使用[RxCache](https://github.com/VictorAlbertos/RxCache "RxCache")，网络监测使用[ReactiveNetwork](https://github.com/pwittchen/ReactiveNetwork "ReactiveNetwork")，页面路由使用[ActivityRouter](https://github.com/mzule/ActivityRouter "ActivityRouter")
 - 项目涵盖大部分kotlin操作，使用新特性封装eventBus、xml文件一句话添加loadingView、全局网络监测、网络重连逻辑、stateView、[独立进程WebView（点进入分支）](https://github.com/vihuela/Kotlin-mvpro/tree/webViewMulProcess "独立进程WebView分支")、简化类继承链
 - 所有场景的操作均与Rxlifecycle绑定，跟随View的生命周期
+- 过滤网络业务异常、责任链过滤网络逻辑异常
 
 
 ![image](https://github.com/vihuela/Kotlin-mvpro/blob/master/gifdemo.gif ) 
