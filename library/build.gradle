@@ -84,8 +84,7 @@ dependencies {
     compile 'com.just.agentweb:agentweb:1.2.5'//webView
     compile 'com.github.mzule.activityrouter:activityrouter:1.2.2'//路由
     //https://github.com/vihuela/RefreshLayout
-    compile('com.ricky:refreshLayout:0.2', { exclude group: 'com.github.CymChad' })
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    compile('com.ricky:refreshLayout:0.4')
     //mvpro
     compile(project(':mvp-core'), { exclude group: 'com.trello.rxlifecycle2' })
 //    compile('com.ricky:mvpro-kotlin:1.3', { exclude group: 'com.trello.rxlifecycle2' })

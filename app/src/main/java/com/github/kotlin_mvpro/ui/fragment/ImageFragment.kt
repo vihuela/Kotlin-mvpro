@@ -47,7 +47,7 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(),
                 .setLayoutManager(StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL))
                 .setItemDecoration(GridItemDecoration(2, SizeUtils.dp2px(5f), false))
                 .setLoadSize(Api.pageSize)
-                .setPageStartOffset(0)
+                .setPageStartOffset(1)
                 .setViewType(RefreshCustomerLayout.Refresh_LoadMore)
                 .setViewStateListener(
                         { showEmpty() },

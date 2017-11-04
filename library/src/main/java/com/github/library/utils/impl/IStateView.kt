@@ -18,6 +18,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.github.library.R
+import com.github.refresh.RefreshCustomerLayout
+import com.github.refresh.RefreshLayout
 import com.kennyc.view.MultiStateView
 import org.jetbrains.anko.findOptional
 
@@ -61,7 +63,10 @@ interface IStateView {
         val outputViews = ArrayList<View>()
         targetRoot.findViewsWithText(outputViews, TAG, View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION)
         if (outputViews.size == 1) {
-            val targetContent = outputViews[0]
+            val targetContent = when (outputViews[0]) {
+                is RefreshCustomerLayout -> outputViews[0].findViewById(R.id.mRecycleView)
+                else -> outputViews[0]
+            }
             val targetContentLp = targetContent.layoutParams
             val targetParent = targetContent.parent as? ViewGroup ?: return
             val targetIndex: Int = targetParent.indexOfChild(targetContent)
