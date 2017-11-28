@@ -14,12 +14,12 @@ apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion "25.0.3"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
@@ -37,7 +37,7 @@ publish {
     userOrg = 'vihuela'
     groupId = 'com.ricky'
     artifactId = 'mvpro-kotlin'
-    publishVersion = '1.3.2'
+    publishVersion = '1.3.3'
     desc = 'mvp in kotlin'
     website = 'https://github.com/vihuela/Kotlin-mvpro'
 }

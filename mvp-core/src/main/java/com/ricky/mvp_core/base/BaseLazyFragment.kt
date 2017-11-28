@@ -22,10 +22,11 @@ abstract class BaseLazyFragment : RxFragment() {
     private var isFirstInvisible = true
     private var isPrepared = false
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initPrepare()
     }
+
     override fun onResume() {
         super.onResume()
         if (isFirstResume) {

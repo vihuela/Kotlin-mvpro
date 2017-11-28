@@ -65,7 +65,7 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
                 .setErrorDrawable(ColorDrawable(Color.parseColor("#DCDDE1")))
                 .setProgressIndicator(ProgressPieIndicator())
                 .setNowThumbnailIndex(0)//仅一张
-                .setImageLoader(GlideImageLoader.with(activity.applicationContext))
+                .setImageLoader(GlideImageLoader.with(activity?.applicationContext))
                 .create()
         transferee.apply(transferConfig).show()
     }

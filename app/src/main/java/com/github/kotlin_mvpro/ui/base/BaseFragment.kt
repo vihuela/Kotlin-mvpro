@@ -27,7 +27,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 //stateView and eventBus
 abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBindingFragment<T, B>(), IStateView, IEventBus {
 
-    val mRxPermissions: RxPermissions by lazy { RxPermissions(activity) }
+    val mRxPermissions: RxPermissions by lazy { RxPermissions(activity!!) }
 
     override fun getStateView(): MultiStateView? {
         return super.getStateView(this)
@@ -38,7 +38,7 @@ abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBin
         super.registerEventBus(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val onCreateView = super.onCreateView(inflater, container, savedInstanceState)
         super.stateViewSetup(onCreateView)
         return onCreateView

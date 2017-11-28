@@ -57,12 +57,12 @@ class Titlebar(context: Context, attr: AttributeSet?, defStyleAttr: Int) : Frame
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             elevation = getDp(2f)
         }
-        mLeftText = (findViewById(R.id.tv_title_left) as TextView).apply { setOnClickListener(this@Titlebar) }
-        mRightText = (findViewById(R.id.tv_title_right) as TextView).apply {
+        mLeftText = (findViewById<TextView>(R.id.tv_title_left) as TextView).apply { setOnClickListener(this@Titlebar) }
+        mRightText = (findViewById<TextView>(R.id.tv_title_right) as TextView).apply {
             setOnClickListener(this@Titlebar)
             setCompoundDrawablesWithIntrinsicBounds(null, null, mRightIconDrawable ?: return@apply, null)
         }
-        mTitleText = (findViewById(R.id.tv_title_center) as TextView).apply { text = mTitle ?: return@apply }
+        mTitleText = (findViewById<TextView>(R.id.tv_title_center) as TextView).apply { text = mTitle ?: return@apply }
     }
 
     override fun onClick(v: View) {

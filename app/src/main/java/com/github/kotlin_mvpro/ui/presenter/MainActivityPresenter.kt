@@ -22,7 +22,7 @@ class MainActivityPresenter : BasePresenter<IView>() {
         print(userInfo ?: return)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         val user = UserInfo("ricky", "vihuela")
         outState?.putParcelable("person", user)
         super.onSaveInstanceState(outState)
