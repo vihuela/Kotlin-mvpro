@@ -43,7 +43,7 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
 
     lateinit var transferConfig: TransferConfig
     lateinit var transferee: Transferee
-    var bp: BehaviorProcessor<Boolean>? = null
+//    var bp: BehaviorProcessor<Boolean>? = null
 
     override fun onViewCreated(view: IImageFragment, arguments: Bundle?, savedInstanceState: Bundle?) {
         transferee = Transferee.getDefault(activity)
@@ -51,7 +51,6 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        transferee.destroy()
     }
 
     fun openImageDetail(iv: ImageView, item: ImageItem, position: Int) {
@@ -72,14 +71,11 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
 
     fun getImageList(page: Int = 1, loadMore: Boolean) {
 
-        bp = getBehavior(bp)//cancel lastTime request
-
         val api = Api.IMPL.getImageList(Api.pageSize, page)
-        val cacheApi = ApiCacheProvider.IMPL.getImageList(api, DynamicKey(page), EvictDynamicKey(ApiUtils.isRxCacheEvict))
+        val cacheApi = ApiCacheProvider.IMPL.getImageList(api, DynamicKey(page))
 
         cacheApi//可以切换api和cacheApi
                 .defPolicy_Retry(this)
-                .bindToBehavior(bp!!)
                 .compose(ApplyFilter())
                 .map {
                     //cacheApi

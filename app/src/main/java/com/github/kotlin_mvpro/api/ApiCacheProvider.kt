@@ -20,17 +20,18 @@ import java.util.concurrent.TimeUnit
 interface ApiCacheProvider {
     companion object {
         val IMPL: ApiCacheProvider = ApiUtils.apiProvider
+        val NO_CACHE = ApiUtils.isRxCacheEvict
     }
 
     @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
-    fun getImageList(resObservable: Observable<ImageRequest.Res>, url: DynamicKey, evictDynamicKey: EvictDynamicKey): Observable<Reply<ImageRequest.Res>>
+    fun getImageList(resObservable: Observable<ImageRequest.Res>, url: DynamicKey, evictDynamicKey: EvictDynamicKey = EvictDynamicKey(NO_CACHE)): Observable<Reply<ImageRequest.Res>>
 
     @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
-    fun getNewsList(O: Observable<NewsRequest.ListRes>, evictProvider: EvictProvider): Observable<Reply<NewsRequest.ListRes>>
+    fun getNewsList(O: Observable<NewsRequest.ListRes>, evictProvider: EvictProvider = EvictProvider(NO_CACHE)): Observable<Reply<NewsRequest.ListRes>>
 
     @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
-    fun getNewsListForDate(O: Observable<NewsRequest.ListRes>, url: DynamicKey, evictDynamicKey: EvictDynamicKey): Observable<Reply<NewsRequest.ListRes>>
+    fun getNewsListForDate(O: Observable<NewsRequest.ListRes>, url: DynamicKey, evictDynamicKey: EvictDynamicKey = EvictDynamicKey(NO_CACHE)): Observable<Reply<NewsRequest.ListRes>>
 
     @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
-    fun getNewDetail(O: Observable<NewsRequest.DetailRes>, url: DynamicKey, evictDynamicKey: EvictDynamicKey): Observable<Reply<NewsRequest.DetailRes>>
+    fun getNewDetail(O: Observable<NewsRequest.DetailRes>, url: DynamicKey, evictDynamicKey: EvictDynamicKey = EvictDynamicKey(NO_CACHE)): Observable<Reply<NewsRequest.DetailRes>>
 }

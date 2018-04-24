@@ -31,18 +31,15 @@ import java.util.*
 
 class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
 
-    var bp: BehaviorProcessor<Boolean>? = null
 
     override fun onViewCreated(view: INewsFragment, arguments: Bundle?, savedInstanceState: Bundle?) {
     }
 
     fun getNewsList() {
-        bp = getBehavior(bp)
 
         val api = Api.IMPL.getNewsList()
-        ApiCacheProvider.IMPL.getNewsList(api, EvictProvider(ApiUtils.isRxCacheEvict))
+        ApiCacheProvider.IMPL.getNewsList(api)
                 .defPolicy_Retry(this)
-                .bindToBehavior(bp!!)
                 .map { it.data.stories }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view().setData(it, false) },
@@ -50,13 +47,11 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
     }
 
     fun getNewsListForDate(page: Int = 1) {
-        bp = getBehavior(bp)
 
         val dateString = getNextDay(-1 * page)
         val api = Api.IMPL.getNewsListForDate(dateString)
-        ApiCacheProvider.IMPL.getNewsListForDate(api, DynamicKey(page), EvictDynamicKey(ApiUtils.isRxCacheEvict))
+        ApiCacheProvider.IMPL.getNewsListForDate(api, DynamicKey(page))
                 .defPolicy_Retry(this)
-                .bindToBehavior(bp!!)
                 .map { it.data.stories }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view().setData(it, true) },
@@ -64,13 +59,13 @@ class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
     }
 
     private fun getNextDay(delay: Int): String {
-        try {
-            val format = SimpleDateFormat("yyyyMMdd")
+        return try {
+            val format = SimpleDateFormat("yyyyMMdd", Locale.CHINESE)
             val d = Date()
             d.let { it.time = (it.time / 1000 + delay * 24 * 60 * 60) * 1000 }
-            return format.format(d)
+            format.format(d)
         } catch (e: Exception) {
-            return ""
+            ""
         }
 
     }

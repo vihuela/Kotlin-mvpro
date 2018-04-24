@@ -72,9 +72,9 @@ dependencies {
     //utils
     compile 'org.greenrobot:eventbus:3.0.0'
     //smooth open image,https://github.com/Hitomis/transferee
-    compile 'com.github.Hitomis.transferee:Transferee:v1.0.0'
-    compile 'com.github.Hitomis.transferee:GlideLoader:v1.0.0'
-    compile 'io.paperdb:paperdb:2.1'//db
+    compile 'com.github.Hitomis.transferee:Transferee:v1.1.0'
+    compile 'com.github.Hitomis.transferee:GlideLoader:v1.1.0'
+    compile 'io.paperdb:paperdb:2.6'//db
     compile 'com.blankj:utilcode:1.7.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'//tab

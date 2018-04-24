@@ -66,12 +66,15 @@ fun <T> Observable<T>.defRetry(count: Int = 10, period: Long = 2): Observable<T>
             }
 }
 
-//网络不佳时重试，仅页面销毁才取消，保证重试策略的异常指向得到执行
-//避免在重试请求执行期间页面不可见销毁请求，而对应的View状态得不到切换
-//因为重试请求一直在发起，所以需要绑定外部的BehaviorProcessor，避免新请求执行时，重试仍然在执行
-fun <T> Observable<T>.defPolicy_Retry(lifecycle: LifecycleProvider<*>): Observable<T> {
-
-    val o = this.defThread().defRetry()
+//【仅需要网络异常时重试才使用此策略】通常是列表，详情，网络异常时有限且间隔的重新发起请求
+//因为重试请求一直在发起，所以需要绑定外部的BehaviorProcessor，避免新请求执行时，重试仍然在执行，本项目的BasePresenter提供一个map缓存
+//其它项目需要外部使用ob.bindToBehavior(bp)
+fun <T> Observable<T>.defPolicy_Retry(lifecycle: LifecycleProvider<*>, requestFlag: String = "mvpro"): Observable<T> {
+    val baseP = lifecycle as? BasePresenter<*>
+    val o = when (baseP) {
+        null -> this.defThread().defRetry()
+        else -> this.defThread().defRetry().bindToBehavior(baseP.mBehaviorMap[requestFlag])
+    }
     return if (lifecycle is RxAppCompatActivity) {
         o.bindUntilEvent(lifecycle as LifecycleProvider<ActivityEvent>, ActivityEvent.DESTROY)
     } else {
@@ -83,7 +86,7 @@ fun <T> Observable<T>.defPolicy(lifecycle: LifecycleProvider<*>): Observable<T> 
         .defThread()
         .bindToLifecycle(lifecycle)
 
-
+@Deprecated("")
 fun BasePresenter<*>.getBehavior(behavior: BehaviorProcessor<Boolean>?): BehaviorProcessor<Boolean> {
     //set last behavior
     behavior?.onNext(false)

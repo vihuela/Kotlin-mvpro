@@ -32,7 +32,7 @@ class WebViewActivityPresenter : BasePresenter<IView>() {
 
     fun getNewsDetail(id: Int) {
         val api = Api.IMPL.getNewDetail(id)
-        ApiCacheProvider.IMPL.getNewDetail(api, DynamicKey(id), EvictDynamicKey(ApiUtils.isRxCacheEvict))
+        ApiCacheProvider.IMPL.getNewDetail(api, DynamicKey(id))
                 .defPolicy_Retry(this)
                 .doOnSubscribe { view().showLoading() }
                 .observeOn(AndroidSchedulers.mainThread())
