@@ -27,10 +27,10 @@
 
 ### 使用
 
-		compile 'com.ricky:mvpro-kotlin:1.3.4'
+		compile 'com.ricky:mvpro-kotlin:1.3.5'
 
 		或者 外部引用了rxlifecycle2
-		compile('com.ricky:mvpro-kotlin:1.3.4', { exclude group: 'com.trello.rxlifecycle2' })
+		compile('com.ricky:mvpro-kotlin:1.3.5', { exclude group: 'com.trello.rxlifecycle2' })
 
 ### apk
 
