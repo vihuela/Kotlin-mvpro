@@ -39,12 +39,12 @@ internal object PresenterFactory {
             trans.add(0, presenter, presenterClass.canonicalName)
         }
         presenter.setView(aty)
-        trans.commit()
+        trans.commitAllowingStateLoss()
         return presenter
     }
 
     fun <T : BasePresenter<*>> createPresenter(frg: BaseBindingFragment<*, *>): T {
-        val trans = frg.fragmentManager.beginTransaction()
+        val trans = frg.fragmentManager?.beginTransaction()
         val presenterClass = try {
             (frg::class.java.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
         } catch (e: Exception) {
@@ -52,13 +52,13 @@ internal object PresenterFactory {
                     "try EmptyPresenter If there is no presenter")
         }
         val args = if (frg.arguments != null) Bundle(frg.arguments) else Bundle()
-        var presenter = frg.fragmentManager.findFragmentByTag(presenterClass.canonicalName) as T?
+        var presenter = frg.fragmentManager?.findFragmentByTag(presenterClass.canonicalName) as T?
         if (presenter == null || presenter.isDetached) {
             presenter = Fragment.instantiate(frg.activity, presenterClass.canonicalName, args) as T
-            trans.add(0, presenter, presenterClass.canonicalName)
+            trans?.add(0, presenter, presenterClass.canonicalName)
         }
         presenter.setView(frg)
-        trans.commit()
+        trans?.commitAllowingStateLoss()
         return presenter
     }
 }
