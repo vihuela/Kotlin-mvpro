@@ -40,7 +40,7 @@ abstract class BaseFragment<T : BasePresenter<*>, B : ViewDataBinding> : BaseBin
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val onCreateView = super.onCreateView(inflater, container, savedInstanceState)
-//        super.stateViewSetup(onCreateView)
+        super.stateViewSetup(onCreateView)
         return onCreateView
     }
 
