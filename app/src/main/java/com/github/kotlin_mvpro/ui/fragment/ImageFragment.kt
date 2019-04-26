@@ -33,7 +33,6 @@ import com.github.refresh.util.GridItemDecoration
 class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(), IImageFragment {
 
     override fun onFirstUserVisible() {
-
         val imageListAdapter = ImageListAdapter()
         imageListAdapter.setOnItemClickListener { adapter, view, position ->
             val iv = view as ImageView

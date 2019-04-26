@@ -40,8 +40,6 @@ class App : Application(), INetState {
         Paper.init(this)
         //utils
         Utils.init(this)
-        //eventBus index
-        EventBus.builder().addIndex(MyEventBusIndex()).installDefaultEventBus()
     }
 
     //wait future use

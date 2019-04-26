@@ -12,6 +12,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion "$maxSdk_version".toInteger()
@@ -44,9 +45,6 @@ android {
 
 }
 kapt {
-    arguments {
-        arg('eventBusIndex', 'com.github.kotlin_mvpro.MyEventBusIndex')
-    }
 }
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
@@ -54,5 +52,4 @@ dependencies {
     kapt "androidx.databinding:databinding-compiler:$build_gradle_version"
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.1'//Instance
     kapt 'com.github.mzule.activityrouter:compiler:1.1.7'
-    kapt 'org.greenrobot:eventbus-annotation-processor:3.0.1'
 }
