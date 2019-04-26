@@ -32,15 +32,15 @@ class MainActivity : BaseActivity<EmptyPresenter, ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val title = arrayOf("美图")
-        val items = arrayOf(ImageFragment())
-//        mBinding.pager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
-//
-//            override fun getItem(position: Int): Fragment = items[position] as Fragment
-//            override fun getCount(): Int = title.size
-//            override fun getPageTitle(position: Int): CharSequence = title[position]
-//        }
-//        mBinding.tab.setViewPager(mBinding.pager, title)
+        val title = arrayOf("美图","知乎日报")
+        val items = arrayOf(ImageFragment(),NewsFragment())
+        mBinding.pager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
+
+            override fun getItem(position: Int): Fragment = items[position] as Fragment
+            override fun getCount(): Int = title.size
+            override fun getPageTitle(position: Int): CharSequence = title[position]
+        }
+        mBinding.tab.setViewPager(mBinding.pager, title)
         mBinding.top.setOnClickListener {
             sendEvent(Event.obtain(LIST_TOP, it.tag))
         }
