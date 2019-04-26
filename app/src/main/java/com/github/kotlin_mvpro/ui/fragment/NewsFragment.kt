@@ -11,7 +11,7 @@
 
 package com.github.kotlin_mvpro.ui.fragment
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.kotlin_mvpro.R
 import com.github.kotlin_mvpro.api.Api
 import com.github.kotlin_mvpro.api.request.NewsRequest

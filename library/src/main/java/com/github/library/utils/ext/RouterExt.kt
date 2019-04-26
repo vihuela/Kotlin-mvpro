@@ -13,7 +13,7 @@ package com.github.library.utils.ext
 
 import android.app.Activity
 import android.app.Service
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.github.mzule.activityrouter.router.Routers
 
 //apply for ActivityRouter

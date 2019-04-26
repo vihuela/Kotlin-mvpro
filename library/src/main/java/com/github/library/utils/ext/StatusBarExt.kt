@@ -12,7 +12,7 @@
 package com.github.library.utils.ext
 
 import android.app.Activity
-import android.support.annotation.FloatRange
+import androidx.annotation.FloatRange
 import android.view.View
 import android.view.ViewGroup
 import com.github.library.utils.java.StatusBarUtil

@@ -11,9 +11,9 @@
 
 package com.ricky.mvp_core.base
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.ricky.mvp_core.base.interfaces.IView
 import com.ricky.mvp_core.utils.PresenterFactory
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity

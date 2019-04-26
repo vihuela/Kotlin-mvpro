@@ -11,7 +11,7 @@
 
 package com.github.kotlin_mvpro.ui.adapter
 
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.blankj.utilcode.util.ScreenUtils
 import com.github.kotlin_mvpro.BR
 import com.github.kotlin_mvpro.R

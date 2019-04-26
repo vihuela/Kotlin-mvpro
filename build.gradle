@@ -13,12 +13,13 @@
 
 buildscript {
     repositories {
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath "com.android.tools.build:gradle:$build_gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.novoda:bintray-release:0.4.0'
+//        classpath 'com.novoda:bintray-release:0.4.0'
         // 上传kotlin库：
         // 创建java的module、引入bintray依赖确保publishing的task有7个！！之后
         // 才继续引入kotlin依赖
@@ -28,21 +29,22 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         jcenter()
         maven { url "https://jitpack.io" }
         maven { url 'https://dl.google.com/dl/android/maven2/' }
     }
-    tasks.withType(Javadoc) {
-        options{
-            encoding "UTF-8"
-            charSet 'UTF-8'
-            links "http://docs.oracle.com/javase/7/docs/api"
-        }
-    }
+//    tasks.withType(Javadoc) {
+//        options{
+//            encoding "UTF-8"
+//            charSet 'UTF-8'
+//            links "http://docs.oracle.com/javase/7/docs/api"
+//        }
+//    }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-tasks.getByPath(":mvp-core:releaseAndroidJavadocs").enabled = false
+//tasks.getByPath(":mvp-core:releaseAndroidJavadocs").enabled = false

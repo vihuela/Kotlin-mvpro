@@ -15,10 +15,10 @@ import android.app.Activity
 import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.ToastUtils
 import com.google.gson.Gson
 

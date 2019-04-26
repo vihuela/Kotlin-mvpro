@@ -14,12 +14,10 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion "$maxSdk_version".toInteger()
-    buildToolsVersion "$buildTools_version".toString()
 
     defaultConfig {
         minSdkVersion "$minSdk_version".toInteger()
         targetSdkVersion "$maxSdk_version".toInteger()
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     dataBinding {
@@ -28,64 +26,69 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testCompile 'junit:junit:4.12'
+    api fileTree(dir: 'libs', include: ['*.jar'])
     //support
-    compile "com.android.support:design:$support_version"
-    compile "com.android.support:support-v4:$support_version"
-    compile "com.android.support:cardview-v7:$support_version"
-    compile "com.android.support:appcompat-v7:$support_version"
-    compile "com.android.support:recyclerview-v7:$support_version"
-    compile "com.android.support:support-annotations:$support_version"
+//    api "com.android.support:design:$support_version"
+//    api "com.android.support:support-v4:$support_version"
+//    api "com.android.support:cardview-v7:$support_version"
+//    api "com.android.support:appcompat-v7:$support_version"
+//    api "com.android.support:recyclerview-v7:$support_version"
+//    api "com.android.support:support-annotations:$support_version"
+
+    api "com.google.android.material:material:$materialVersion"
+    api "androidx.appcompat:appcompat:$appCompatVersion"
+    api "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    api "androidx.cardview:cardview:$cardVersion"
+    api "androidx.annotation:annotation:$androidXAnnotations"
+    api 'androidx.multidex:multidex:2.0.0'
     //kotlin
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.anko:anko-commons:$anko_version"
-    compile "org.jetbrains.anko:anko-sdk25:$anko_version"
-    compile "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
-    compile "org.jetbrains.anko:anko-support-v4:$anko_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api "org.jetbrains.anko:anko-commons:$anko_version"
+    api "org.jetbrains.anko:anko-sdk25:$anko_version"
+    api "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
+    api "org.jetbrains.anko:anko-support-v4:$anko_version"
     //retrofit & okHttp
-    compile "com.squareup.retrofit2:retrofit:$retrofit2_version"
-    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
-    compile "com.squareup.retrofit2:converter-gson:$retrofit2_version"
-    compile "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
-    compile "com.squareup.okhttp3:okhttp:$okHttp_version"
+    api "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+    api "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
+    api "com.squareup.okhttp3:okhttp:$okHttp_version"
     //https://github.com/vihuela/Retrofitplus
-    compile 'com.ricky:retrofitExceptionDispatcher:0.6'
+    api 'com.ricky:retrofitExceptionDispatcher:0.6'
     //rx
-    compile "io.reactivex.rxjava2:rxjava:$rxJava_version"
-    compile "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version"
-    compile "io.reactivex.rxjava2:rxandroid:$rxAndroid_version"
-    compile "com.trello.rxlifecycle2:rxlifecycle:$rxLifecycle_version"
-    compile "com.trello.rxlifecycle2:rxlifecycle-android:$rxLifecycle_version"
-    compile "com.trello.rxlifecycle2:rxlifecycle-components:$rxLifecycle_version"
-    compile "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxLifecycle_version"
-    compile "com.jakewharton.rxbinding2:rxbinding:$rxBinding_version"
-    compile "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxBinding_version"
-    compile "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxBinding_version"
-    compile "com.github.VictorAlbertos.RxCache:runtime:$rxCache_version"
-    compile "com.github.VictorAlbertos.Jolyglot:gson:$rxCache_gson_version"
-    compile "com.github.pwittchen:reactivenetwork-rx2:$rxNetwork_version"
-    compile "com.tbruyelle.rxpermissions2:rxpermissions:$rxPermissions_version"
+    api "io.reactivex.rxjava2:rxjava:$rxJava_version"
+    api "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version"
+    api "io.reactivex.rxjava2:rxandroid:$rxAndroid_version"
+    api "com.trello.rxlifecycle2:rxlifecycle:$rxLifecycle_version"
+    api "com.trello.rxlifecycle2:rxlifecycle-android:$rxLifecycle_version"
+    api "com.trello.rxlifecycle2:rxlifecycle-components:$rxLifecycle_version"
+    api "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxLifecycle_version"
+    api "com.jakewharton.rxbinding2:rxbinding:$rxBinding_version"
+    api "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxBinding_version"
+    api "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxBinding_version"
+    api "com.github.VictorAlbertos.RxCache:runtime:$rxCache_version"
+    api "com.github.VictorAlbertos.Jolyglot:gson:$rxCache_gson_version"
+    api "com.github.pwittchen:reactivenetwork-rx2:$rxNetwork_version"
+    api "com.tbruyelle.rxpermissions2:rxpermissions:$rxPermissions_version"
     //utils
-    compile 'org.greenrobot:eventbus:3.0.0'
+    api 'org.greenrobot:eventbus:3.0.0'
     //smooth open image,https://github.com/Hitomis/transferee
-    compile 'com.github.Hitomis.transferee:Transferee:v1.1.0'
-    compile 'com.github.Hitomis.transferee:GlideLoader:v1.1.0'
-    compile 'io.paperdb:paperdb:2.6'//db
-    compile 'com.blankj:utilcode:1.7.1'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'//tab
-    compile 'nz.bradcampbell:paperparcel:2.0.1'//持久化
-    compile 'nz.bradcampbell:paperparcel-kotlin:2.0.1'
-    compile 'com.github.Kennyc1012:MultiStateView:1.3.2'//视图状态切换
-    compile 'com.just.agentweb:agentweb:1.2.5'//webView
-    compile 'com.github.mzule.activityrouter:activityrouter:1.2.2'//路由
+    api 'com.github.Hitomis.transferee:Transferee:v1.1.0'
+    api 'com.github.Hitomis.transferee:GlideLoader:v1.1.0'
+    api 'io.paperdb:paperdb:2.6'//db
+    api 'com.blankj:utilcode:1.7.1'
+    api 'com.github.bumptech.glide:glide:3.7.0'
+    api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'//tab
+    api 'nz.bradcampbell:paperparcel:2.0.1'//持久化
+    api 'nz.bradcampbell:paperparcel-kotlin:2.0.1'
+    api 'com.github.Kennyc1012:MultiStateView:1.3.2'//视图状态切换
+    api 'com.just.agentweb:agentweb:1.2.5'//webView
+    api 'com.github.mzule.activityrouter:activityrouter:1.2.2'//路由
     //https://github.com/vihuela/RefreshLayout
-    compile('com.ricky:refreshLayout:0.4.2')
+    api('com.ricky:refreshLayout:0.4.2')
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.31'
+
     //mvpro
-    compile(project(':mvp-core'), { exclude group: 'com.trello.rxlifecycle2' })
+    api(project(':mvp-core'), { exclude group: 'com.trello.rxlifecycle2' })
 //    compile('com.ricky:mvpro-kotlin:1.3', { exclude group: 'com.trello.rxlifecycle2' })
 }

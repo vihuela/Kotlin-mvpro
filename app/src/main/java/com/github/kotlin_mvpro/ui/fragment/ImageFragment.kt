@@ -12,8 +12,8 @@
 package com.github.kotlin_mvpro.ui.fragment
 
 import android.graphics.drawable.ColorDrawable
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.ImageView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.blankj.utilcode.util.SizeUtils
 import com.github.kotlin_mvpro.R
 import com.github.kotlin_mvpro.api.Api

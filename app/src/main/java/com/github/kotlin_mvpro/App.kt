@@ -12,6 +12,8 @@
 package com.github.kotlin_mvpro
 
 import android.app.Application
+import android.content.Context
+import androidx.multidex.MultiDex
 import com.blankj.utilcode.util.Utils
 import com.github.kotlin_mvpro.api.ApiUtils
 import com.github.library.utils.ext.getProcessName
@@ -49,5 +51,10 @@ class App : Application(), INetState {
             level > Application.TRIM_MEMORY_UI_HIDDEN -> {
             }
         }
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 }

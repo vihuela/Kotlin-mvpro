@@ -12,11 +12,11 @@
 package com.github.library.utils.impl
 
 import android.app.Activity
-import android.support.v4.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.github.library.R
 import com.github.refresh.RefreshCustomerLayout
 import com.github.refresh.RefreshLayout

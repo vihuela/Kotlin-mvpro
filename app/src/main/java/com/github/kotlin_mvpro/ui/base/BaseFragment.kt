@@ -11,7 +11,7 @@
 
 package com.github.kotlin_mvpro.ui.base
 
-import android.databinding.ViewDataBinding
+import androidx.databinding.ViewDataBinding
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
