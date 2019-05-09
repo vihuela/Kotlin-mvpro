@@ -17,7 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ricky.mvp_core.base.interfaces.IView
 import com.ricky.mvp_core.utils.BehaviorMap
-import com.trello.rxlifecycle2.components.support.RxFragment
+import com.trello.rxlifecycle3.components.support.RxFragment
 
 /**
  *

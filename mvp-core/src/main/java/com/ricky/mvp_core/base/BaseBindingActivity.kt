@@ -16,7 +16,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.ricky.mvp_core.base.interfaces.IView
 import com.ricky.mvp_core.utils.PresenterFactory
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 
 /**
  * no presenter use {@link EmptyPresenter}
