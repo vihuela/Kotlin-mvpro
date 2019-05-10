@@ -14,6 +14,7 @@ package com.ricky.mvp_core.base
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import com.ricky.mvp_core.base.interfaces.IView
 import com.ricky.mvp_core.utils.PresenterFactory
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
@@ -29,10 +30,12 @@ abstract class BaseBindingActivity<T : BasePresenter<*>, B : ViewDataBinding> : 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = createViewDataBinding()
-        mPresenter = PresenterFactory.createPresenter(this)
+        mPresenter = createPresenter()
     }
 
-    private fun createViewDataBinding(): B = DataBindingUtil.setContentView(this, getLayoutId())
+    open fun createViewDataBinding(): B = DataBindingUtil.setContentView(this, getLayoutId())
+    open fun createPresenter(): T = PresenterFactory.createPresenter(this, getPresenterFactory())
+    open fun getPresenterFactory(): ViewModelProvider.Factory? = null
 
     abstract fun getLayoutId(): Int
 

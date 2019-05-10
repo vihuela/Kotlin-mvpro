@@ -11,8 +11,8 @@
 
 package com.ricky.mvp_core.utils
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.ricky.mvp_core.base.BaseBindingActivity
 import com.ricky.mvp_core.base.BaseBindingFragment
 import com.ricky.mvp_core.base.BasePresenter
@@ -24,41 +24,65 @@ import java.lang.reflect.ParameterizedType
 internal object PresenterFactory {
 
 
-    fun <T : BasePresenter<*>> createPresenter(aty: BaseBindingActivity<*, *>): T {
-        val trans = aty.supportFragmentManager.beginTransaction()
+    fun <T : BasePresenter<*>> createPresenter(aty: BaseBindingActivity<*, *>, factory: ViewModelProvider.Factory?): T {
         val presenterClass = try {
             (aty::class.java.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
         } catch (e: Exception) {
             throw IllegalArgumentException("${aty.javaClass.simpleName} create presenter ERROR，" +
                     "try EmptyPresenter If there is no presenter")
         }
-        val args = if (aty.intent.extras != null) Bundle(aty.intent.extras) else Bundle()
-        var presenter = aty.supportFragmentManager.findFragmentByTag(presenterClass.canonicalName) as T?
-        if (presenter == null || presenter.isDetached) {
-            presenter = Fragment.instantiate(aty, presenterClass.canonicalName, args) as T
-            trans.add(0, presenter, presenterClass.canonicalName)
-        }
-        presenter.setView(aty)
-        trans.commitAllowingStateLoss()
-        return presenter
+        val get = ViewModelProviders.of(aty, factory).get(presenterClass)
+        get.setView(aty)
+        return get
     }
 
-    fun <T : BasePresenter<*>> createPresenter(frg: BaseBindingFragment<*, *>): T {
-        val trans = frg.fragmentManager?.beginTransaction()
+    fun <T : BasePresenter<*>> createPresenter(frg: BaseBindingFragment<*, *>, factory: ViewModelProvider.Factory?): T {
         val presenterClass = try {
             (frg::class.java.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
         } catch (e: Exception) {
             throw IllegalArgumentException("${frg.javaClass.simpleName} create presenter ERROR，" +
                     "try EmptyPresenter If there is no presenter")
         }
-        val args = if (frg.arguments != null) Bundle(frg.arguments) else Bundle()
-        var presenter = frg.fragmentManager?.findFragmentByTag(presenterClass.canonicalName) as T?
-        if (presenter == null || presenter.isDetached) {
-            presenter = Fragment.instantiate(frg.activity, presenterClass.canonicalName, args) as T
-            trans?.add(0, presenter, presenterClass.canonicalName)
-        }
-        presenter.setView(frg)
-        trans?.commitAllowingStateLoss()
-        return presenter
+        val get = ViewModelProviders.of(frg, factory).get(presenterClass)
+        get.setView(frg)
+        return get
     }
+
+//    fun <T : BasePresenter<*>> createPresenter(aty: BaseBindingActivity<*, *>): T {
+//        val trans = aty.supportFragmentManager.beginTransaction()
+//        val presenterClass = try {
+//            (aty::class.java.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
+//        } catch (e: Exception) {
+//            throw IllegalArgumentException("${aty.javaClass.simpleName} create presenter ERROR，" +
+//                    "try EmptyPresenter If there is no presenter")
+//        }
+//        val args = if (aty.intent.extras != null) Bundle(aty.intent.extras) else Bundle()
+//        var presenter = aty.supportFragmentManager.findFragmentByTag(presenterClass.canonicalName) as T?
+//        if (presenter == null || presenter.isDetached) {
+//            presenter = Fragment.instantiate(aty, presenterClass.canonicalName, args) as T
+//            trans.add(0, presenter, presenterClass.canonicalName)
+//        }
+//        presenter.setView(aty)
+//        trans.commitAllowingStateLoss()
+//        return presenter
+//    }
+//
+//    fun <T : BasePresenter<*>> createPresenter(frg: BaseBindingFragment<*, *>): T {
+//        val trans = frg.fragmentManager?.beginTransaction()
+//        val presenterClass = try {
+//            (frg::class.java.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
+//        } catch (e: Exception) {
+//            throw IllegalArgumentException("${frg.javaClass.simpleName} create presenter ERROR，" +
+//                    "try EmptyPresenter If there is no presenter")
+//        }
+//        val args = if (frg.arguments != null) Bundle(frg.arguments) else Bundle()
+//        var presenter = frg.fragmentManager?.findFragmentByTag(presenterClass.canonicalName) as T?
+//        if (presenter == null || presenter.isDetached) {
+//            presenter = Fragment.instantiate(frg.activity, presenterClass.canonicalName, args) as T
+//            trans?.add(0, presenter, presenterClass.canonicalName)
+//        }
+//        presenter.setView(frg)
+//        trans?.commitAllowingStateLoss()
+//        return presenter
+//    }
 }

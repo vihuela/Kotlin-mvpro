@@ -27,20 +27,14 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    //support
-//    api "com.android.support:design:$support_version"
-//    api "com.android.support:support-v4:$support_version"
-//    api "com.android.support:cardview-v7:$support_version"
-//    api "com.android.support:appcompat-v7:$support_version"
-//    api "com.android.support:recyclerview-v7:$support_version"
-//    api "com.android.support:support-annotations:$support_version"
 
     api "com.google.android.material:material:$materialVersion"
     api "androidx.appcompat:appcompat:$appCompatVersion"
     api "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     api "androidx.cardview:cardview:$cardVersion"
     api "androidx.annotation:annotation:$androidXAnnotations"
-    api 'androidx.multidex:multidex:2.0.0'
+    api "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    api "androidx.multidex:multidex:$multidexVersion"
     //kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     api "org.jetbrains.anko:anko-commons:$anko_version"

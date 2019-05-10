@@ -31,6 +31,7 @@ dependencies {
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     api "com.trello.rxlifecycle3:rxlifecycle:$rxLifecycle_version"
     api "com.trello.rxlifecycle3:rxlifecycle-components:$rxLifecycle_version"
+    api "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
 }
 //publish {
 //    userOrg = 'vihuela'
