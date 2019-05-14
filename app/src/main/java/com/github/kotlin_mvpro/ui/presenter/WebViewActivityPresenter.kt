@@ -26,9 +26,6 @@ import io.rx_cache2.EvictDynamicKey
 class WebViewActivityPresenter : BasePresenter<IView>() {
     var onLoadCallback: ((title: String, data: String) -> Unit)? = null
 
-    override fun onViewCreated(view: IView, arguments: Bundle?, savedInstanceState: Bundle?) {
-    }
-
 
     fun getNewsDetail(id: Int) {
         val api = Api.IMPL.getNewDetail(id)

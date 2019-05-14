@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import com.ricky.mvp_core.base.interfaces.IView
 import com.ricky.mvp_core.utils.PresenterFactory
 
@@ -30,9 +31,12 @@ abstract class BaseBindingFragment<T : BasePresenter<*>, B : ViewDataBinding> : 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        mPresenter = PresenterFactory.createPresenter(this)
+        mPresenter = createPresenter()
         return mBinding.root
     }
+
+    open fun createPresenter(): T = PresenterFactory.createPresenter(this, getPresenterFactory())
+    open fun getPresenterFactory(): ViewModelProvider.Factory? = null
 
     abstract fun getLayoutId(): Int
 

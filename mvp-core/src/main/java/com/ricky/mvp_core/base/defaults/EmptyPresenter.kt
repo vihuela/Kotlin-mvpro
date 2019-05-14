@@ -16,6 +16,5 @@ import com.ricky.mvp_core.base.BasePresenter
 import com.ricky.mvp_core.base.interfaces.IView
 
 class EmptyPresenter : BasePresenter<IView>() {
-    override fun onViewCreated(view: IView, arguments: Bundle?, savedInstanceState: Bundle?) {
-    }
+
 }

@@ -32,9 +32,6 @@ import java.util.*
 class NewsFragmentPresenter : BasePresenter<INewsFragment>() {
 
 
-    override fun onViewCreated(view: INewsFragment, arguments: Bundle?, savedInstanceState: Bundle?) {
-    }
-
     fun getNewsList() {
 
         val api = Api.IMPL.getNewsList()
