@@ -71,6 +71,6 @@ class WebViewActivity : BaseActivity<WebViewActivityPresenter, ActivityNewsDetai
     }
 
     override fun onStateViewRetryListener() {
-        mPresenter.getNewsDetail(idStr ?: return)
+        mPresenter.getNewsDetail(idStr ?: return)//
     }
 }
