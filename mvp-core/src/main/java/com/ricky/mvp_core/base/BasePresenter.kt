@@ -11,8 +11,13 @@
 
 package com.ricky.mvp_core.base
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.ricky.mvp_core.base.interfaces.IView
 import com.ricky.mvp_core.utils.BehaviorMap
+import com.trello.rxlifecycle3.components.support.RxFragment
 
 /**
  *
@@ -25,14 +30,25 @@ import com.ricky.mvp_core.utils.BehaviorMap
  * Coordinate with RxLifeCycle
  *
  */
-abstract class BasePresenter<V : IView> : RxViewModel() {
-
-    var mView: V? = null//TODO
+abstract class BasePresenter<V : IView> : RxFragment() {
+    var mView: V? = null
     val mBehaviorMap by lazy { BehaviorMap() }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        if (mView != null)
+            onViewCreated(mView!!, arguments, savedInstanceState)
+        return null
+    }
+
+    abstract fun onViewCreated(view: V, arguments: Bundle?, savedInstanceState: Bundle?)
+
+    //abandon
+    final override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 
     fun view(): V = mView!!
 
-    //注意如果复用Presenter时，获得的View将是最后一个设置Presenter的
     fun setView(view: Any) {
         this.mView = view as V
     }

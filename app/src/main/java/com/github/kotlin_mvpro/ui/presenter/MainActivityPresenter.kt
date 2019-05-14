@@ -17,6 +17,15 @@ import com.ricky.mvp_core.base.BasePresenter
 import com.ricky.mvp_core.base.interfaces.IView
 
 class MainActivityPresenter : BasePresenter<IView>() {
+    override fun onViewCreated(view: IView, arguments: Bundle?, savedInstanceState: Bundle?) {
+        val userInfo = savedInstanceState?.getParcelable<UserInfo>("person")
+        print(userInfo ?: return)
+    }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        val user = UserInfo("ricky", "vihuela")
+        outState?.putParcelable("person", user)
+        super.onSaveInstanceState(outState)
+    }
 
 }

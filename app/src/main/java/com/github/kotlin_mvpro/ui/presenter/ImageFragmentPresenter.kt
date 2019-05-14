@@ -11,7 +11,6 @@
 
 package com.github.kotlin_mvpro.ui.presenter
 
-import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -41,25 +40,18 @@ import io.rx_cache2.EvictDynamicKey
 import io.rx_cache2.Reply
 
 class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
-    //假如需要复用Presenter横跨多个View，将此类置为单例，并配置对应PresenterFactory即可
-    //需要在View中重写getPresenterFactory
-    companion object {
-        @Volatile
-        private var INSTANCE: ImageFragmentPresenter? = null
-
-        fun getInstance() = INSTANCE ?: synchronized(ImageFragmentPresenter::class.java) {
-            INSTANCE ?: ImageFragmentPresenter().also { INSTANCE = it }
-        }
-    }
 
     lateinit var transferConfig: TransferConfig
     lateinit var transferee: Transferee
 //    var bp: BehaviorProcessor<Boolean>? = null
 
-    fun init(activity: Activity){
+    override fun onViewCreated(view: IImageFragment, arguments: Bundle?, savedInstanceState: Bundle?) {
         transferee = Transferee.getDefault(activity)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 
     fun openImageDetail(iv: ImageView, item: ImageItem, position: Int) {
         val imageViewList = arrayListOf<ImageView>().apply { add(iv) }
@@ -72,7 +64,7 @@ class ImageFragmentPresenter : BasePresenter<IImageFragment>() {
                 .setErrorDrawable(ColorDrawable(Color.parseColor("#DCDDE1")))
                 .setProgressIndicator(ProgressPieIndicator())
                 .setNowThumbnailIndex(0)//仅一张
-                .setImageLoader(GlideImageLoader.with(iv.context?.applicationContext))
+                .setImageLoader(GlideImageLoader.with(activity?.applicationContext))
                 .create()
         transferee.apply(transferConfig).show()
     }

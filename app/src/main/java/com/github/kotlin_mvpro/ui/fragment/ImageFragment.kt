@@ -13,7 +13,6 @@ package com.github.kotlin_mvpro.ui.fragment
 
 import android.graphics.drawable.ColorDrawable
 import android.widget.ImageView
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.blankj.utilcode.util.SizeUtils
 import com.github.kotlin_mvpro.R
@@ -25,7 +24,6 @@ import com.github.kotlin_mvpro.ui.base.BaseFragment
 import com.github.kotlin_mvpro.ui.presenter.ImageFragmentPresenter
 import com.github.kotlin_mvpro.ui.view.IImageFragment
 import com.github.kotlin_mvpro.utils.LIST_TOP
-import com.github.kotlin_mvpro.utils.MainPresenterFactory
 import com.github.library.utils.eventbus.Event
 import com.github.library.utils.ext.setRefreshListener
 import com.github.library.utils.ext.setViewStateListener
@@ -35,9 +33,6 @@ import com.github.refresh.util.GridItemDecoration
 class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(), IImageFragment {
 
     override fun onFirstUserVisible() {
-
-        mPresenter.init(activity!!)
-
         val imageListAdapter = ImageListAdapter()
         imageListAdapter.setOnItemClickListener { adapter, view, position ->
             val iv = view as ImageView
@@ -96,9 +91,5 @@ class ImageFragment : BaseFragment<ImageFragmentPresenter, CommonListBinding>(),
     override fun isRegisterEventBus(): Boolean = true
 
     override fun isRegisterStateView(): Boolean = true
-
-    override fun getPresenterFactory(): ViewModelProvider.Factory? {
-        return MainPresenterFactory()
-    }
 
 }
